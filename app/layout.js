@@ -1,5 +1,16 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
+import { Jost } from "next/font/google";
+import { Bodoni_Moda } from "next/font/google";
+
+const jost = Jost({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+const bodoni_moda = Bodoni_Moda({
+  variable: "--font-serif",
+  subsets: ["latin"],
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -8,9 +19,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${jost.variable} ${bodoni_moda.variable}`}>
       <body>
-        <ThemeProvider attribute="class">{children}</ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

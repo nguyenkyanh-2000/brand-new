@@ -1,18 +1,19 @@
-"use client";
-
-import { useThemeSwitcher } from "@/hooks/useThemeSwitcher";
+import AdminNavigation from "@/components/layout/AdminNavigation";
+import Header from "@/components/layout/Header";
+import Logo from "@/components/layout/Logo";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import { User2 } from "lucide-react";
 
 function Page() {
-  const [theme, setTheme] = useThemeSwitcher();
-
   return (
-    <div className="h-96 bg-white dark:bg-black">
-      <div>Current theme: {theme}</div>
-      <button className="text-red-600" onClick={() => setTheme("light")}>
-        Light theme
-      </button>
-      <button onClick={() => setTheme("dark")}>Dark theme</button>
-    </div>
+    <Header>
+      <Logo />
+      <AdminNavigation />
+      <div className="hidden lg:flex gap-5">
+        <ThemeToggle />
+        <User2 />
+      </div>
+    </Header>
   );
 }
 

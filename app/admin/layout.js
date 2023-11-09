@@ -1,5 +1,3 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
-
 export const metadata = {
   title: "Admin homepage",
   description: "Admin homepage for Brand website",
