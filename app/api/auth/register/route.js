@@ -17,7 +17,10 @@ export async function POST(request) {
       email,
       password,
     });
-    if (error) throw new ApiError(error.status, error.message);
+    if (error) {
+      if (!error.status) error.status = 400;
+      throw new ApiError(error.status, error.message);
+    }
     if (data.user?.identities?.length === 0)
       throw new ApiError(400, "User already existed!");
     return NextResponse.json({

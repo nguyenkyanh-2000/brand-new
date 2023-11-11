@@ -15,11 +15,13 @@ export async function POST(request) {
         emailRedirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/api/auth/callback`,
       },
     });
-    if (userCredentials.error)
+    if (userCredentials.error) {
+      if (!userCredentials.error.status) userCredentials.error.status = 400;
       throw new ApiError(
         userCredentials.error.status,
         userCredentials.error.message
       );
+    }
     // Get user profile from login credentials
     const userProfile = await supabase
       .from("profile")
@@ -27,7 +29,7 @@ export async function POST(request) {
       .eq("user_id", userCredentials.data.user.id)
       .single();
     if (userProfile.error) {
-      if (!userProfile.error.status) error.status = 400;
+      if (!userProfile.error.status) userProfile.error.status = 400;
       throw new ApiError(userProfile.error.status, userProfile.error.message);
     }
     return NextResponse.json({
