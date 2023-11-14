@@ -13,7 +13,7 @@ function AdminNavigation() {
           </Link>
         </AnimatedUnderline>
         <AnimatedUnderline>
-          <Link className="text-lg" href={"#"}>
+          <Link className="text-lg" href={"/admin/products"}>
             Products
           </Link>
         </AnimatedUnderline>

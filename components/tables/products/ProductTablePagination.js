@@ -13,15 +13,26 @@ import {
   ChevronsLeft,
   ChevronsRight,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function ProductTablePagination({ table }) {
+  const router = useRouter();
   return (
     <div className="w-full flex items-center justify-between">
       <div className="flex items-center space-x-2">
         <p className="text-sm font-medium">Rows:</p>
         <Select
-          value={`${table.getState().pagination.pageSize}`}
           onValueChange={(value) => {
+            // Calculate new page index when limit is changed
+            let newPageIndex = Math.floor(
+              (table.getState().pagination.pageIndex *
+                table.getState().pagination.pageSize) /
+                Number(value)
+            );
+
+            router.push(`/admin/products?page=${newPageIndex}&limit=${value}`);
+            table.setPageIndex(newPageIndex);
+            table.setPageCount(table.getPageCount());
             table.setPageSize(Number(value));
           }}
         >
@@ -38,7 +49,7 @@ export function ProductTablePagination({ table }) {
         </Select>
       </div>
       <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-        Page {table.getState().pagination.pageIndex + 1} of{" "}
+        Page {Number(table.getState().pagination.pageIndex) + 1} of{" "}
         {table.getPageCount()}
       </div>
       <div className="flex items-center space-x-2">
@@ -47,7 +58,14 @@ export function ProductTablePagination({ table }) {
           className={`hidden p-0 lg:flex ${
             !table.getCanPreviousPage() ? "cursor-not-allowed" : ""
           }`}
-          onClick={() => table.setPageIndex(0)}
+          onClick={() => {
+            table.setPageIndex(0);
+            router.push(
+              `/admin/products?page=1&limit=${
+                table.getState().pagination.pageSize
+              }`
+            );
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           <span className="sr-only">Go to first page</span>
@@ -58,7 +76,14 @@ export function ProductTablePagination({ table }) {
           className={` p-0 ${
             !table.getCanPreviousPage() ? "cursor-not-allowed" : ""
           }`}
-          onClick={() => table.previousPage()}
+          onClick={() => {
+            table.previousPage();
+            router.push(
+              `/admin/products?page=${
+                table.getState().pagination.pageIndex - 1
+              }&limit=${table.getState().pagination.pageSize}`
+            );
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           <span className="sr-only">Go to previous page</span>
@@ -69,7 +94,14 @@ export function ProductTablePagination({ table }) {
           className={` p-0 ${
             !table.getCanNextPage() ? "cursor-not-allowed" : ""
           }`}
-          onClick={() => table.nextPage()}
+          onClick={() => {
+            table.nextPage();
+            router.push(
+              `/admin/products?page=${
+                table.getState().pagination.pageIndex + 1
+              }&limit=${table.getState().pagination.pageSize}`
+            );
+          }}
           disabled={!table.getCanNextPage()}
         >
           <span className="sr-only">Go to next page</span>
@@ -80,7 +112,14 @@ export function ProductTablePagination({ table }) {
           className={`hidden  p-0 lg:flex ${
             !table.getCanNextPage() ? "cursor-not-allowed" : ""
           }`}
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          onClick={() => {
+            table.setPageIndex(table.getPageCount() - 1);
+            router.push(
+              `/admin/products?page=${table.getPageCount()}&limit=${
+                table.getState().pagination.pageSize
+              }`
+            );
+          }}
           disabled={!table.getCanNextPage()}
         >
           <span className="sr-only">Go to last page</span>

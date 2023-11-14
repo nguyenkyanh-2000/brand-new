@@ -12,9 +12,9 @@ export async function GET(request) {
     const filteredParams = filterSearchParams(request.nextUrl, allowedParams);
     let { page, limit } = filteredParams;
     // Ensure page and limit are numbers. Default: Page 1, limit 10
-    page = Number(page) || 1;
+    page = Number(page) || 0;
     limit = Number(limit) || 10;
-    const offset = (page - 1) * limit;
+    const offset = page * limit;
     const supabase = createRouteHandlerClient({ cookies });
     // Supabase uses 0-based index and equal on both side for "range".
     const { data, count, error } = await supabase

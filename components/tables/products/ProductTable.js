@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import {
   flexRender,
@@ -7,7 +7,6 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
   getFilteredRowModel,
-  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
@@ -23,11 +22,29 @@ import {
 import { ProductTableToolbar } from "./ProductTableToolBar";
 import { ProductTablePagination } from "./ProductTablePagination";
 
-export default function ProductTable({ columns, data, totalPages }) {
+export default function ProductTable({
+  columns,
+  data,
+  totalPages,
+  currentPage,
+  limit,
+}) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState({});
   const [columnFilters, setColumnFilters] = useState([]);
   const [sorting, setSorting] = useState([]);
+  const [{ pageIndex, pageSize }, setPagination] = useState({
+    pageIndex: currentPage,
+    pageSize: limit,
+  });
+
+  const pagination = useMemo(
+    () => ({
+      pageIndex,
+      pageSize,
+    }),
+    [pageIndex, pageSize]
+  );
 
   const table = useReactTable({
     data,
@@ -37,16 +54,18 @@ export default function ProductTable({ columns, data, totalPages }) {
       columnVisibility,
       rowSelection,
       columnFilters,
+      pagination,
     },
+    pageCount: totalPages,
     enableRowSelection: true,
     manualPagination: true,
+    onPaginationChange: setPagination,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
