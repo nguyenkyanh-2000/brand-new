@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Logo from "@/components/layout/Logo";
-import { Button } from "@/components/ui/Button";
-import { Checkbox } from "@/components/ui/Checkbox";
 import {
   Form,
   FormControl,
@@ -13,18 +14,16 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
-import credentialSchema from "@/schema/credentialSchema";
-import Link from "next/link";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import { Button } from "@/components/ui/Button";
+import registrationSchema from "@/schema/registrationSchema";
 
-function LoginPage() {
+function RegisterPage() {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
-    resolver: zodResolver(credentialSchema),
-    defaultValues: { email: "", password: "" },
+    resolver: zodResolver(registrationSchema),
+    defaultValues: { email: "", password: "", confirmPassword: "" },
   });
 
   const onSubmit = (data) => {
@@ -36,7 +35,6 @@ function LoginPage() {
       <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <Logo />
       </div>
-
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -72,48 +70,45 @@ function LoginPage() {
               </FormItem>
             )}
           />
-
-          <div className="flex flex-col justify-between md:flex-row md:gap-3">
-            <div className="hidden md:flex items-center gap-1">
-              <Checkbox
-                id="c1"
-                checked={passwordVisibility}
-                onCheckedChange={() =>
-                  setPasswordVisibility(!passwordVisibility)
-                }
-              />
-              <Label htmlFor="c1">Show password?</Label>
-            </div>
-            <Link
-              href={"#"}
-              className="font-semibold text-sm text-foreground hover:text-foreground/50 text-center"
-            >
-              Forgot your password?
-            </Link>
+          <FormField
+            control={form.control}
+            name="confirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="confirmPassword">
+                  Confirm your password
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    id="confirmPassword"
+                    type={passwordVisibility ? "text" : "password"}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex items-center gap-1">
+            <Checkbox
+              id="c1"
+              checked={passwordVisibility}
+              onCheckedChange={() => setPasswordVisibility(!passwordVisibility)}
+            />
+            <Label htmlFor="c1">Show password?</Label>
           </div>
-
-          <div className="flex flex-col items-center gap-2">
-            <Button type="submit" className="w-full">
-              Sign in with email
-            </Button>
-            <p className="text-xs text-foreground">Or sign in with</p>
-            <div className="flex w-full gap-5 space-between">
-              <Button className="w-full">Google</Button>
-              <Button className="w-full">
-                <span>Facebook</span>
-              </Button>
-            </div>
-          </div>
-
+          <Button variant="default" type="submit">
+            Register now
+          </Button>
           <p className="mt-10 text-center text-sm text-foreground">
-            Not a member?{" "}
+            Back to the{" "}
             <Link
-              href="/auth/register"
+              href="/auth/login"
               className="font-semibold text-sm text-foreground
-        hover:text-foreground/50"
+              hover:text-foreground/50"
             >
               {" "}
-              Register here
+              login page
             </Link>
           </p>
         </form>
@@ -122,4 +117,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
