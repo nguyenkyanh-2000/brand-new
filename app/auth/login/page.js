@@ -19,8 +19,11 @@ import Link from "next/link";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useLogin from "@/hooks/useLogin";
+import { Loader2 } from "lucide-react";
 
 function LoginPage() {
+  const { login, isLoading } = useLogin();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
     resolver: zodResolver(credentialSchema),
@@ -28,7 +31,7 @@ function LoginPage() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    login(data);
   };
 
   return (
@@ -94,12 +97,18 @@ function LoginPage() {
 
           <div className="flex flex-col items-center gap-2">
             <Button type="submit" className="w-full">
-              Sign in with email
+              {isLoading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                "Sign in with email"
+              )}
             </Button>
             <p className="text-xs text-foreground">Or sign in with</p>
             <div className="flex w-full gap-5 space-between">
-              <Button className="w-full">Google</Button>
-              <Button className="w-full">
+              <Button type="button" className="w-full">
+                Google
+              </Button>
+              <Button type="button" className="w-full">
                 <span>Facebook</span>
               </Button>
             </div>

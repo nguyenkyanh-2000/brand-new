@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
-import ThemeToggle from "@/components/theme/ThemeToggle";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Menu, User2, X } from "lucide-react";
 
 function AdminNavigationMobile() {
