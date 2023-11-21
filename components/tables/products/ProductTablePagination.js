@@ -115,7 +115,7 @@ export function ProductTablePagination({ table }) {
           onClick={() => {
             table.setPageIndex(table.getPageCount() - 1);
             router.push(
-              `/admin/products?page=${table.getPageCount()}&limit=${
+              `/admin/products?page=${table.getPageCount() - 1}&limit=${
                 table.getState().pagination.pageSize
               }`
             );

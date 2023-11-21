@@ -28,7 +28,7 @@ export default function useLogin() {
     mutationFn: ({ email, password }) => loginWithEmail({ email, password }),
     onSuccess: (data) => {
       toast({
-        title: `Welcome back, ${data.user.first_name}.`,
+        title: `Welcome back!`,
         description: "Login successfully!",
       });
       queryClient.setQueryData("user", data);

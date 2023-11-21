@@ -1,9 +1,8 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { headers, cookies } from "next/headers";
 
-const supabase = createServerComponentClient({ headers, cookies });
-
 export const isUser = async () => {
+  const supabase = createServerComponentClient({ headers, cookies });
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -12,6 +11,7 @@ export const isUser = async () => {
 };
 
 export const isAdmin = async () => {
+  const supabase = createServerComponentClient({ headers, cookies });
   const {
     data: { user },
   } = await supabase.auth.getUser();
