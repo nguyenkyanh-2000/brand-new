@@ -1,24 +1,24 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useToast } from "./useToast";
 
-const useEditProduct = () => {
+const useAddProduct = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
   const { toast } = useToast();
 
-  const editProductHandler = async (productId, data) => {
+  const addProductHandler = async (data) => {
     const url = new URL(
-      `/api/products/${productId}`,
+      `/api/products`,
       process.env.NEXT_PUBLIC_LOCATION_ORIGIN
     );
-    const options = {
-      method: "PUT",
+    const res = await fetch(url, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    };
-
-    const res = await fetch(url, options);
+    });
     const result = await res.json();
 
     if (result.error) throw new Error(result.error.message);
@@ -26,14 +26,15 @@ const useEditProduct = () => {
     return result;
   };
 
-  const { mutate: editProduct, isPending: isLoading } = useMutation({
+  return useMutation({
     mutationKey: ["products"],
-    mutationFn: ({ productId, data }) => editProductHandler(productId, data),
+    mutationFn: (data) => addProductHandler(data),
     onSuccess: (data) => {
       queryClient.invalidateQueries(["products"]);
+      router.refresh();
       toast({
-        title: `Product is updated.`,
-        description: "Update successfully!",
+        title: `New product added.`,
+        description: "A new product was created successfully!",
       });
     },
     onError: (error) => {
@@ -44,8 +45,6 @@ const useEditProduct = () => {
       });
     },
   });
-
-  return { editProduct, isLoading };
 };
 
-export default useEditProduct;
+export default useAddProduct;

@@ -33,7 +33,11 @@ export default function useSignUp() {
       router.push("/auth/login");
     },
     onError: (error) => {
-      toast({ title: "Error!", description: `${error.message}` });
+      toast({
+        variant: "destructive",
+        title: "Error!",
+        description: `${error.message}`,
+      });
     },
   });
 

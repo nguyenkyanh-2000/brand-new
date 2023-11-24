@@ -35,7 +35,11 @@ export default function useLogin() {
       router.push("/");
     },
     onError: (error) => {
-      toast({ title: "Error!", description: `${error.message}` });
+      toast({
+        variant: "destructive",
+        title: "Error!",
+        description: `${error.message}`,
+      });
     },
   });
 

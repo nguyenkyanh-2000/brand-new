@@ -2,6 +2,7 @@ import React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva } from "class-variance-authority";
 import { cn } from "@/utils/tailwind-utils";
+import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
@@ -34,14 +35,20 @@ const buttonVariants = cva(
 );
 
 const Button = React.forwardRef(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, isLoading, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
         ref={ref}
         className={cn(buttonVariants({ variant, size, className }))}
         {...props}
-      />
+      >
+        {isLoading ? (
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+        ) : (
+          <>{props.children}</>
+        )}
+      </Comp>
     );
   }
 );

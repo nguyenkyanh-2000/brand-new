@@ -33,6 +33,15 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+
+    /* Carousel */
+
+    --slide-spacing: 1rem;
+    --slide-size: 100%;
+    --slide-height: 19rem;
+
+    --thumbs-slide-spacing: 0.8rem;
+    --thumbs-slide-height: 9rem;
   }
 
   .dark {

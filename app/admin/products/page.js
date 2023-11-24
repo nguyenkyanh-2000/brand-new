@@ -6,7 +6,7 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/utils/getQueryClient";
 
 const Page = async ({ searchParams }) => {
-  const { data, isLoading, error } = await useGetProducts(
+  const { data, error } = await useGetProducts(
     searchParams.page,
     searchParams.limit
   );

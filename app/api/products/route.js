@@ -4,14 +4,14 @@ import transformedZodErrors from "@/utils/zod-utils";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
-import { filterSearchParams } from "@/utils/searchparams-utils";
 
 export async function GET(request) {
   try {
-    const allowedParams = ["page", "limit"];
-    const filteredParams = filterSearchParams(request.nextUrl, allowedParams);
-    let { page, limit } = filteredParams;
-    // Ensure page and limit are numbers. Default: Page 1, limit 10
+    const url = request.nextUrl;
+    const searchParams = new URL(url).searchParams;
+    let page = searchParams.get("page");
+    let limit = searchParams.get("limit");
+    // Ensure page and limit are numbers. Default: Page 0, limit 10
     page = Number(page) || 0;
     limit = Number(limit) || 10;
     const offset = page * limit;
@@ -20,24 +20,26 @@ export async function GET(request) {
     const { data, count, error } = await supabase
       .from("product")
       .select(`*, product_image(url)`, { count: "exact" })
+      .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
-    } else {
-      const res = {
-        error: null,
-        data: {
-          products: data,
-          currentPage: page,
-          totalPages: Math.ceil(count / limit),
-        },
-        status: 200,
-        message: "OK",
-      };
-      return NextResponse.json(res);
     }
+
+    const res = {
+      error: null,
+      data: {
+        products: data,
+        currentPage: page,
+        totalPages: Math.ceil(count / limit),
+      },
+      status: 200,
+      message: "OK",
+    };
+
+    return NextResponse.json(res);
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
@@ -57,11 +59,13 @@ export async function POST(request) {
     const { data, error } = await supabase
       .from("product")
       .insert(product)
-      .select();
+      .select()
+      .single();
     // User do not have sufficient rights to edit the products.
-    if (error?.code === "42501")
-      throw new ApiError(401, "User do not have sufficient rights");
+
     if (error) {
+      if (error.code === "42501")
+        throw new ApiError(401, "User do not have sufficient rights");
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
     }

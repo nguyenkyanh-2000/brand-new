@@ -1,10 +1,9 @@
 import getQueryClient from "@/utils/getQueryClient";
+import { useQuery } from "@tanstack/react-query";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
-const useGetProducts = async (page = 0, limit = 10) => {
-  const queryClient = getQueryClient();
-
+const useQueryProducts = (page = 0, limit = 10) => {
   const options = {
     next: { revalidate: 0 },
   };
@@ -15,12 +14,13 @@ const useGetProducts = async (page = 0, limit = 10) => {
       options
     );
     const result = await res.json();
-    return result;
+    if (result.error) throw new Error(result.error.message);
+    return result.data;
   };
 
   const queryKey = ["products"];
 
-  const { data, error } = await queryClient.fetchQuery({
+  const { data, error } = useQuery({
     queryKey: queryKey,
     queryFn: () => getProducts(page, limit),
   });
@@ -28,4 +28,4 @@ const useGetProducts = async (page = 0, limit = 10) => {
   return { data, error };
 };
 
-export default useGetProducts;
+export default useQueryProducts;

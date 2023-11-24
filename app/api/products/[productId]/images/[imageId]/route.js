@@ -10,16 +10,7 @@ import transformedZodErrors from "@/utils/zod-utils";
 export async function GET(request, context) {
   try {
     const imageId = context.params.imageId;
-    const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
-    // Check if the product image exists
-    const productImageExisted = await checkProductImageExistence(
-      supabase,
-      imageId
-    );
     if (!productImageExisted)
       throw new ApiError(400, "Product image does not exist!");
     const { data, error } = await supabase
@@ -27,6 +18,7 @@ export async function GET(request, context) {
       .select("*")
       .eq("id", imageId)
       .maybeSingle();
+    if (!data) throw new ApiError(400, "Product image does not exist!");
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);

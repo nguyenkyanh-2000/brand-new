@@ -100,12 +100,13 @@ function RegisterPage() {
             />
             <Label htmlFor="c1">Show password?</Label>
           </div>
-          <Button variant="default" type="submit">
-            {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              "Register now"
-            )}
+          <Button
+            isLoading={isLoading}
+            disabled={isLoading}
+            variant="default"
+            type="submit"
+          >
+            Register now
           </Button>
           <p className="mt-10 text-center text-sm text-foreground">
             Back to the{" "}

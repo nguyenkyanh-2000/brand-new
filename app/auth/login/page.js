@@ -96,12 +96,13 @@ function LoginPage() {
           </div>
 
           <div className="flex flex-col items-center gap-2">
-            <Button type="submit" className="w-full">
-              {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                "Sign in with email"
-              )}
+            <Button
+              isLoading={isLoading}
+              disabled={isLoading}
+              type="submit"
+              className="w-full"
+            >
+              Sign in with email
             </Button>
             <p className="text-xs text-foreground">Or sign in with</p>
             <div className="flex w-full gap-5 space-between">

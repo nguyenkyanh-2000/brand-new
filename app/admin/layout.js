@@ -4,7 +4,6 @@ import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { isAdmin } from "@/utils/supabase-auth-utils";
 import { User2 } from "lucide-react";
-import { notFound } from "next/navigation";
 
 export const metadata = {
   title: "Admin homepage",

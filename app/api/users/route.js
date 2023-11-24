@@ -1,14 +1,14 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { filterSearchParams } from "@/utils/searchparams-utils";
 import { ApiError } from "next/dist/server/api-utils";
 
 export async function GET(request) {
   try {
-    const allowedParams = ["page", "limit"];
-    const filteredParams = filterSearchParams(request.nextUrl, allowedParams);
-    let { page, limit } = filteredParams;
+    const url = request.nextUrl;
+    const searchParams = new URL(url).searchParams;
+    let page = searchParams.get("page");
+    let limit = searchParams.get("limit");
     // Ensure page and limit are numbers
     page = Number(page) || 1;
     limit = Number(limit) || 10;
