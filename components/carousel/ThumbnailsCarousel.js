@@ -5,11 +5,9 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ThumbnailsCarouselThumb } from "./ThumbnailsCarouselThumb";
 import Image from "next/image";
 
-const slides = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const options = {};
-
 const ThumbnailsCarousel = ({ images }) => {
-  //const { slides, options } = props;
+  const slides = images.map((image, index) => index);
+  const options = {};
   const imageByIndex = (index) => images[index % images.length];
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);

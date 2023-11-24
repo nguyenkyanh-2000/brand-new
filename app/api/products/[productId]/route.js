@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
 import productSchema from "@/schema/productSchema";
 import transformedZodErrors from "@/utils/zod-utils";
-import { checkProductExistence } from "./checkProductExistence";
 import { isUUID } from "@/utils/isUUID";
 
 export async function GET(request, context) {
@@ -14,7 +13,7 @@ export async function GET(request, context) {
     const supabase = createRouteHandlerClient({ cookies });
     const { data, error } = await supabase
       .from("product")
-      .select("*")
+      .select("*, product_image(*)")
       .eq("id", productId)
       .maybeSingle();
 

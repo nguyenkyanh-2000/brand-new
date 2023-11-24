@@ -25,7 +25,7 @@ import {
 import useEditProduct from "@/hooks/useEditProduct";
 
 function ProductForm({ defaultProduct }) {
-  const { editProduct, isLoading } = useEditProduct();
+  const { mutate, isPending } = useEditProduct();
   const form = useForm({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -37,7 +37,7 @@ function ProductForm({ defaultProduct }) {
   });
 
   const onSubmit = (data) => {
-    editProduct({ data: data, productId: defaultProduct.id });
+    mutate({ data: data, productId: defaultProduct.id });
   };
 
   return (
@@ -121,8 +121,8 @@ function ProductForm({ defaultProduct }) {
             Reset
           </Button>
           <Button
-            isLoading={isLoading}
-            disabled={isLoading}
+            isLoading={isPending}
+            disabled={isPending}
             className="w-[100px]"
             type="submit"
           >

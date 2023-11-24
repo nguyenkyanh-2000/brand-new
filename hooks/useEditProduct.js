@@ -26,7 +26,7 @@ const useEditProduct = () => {
     return result;
   };
 
-  const { mutate: editProduct, isPending: isLoading } = useMutation({
+  return useMutation({
     mutationKey: ["products"],
     mutationFn: ({ productId, data }) => editProductHandler(productId, data),
     onSuccess: (data) => {
@@ -44,8 +44,6 @@ const useEditProduct = () => {
       });
     },
   });
-
-  return { editProduct, isLoading };
 };
 
 export default useEditProduct;

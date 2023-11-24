@@ -1,6 +1,7 @@
 "use client";
+
 import React from "react";
-import { MoreVertical } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { ProductTableColumnHeader } from "./ProductTableColumnHeader";
 import {
   DropdownMenu,
@@ -9,8 +10,10 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
 } from "@/components/ui/DropdownMenu";
+
 import Link from "next/link";
 import { format } from "date-fns";
+import DeleteProductDialog from "@/components/forms/product/DeleteProductDialog";
 
 const columns = [
   {
@@ -69,7 +72,7 @@ const columns = [
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <MoreVertical />
+            <MoreHorizontal />
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -81,7 +84,7 @@ const columns = [
             <DropdownMenuItem>
               <Link href={`/admin/products/${product.id}`}>Edit product</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>Delete product</DropdownMenuItem>
+            <DeleteProductDialog productId={product.id} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

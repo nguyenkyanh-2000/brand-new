@@ -1,9 +1,8 @@
 import ThumbnailsCarousel from "@/components/carousel/ThumbnailsCarousel";
 import ProductForm from "@/components/forms/product/ProductForm";
 import Image from "next/image";
-import React, { Suspense } from "react";
+import React from "react";
 import notFoundImage from "@/public/Image_not_available.png";
-import Loading from "./loading";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
@@ -15,28 +14,13 @@ async function getProductById(id) {
   return result;
 }
 
-async function getProductImages(id) {
-  const res = await fetch(`${API_URL}/products/${id}/images`, {
-    next: { revalidate: 0 },
-  });
-  const result = await res.json();
-  return result;
-}
-
 async function Page({ params }) {
   const productId = params.id;
-  const [productResult, productImagesResult] = await Promise.all([
-    getProductById(productId),
-    getProductImages(productId),
-  ]);
+  const result = await getProductById(productId);
 
-  if (productResult.error) throw new Error(productResult.error.message);
+  if (result.error) throw new Error(result.error.message);
 
-  if (productImagesResult.error)
-    throw new Error(productImagesResult.error.message);
-
-  const { product } = productResult.data;
-  const { product_images } = productImagesResult.data;
+  const { product } = result.data;
 
   return (
     <div className="w-full mt-10">
@@ -49,9 +33,11 @@ async function Page({ params }) {
           <ProductForm defaultProduct={product} />
         </div>
         <div className="col-span-5 bg-background rounded p-5 sm:p-10 flex flex-col gap-10">
-          <h3 className="text-xl sm:text-3xl font-bold"> Product images</h3>
-          {product_images.length ? (
-            <ThumbnailsCarousel images={product_images} />
+          <h3 className="text-xl sm:text-3xl font-bold"> Product variants</h3>
+        </div>
+        <div className="col-span-12 bg-background rounded p-5 sm:p-10">
+          {product.product_image.length ? (
+            <ThumbnailsCarousel images={product.product_image} />
           ) : (
             <Image
               src={notFoundImage}
