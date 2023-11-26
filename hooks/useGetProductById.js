@@ -2,27 +2,25 @@ import getQueryClient from "@/utils/getQueryClient";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
-const getProducts = async (page = 0, limit = 10) => {
+const getProduct = async (productId) => {
   const options = {
     next: { revalidate: 0 },
   };
-  const res = await fetch(
-    `${API_URL}/products?page=${page}&limit=${limit}`,
-    options
-  );
+
+  const res = await fetch(`${API_URL}/products/${productId}`, options);
   const result = await res.json();
   return result;
 };
 
-const useGetProducts = async (page = 0, limit = 10) => {
+const useGetProduct = async (productId) => {
   const queryClient = getQueryClient();
 
-  const queryKey = ["products", page];
+  const queryKey = ["product"];
 
   return await queryClient.fetchQuery({
     queryKey: queryKey,
-    queryFn: () => getProducts(page, limit),
+    queryFn: () => getProduct(productId),
   });
 };
 
-export default useGetProducts;
+export default useGetProduct;

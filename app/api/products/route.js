@@ -19,7 +19,7 @@ export async function GET(request) {
     // Supabase uses 0-based index and equal on both side for "range".
     const { data, count, error } = await supabase
       .from("product")
-      .select(`*, product_image(url)`, { count: "exact" })
+      .select(`*, product_image(*)`, { count: "exact" })
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 

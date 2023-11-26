@@ -13,7 +13,7 @@ export async function GET(request, context) {
     const supabase = createRouteHandlerClient({ cookies });
     const { data, error } = await supabase
       .from("product")
-      .select("*, product_image(*)")
+      .select("*, product_image(*), product_variant(*)")
       .eq("id", productId)
       .maybeSingle();
 

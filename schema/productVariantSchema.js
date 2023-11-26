@@ -2,27 +2,28 @@ import { z } from "zod";
 
 const productVariantSchema = z
   .object({
-    variant_name: z
+    name: z
       .string({
         invalid_type_error: "The variant name is not a string!",
         required_error: "Missing variant name.",
       })
       .min(1, { message: "Variant name is required." }),
 
-    amount_left: z
+    amount_left: z.coerce
       .number({
-        invalid_type_error: "The amount left is not a number!",
-        required_error: "Missing amount left.",
+        invalid_type_error: "The amount in stock is not a number!",
+        required_error: "Missing amount in stock.",
       })
-      .min(0, { message: "Amount left must be greater than or equal to 0." }),
+      .min(0, {
+        message: "The amount in stock must be greater than or equal to 0.",
+      }),
 
-    image_url: z
-      .string({
-        invalid_type_error: "The image URL is not a string!",
-        required_error: "Missing image URL.",
+    price: z.coerce
+      .number({
+        invalid_type_error: "Wrong type of data for price.",
+        required_error: "Missing price for the product.",
       })
-      .min(1, { message: "Image URL is required." })
-      .optional(),
+      .positive("The price for the product is incorrect."),
   })
   .strict();
 

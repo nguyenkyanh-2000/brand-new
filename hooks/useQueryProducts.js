@@ -1,4 +1,3 @@
-import getQueryClient from "@/utils/getQueryClient";
 import { useQuery } from "@tanstack/react-query";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;

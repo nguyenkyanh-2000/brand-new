@@ -1,26 +1,22 @@
-import ThumbnailsCarousel from "@/components/carousel/ThumbnailsCarousel";
 import ProductForm from "@/components/forms/product/ProductForm";
 import Image from "next/image";
 import React from "react";
 import notFoundImage from "@/public/Image_not_available.png";
-
-const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
-
-async function getProductById(id) {
-  const res = await fetch(`${API_URL}/products/${id}`, {
-    next: { revalidate: 0 },
-  });
-  const result = await res.json();
-  return result;
-}
+import { AddProductVariantDialog } from "@/components/forms/productVariant/AddProductVariantForm";
+import ProductVariantCard from "@/components/forms/productVariant/ProductVariantCard";
+import { ScrollArea } from "@/components/ui/ScrollArea";
+import useGetProduct from "@/hooks/useGetProductById";
+import AdminProductImageGallery from "@/components/gallery/AdminProductImageGallery";
 
 async function Page({ params }) {
   const productId = params.id;
-  const result = await getProductById(productId);
+  const { data, error } = await useGetProduct(productId);
 
-  if (result.error) throw new Error(result.error.message);
+  if (error) throw new Error(result.error.message);
 
-  const { product } = result.data;
+  const { product } = data;
+  const productVariants = product.product_variant;
+  const productImages = product.product_image;
 
   return (
     <div className="w-full mt-10">
@@ -33,11 +29,34 @@ async function Page({ params }) {
           <ProductForm defaultProduct={product} />
         </div>
         <div className="col-span-5 bg-background rounded p-5 sm:p-10 flex flex-col gap-10">
-          <h3 className="text-xl sm:text-3xl font-bold"> Product variants</h3>
+          <div className="flex flex-col gap-5 sm:flex-row justify-between items-center">
+            <h3 className="inline-block text-xl sm:text-3xl font-bold">
+              Product variants
+            </h3>
+            <AddProductVariantDialog productId={product.id} />
+          </div>
+          {productVariants.length ? (
+            <ScrollArea className="h-[480px] w-full rounded-md">
+              <div className="flex flex-col gap-2">
+                {productVariants
+                  .slice(0)
+                  .reverse()
+                  .map((productVariant, index) => (
+                    <ProductVariantCard
+                      productVariant={productVariant}
+                      key={index}
+                    />
+                  ))}
+              </div>
+            </ScrollArea>
+          ) : (
+            <p>No variants found. Please add one.</p>
+          )}
         </div>
         <div className="col-span-12 bg-background rounded p-5 sm:p-10">
-          {product.product_image.length ? (
-            <ThumbnailsCarousel images={product.product_image} />
+          <h3 className="text-xl sm:text-3xl font-bold"> Image gallery</h3>
+          {productImages.length ? (
+            <AdminProductImageGallery images={productImages} />
           ) : (
             <Image
               src={notFoundImage}

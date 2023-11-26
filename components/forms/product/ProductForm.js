@@ -78,7 +78,7 @@ function ProductForm({ defaultProduct }) {
           name="price"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="price">Price (USD)</FormLabel>
+              <FormLabel htmlFor="price">Base price (USD)</FormLabel>
               <FormControl>
                 <Input id="price" type="number" {...field} />
               </FormControl>

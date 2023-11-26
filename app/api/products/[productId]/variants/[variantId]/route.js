@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
 import { checkProductExistence } from "../../checkProductExistence";
-import { checkProductVariantExistence } from "./checkProductVariantExistence";
 import productVariantSchema from "@/schema/productVariantSchema";
 import transformedZodErrors from "@/utils/zod-utils";
 
@@ -16,12 +15,7 @@ export async function GET(request, context) {
     const productExisted = await checkProductExistence(supabase, productId);
     if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Check if the product variant exists
-    const productVariantExisted = await checkProductVariantExistence(
-      supabase,
-      variantId
-    );
-    if (!productVariantExisted)
-      throw new ApiError(400, "Product variant does not exist!");
+    if (!data) throw new ApiError(400, "Product variant does not exist!");
     const { data, error } = await supabase
       .from("product_variant")
       .select("*")
@@ -54,12 +48,6 @@ export async function PUT(request, context) {
     const productExisted = await checkProductExistence(supabase, productId);
     if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Check if the product variant exists
-    const productVariantExisted = await checkProductVariantExistence(
-      supabase,
-      variantId
-    );
-    if (!productVariantExisted)
-      throw new ApiError(400, "Product variant does not exist!");
     // Validate data
     let productVariant = await request.json();
     const result = productVariantSchema.safeParse(productVariant);
@@ -71,10 +59,11 @@ export async function PUT(request, context) {
       .eq("id", variantId)
       .select("*")
       .maybeSingle();
-    // User do not have sufficient rights to edit the products.
-    if (error?.code === "42501")
-      throw new ApiError(401, "User do not have sufficient rights");
+
+    if (!data) throw new ApiError(400, "The product variant does not exist!");
     if (error) {
+      if (error?.code === "42501")
+        throw new ApiError(401, "User do not have sufficient rights");
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
     }
@@ -101,18 +90,14 @@ export async function DELETE(request, context) {
     const productExisted = await checkProductExistence(supabase, productId);
     if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Check if the product variant exists
-    const productVariantExisted = await checkProductVariantExistence(
-      supabase,
-      variantId
-    );
-    if (!productVariantExisted)
-      throw new ApiError(400, "Product variant does not exist!");
     const { data, error } = await supabase
       .from("product_variant")
       .delete()
       .eq("id", variantId)
       .select()
       .maybeSingle();
+
+    if (!data) throw new ApiError(400, "The product variant does not exist!");
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
