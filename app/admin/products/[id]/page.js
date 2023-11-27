@@ -64,11 +64,13 @@ async function Page({ params }) {
           {productImages.length ? (
             <AdminProductImageGallery images={productImages} />
           ) : (
-            <Image
-              src={notFoundImage}
-              className="w-full object-cover"
-              alt="No image"
-            ></Image>
+            <div className="flex w-full justify-center">
+              <Image
+                src={notFoundImage}
+                className="object-cover"
+                alt="No image"
+              ></Image>
+            </div>
           )}
         </div>
       </div>

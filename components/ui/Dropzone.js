@@ -28,6 +28,7 @@ export const Dropzone = React.forwardRef(
 
     const { getInputProps, getRootProps } = useDropzone({
       onDrop,
+      accept: props.accept,
     });
 
     return (
@@ -63,7 +64,12 @@ export const Dropzone = React.forwardRef(
                   >
                     Click Here
                   </Button>
-                  <input ref={ref} {...getInputProps()} {...props} />
+                  <input
+                    ref={ref}
+                    {...getInputProps()}
+                    accept={accept}
+                    {...props}
+                  />
                 </div>
               </>
             </CardContent>

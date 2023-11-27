@@ -12,15 +12,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
 
-import { DropdownMenuItem } from "../../ui/DropdownMenu";
+import { Button } from "@/components/ui/Button";
 
-function DeleteProductDialog({ productId }) {
+function DeleteProductImageDialog({ productId, className }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          Delete product
-        </DropdownMenuItem>
+        <Button className={className} variant="destructive">
+          Delete image
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -35,7 +35,7 @@ function DeleteProductDialog({ productId }) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              mutate(productId);
+              console.log("Delete");
             }}
             className="bg-destructive text-destructive-foreground"
           >
@@ -47,4 +47,4 @@ function DeleteProductDialog({ productId }) {
   );
 }
 
-export default DeleteProductDialog;
+export default DeleteProductImageDialog;

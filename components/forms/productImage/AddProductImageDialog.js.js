@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -75,7 +74,7 @@ export function AddProductImageDialog() {
                 <FormItem>
                   <FormLabel htmlFor="url">Image</FormLabel>
                   <FormControl>
-                    <Dropzone id="url" {...field} />
+                    <Dropzone accept="image/*" id="url" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
