@@ -19,7 +19,11 @@ function DeleteProductDialog({ productId }) {
   const { mutate } = useDeleteProduct();
 
   return (
-    <AlertDialog>
+    <AlertDialog
+      onOpenChange={() => {
+        setTimeout(() => (document.body.style.pointerEvents = ""), 100);
+      }}
+    >
       <AlertDialogTrigger asChild>
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           Delete product
@@ -37,7 +41,9 @@ function DeleteProductDialog({ productId }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => mutate(productId)}
+            onClick={() => {
+              mutate(productId);
+            }}
             className="bg-destructive text-destructive-foreground"
           >
             Delete

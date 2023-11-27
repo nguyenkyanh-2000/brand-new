@@ -7,6 +7,7 @@ import ProductVariantCard from "@/components/forms/productVariant/ProductVariant
 import { ScrollArea } from "@/components/ui/ScrollArea";
 import useGetProduct from "@/hooks/useGetProductById";
 import AdminProductImageGallery from "@/components/gallery/AdminProductImageGallery";
+import { AddProductImageDialog } from "@/components/forms/productImage/AddProductImageDialog.js";
 
 async function Page({ params }) {
   const productId = params.id;
@@ -54,7 +55,12 @@ async function Page({ params }) {
           )}
         </div>
         <div className="col-span-12 bg-background rounded p-5 sm:p-10">
-          <h3 className="text-xl sm:text-3xl font-bold"> Image gallery</h3>
+          <div className="flex flex-col gap-5 sm:flex-row justify-between items-center">
+            <h3 className="inline-block text-xl sm:text-3xl font-bold">
+              Product images
+            </h3>
+            <AddProductImageDialog />
+          </div>
           {productImages.length ? (
             <AdminProductImageGallery images={productImages} />
           ) : (

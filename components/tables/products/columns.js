@@ -70,7 +70,7 @@ const columns = [
       const product = row.original;
 
       return (
-        <DropdownMenu>
+        <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
             <MoreHorizontal />
           </DropdownMenuTrigger>
