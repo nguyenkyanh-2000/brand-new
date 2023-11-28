@@ -4,12 +4,12 @@ import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
 import productSchema from "@/schema/productSchema";
 import transformedZodErrors from "@/utils/zod-utils";
-import { isUUID } from "@/utils/isUUID";
+import { validate } from "uuid";
 
 export async function GET(request, context) {
   try {
     const productId = context.params.productId;
-    if (!isUUID(productId)) throw new ApiError(400, "Wrong product ID");
+    if (!validate(productId)) throw new ApiError(400, "Wrong product ID");
     const supabase = createRouteHandlerClient({ cookies });
     const { data, error } = await supabase
       .from("product")
@@ -40,7 +40,7 @@ export async function PUT(request, context) {
   try {
     const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    if (!isUUID(productId)) throw new ApiError(400, "Wrong product ID");
+    if (!validate(productId)) throw new ApiError(400, "Wrong product ID");
     // Request's body validation. Always return 400 error if invalid.
     let product = await request.json();
     const result = productSchema.safeParse(product);

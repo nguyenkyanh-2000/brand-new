@@ -18,33 +18,44 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/Form";
-import productImageSchema from "@/schema/productImageSchema";
+import { ImageSchema } from "@/schema/imageSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Dropzone } from "@/components/ui/Dropzone";
+import useAddProductImage from "@/hooks/useAddProductImage";
 
-export function AddProductImageDialog() {
+export function AddProductImageDialog({ productId }) {
   const [open, setOpen] = useState(false);
+  const { mutate } = useAddProductImage();
   const form = useForm({
-    resolver: zodResolver(productImageSchema),
+    resolver: zodResolver(ImageSchema),
     defaultValues: {
-      url: "",
+      image: "",
       description: "",
     },
   });
 
   const onSubmit = (data) => {
-    console.log(data);
+    mutate({ productId, ...data });
     setOpen(false);
     form.reset();
   };
+
+  const onCancel = () => {
+    setOpen(false);
+    form.reset();
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="default">Add image</Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[320px] sm:max-w-[500px]">
+      <DialogContent
+        onCloseAutoFocus={() => form.reset()}
+        className="max-w-[320px] sm:max-w-[500px]"
+      >
         <DialogHeader>
           <DialogTitle>Add a product image</DialogTitle>
         </DialogHeader>
@@ -69,12 +80,12 @@ export function AddProductImageDialog() {
 
             <FormField
               control={form.control}
-              name="url"
+              name="image"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="url">Image</FormLabel>
+                  <FormLabel htmlFor="image">Image</FormLabel>
                   <FormControl>
-                    <Dropzone accept="image/*" id="url" {...field} />
+                    <Dropzone id="image" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -82,6 +93,14 @@ export function AddProductImageDialog() {
             />
 
             <div className="w-full flex justify-end gap-4">
+              <Button
+                className="w-[100px]"
+                variant="secondary"
+                onClick={onCancel}
+                type="reset"
+              >
+                Cancel
+              </Button>
               <Button className="w-[100px]" type="submit">
                 Save
               </Button>

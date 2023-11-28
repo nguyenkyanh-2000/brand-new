@@ -59,7 +59,7 @@ async function Page({ params }) {
             <h3 className="inline-block text-xl sm:text-3xl font-bold">
               Product images
             </h3>
-            <AddProductImageDialog />
+            <AddProductImageDialog productId={product.id} />
           </div>
           {productImages.length ? (
             <AdminProductImageGallery images={productImages} />

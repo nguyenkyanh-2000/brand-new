@@ -26,9 +26,7 @@ function DeleteProductImageDialog({ productId, className }) {
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure?</AlertDialogTitle>
           <AlertDialogDescription>
-            {
-              "This action will delete all the product's variants and images! It is also irreversible."
-            }
+            {"This action will delete this image! It is irreversible."}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

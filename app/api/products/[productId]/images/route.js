@@ -2,15 +2,14 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
-import { checkProductExistence } from "../checkProductExistence";
 import productImageSchema from "@/schema/productImageSchema";
 import transformedZodErrors from "@/utils/zod-utils";
-import { isUUID } from "@/utils/isUUID";
+import { validate } from "uuid";
 
 export async function GET(request, context) {
   try {
     const productId = context.params.productId;
-    if (!isUUID(productId)) throw new ApiError(400, "Product ID is invalid.");
+    if (!validate(productId)) throw new ApiError(400, "Product ID is invalid.");
     const supabase = createRouteHandlerClient({ cookies });
     // Ensure page and limit are numbers. Default: Page 0, limit 10
     const { data, error } = await supabase
@@ -42,7 +41,7 @@ export async function GET(request, context) {
 export async function POST(request, context) {
   try {
     const productId = context.params.productId;
-    if (!isUUID(productId)) throw new ApiError(400, "Product ID is invalid.");
+    if (!validate(productId)) throw new ApiError(400, "Wrong product ID");
     const supabase = createRouteHandlerClient({ cookies });
     // Validate data
     let productImage = await request.json();
