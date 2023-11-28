@@ -6,7 +6,6 @@ import { cn } from "@/utils/tailwind-utils";
 import { useDropzone } from "react-dropzone";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
-import { supabaseUpload } from "@/utils/supabase-image-upload";
 
 export const Dropzone = React.forwardRef(({ className, ...props }, ref) => {
   const [file, setFile] = useState(null);

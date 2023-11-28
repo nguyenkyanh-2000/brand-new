@@ -37,7 +37,7 @@ export function AddProductImageDialog({ productId }) {
   });
 
   const onSubmit = (data) => {
-    mutate({ productId, ...data });
+    mutate({ productId: productId, ...data });
     setOpen(false);
     form.reset();
   };

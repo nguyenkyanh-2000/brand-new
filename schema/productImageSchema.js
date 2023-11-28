@@ -2,6 +2,12 @@ import { z } from "zod";
 
 const productImageSchema = z
   .object({
+    id: z
+      .string({
+        invalid_type_error: "The image ID is not a string!",
+        required_error: "Missing image ID.",
+      })
+      .uuid({ message: "The image ID is not an UUID!" }),
     url: z
       .string({
         invalid_type_error: "The image URL is not a string!",

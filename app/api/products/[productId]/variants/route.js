@@ -2,7 +2,6 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
-import { checkProductExistence } from "../checkProductExistence";
 import productVariantSchema from "@/schema/productVariantSchema";
 import transformedZodErrors from "@/utils/zod-utils";
 
@@ -18,9 +17,6 @@ export async function GET(request, context) {
     page = Number(page) || 1;
     limit = Number(limit) || 10;
     const offset = (page - 1) * limit;
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
     const { data, count, error } = await supabase
       .from("product_variant")
       .select("*", { count: "exact" })
@@ -52,9 +48,6 @@ export async function POST(request, context) {
   try {
     const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Validate data
     let productVariant = await request.json();
     const result = productVariantSchema.safeParse(productVariant);

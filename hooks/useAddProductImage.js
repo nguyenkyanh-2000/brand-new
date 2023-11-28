@@ -15,9 +15,15 @@ const useAddProductImage = () => {
       process.env.NEXT_PUBLIC_LOCATION_ORIGIN
     );
 
-    const imageUrl = await supabaseUpload(data.image, "product_image");
+    const { imageEndpoint, imageId } = await supabaseUpload(
+      data.image,
+      "product_image",
+      `${productId}`
+    );
+
     const newData = {
-      url: `${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_URL}/product_image/${imageUrl}`,
+      id: imageId,
+      url: `${process.env.NEXT_PUBLIC_SUPABASE_BUCKET_URL}/product_image/${imageEndpoint}`,
       description: data.description,
     };
 

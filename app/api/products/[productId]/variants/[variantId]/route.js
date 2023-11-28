@@ -2,29 +2,26 @@ import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
-import { checkProductExistence } from "../../checkProductExistence";
 import productVariantSchema from "@/schema/productVariantSchema";
 import transformedZodErrors from "@/utils/zod-utils";
 
 export async function GET(request, context) {
   try {
     const variantId = context.params.variantId;
-    const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
-    // Check if the product variant exists
-    if (!data) throw new ApiError(400, "Product variant does not exist!");
+
     const { data, error } = await supabase
       .from("product_variant")
       .select("*")
       .eq("id", variantId)
       .maybeSingle();
+    // Check if the product variant exists
+    if (!data) throw new ApiError(400, "Product variant does not exist!");
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
     }
+
     return NextResponse.json({
       error: null,
       data: { product_variant: data },
@@ -44,9 +41,6 @@ export async function PUT(request, context) {
     const variantId = context.params.variantId;
     const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Check if the product variant exists
     // Validate data
     let productVariant = await request.json();
@@ -86,9 +80,6 @@ export async function DELETE(request, context) {
     const variantId = context.params.variantId;
     const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product exists
-    const productExisted = await checkProductExistence(supabase, productId);
-    if (!productExisted) throw new ApiError(400, "Product does not exist!");
     // Check if the product variant exists
     const { data, error } = await supabase
       .from("product_variant")
