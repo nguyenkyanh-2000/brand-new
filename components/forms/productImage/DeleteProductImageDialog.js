@@ -13,8 +13,11 @@ import {
 } from "@/components/ui/AlertDialog";
 
 import { Button } from "@/components/ui/Button";
+import useDeleteProductImage from "@/hooks/useDeleteProductImage";
 
-function DeleteProductImageDialog({ productId, className }) {
+function DeleteProductImageDialog({ imageId, productId, className }) {
+  const { mutate } = useDeleteProductImage();
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -33,7 +36,7 @@ function DeleteProductImageDialog({ productId, className }) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              console.log("Delete");
+              mutate({ productId, imageId });
             }}
             className="bg-destructive text-destructive-foreground"
           >

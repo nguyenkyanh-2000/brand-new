@@ -6,7 +6,6 @@ import DeleteProductImageDialog from "../forms/productImage/DeleteProductImageDi
 
 export default function GalleryImageContainer({ image }) {
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <div
       key={image.id}
@@ -21,7 +20,11 @@ export default function GalleryImageContainer({ image }) {
         className="object-cover hover:opacity-50"
       />
       {isHovered && (
-        <DeleteProductImageDialog className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <DeleteProductImageDialog
+          productId={image.product_id}
+          imageId={image.id}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
       )}
     </div>
   );
