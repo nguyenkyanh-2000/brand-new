@@ -92,6 +92,28 @@ export async function DELETE(request, context) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
     }
+
+    // Delete image folder "productId" in supabase storage
+    // Hacky solution to delete a whole folder since supabase does not provide an innate method.
+    const { data: list } = await supabase.storage
+      .from("product_image")
+      .list(`${productId}`);
+    const filesToRemove = list.map((x) => `${productId}/${x.name}`);
+
+    console.log(filesToRemove);
+
+    const storageAction = await supabase.storage
+      .from("product_image")
+      .remove(filesToRemove);
+
+    if (storageAction.error) {
+      if (!storageAction.error.status) storageAction.error = 400;
+      throw new ApiError(
+        storageAction.error.status,
+        storageAction.error.message
+      );
+    }
+
     return NextResponse.json({
       error: null,
       data: { product: data },

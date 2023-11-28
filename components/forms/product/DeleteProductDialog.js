@@ -13,8 +13,10 @@ import {
 } from "@/components/ui/AlertDialog";
 
 import { DropdownMenuItem } from "../../ui/DropdownMenu";
+import useDeleteProduct from "@/hooks/useDeleteProduct";
 
 function DeleteProductDialog({ productId }) {
+  const { mutate } = useDeleteProduct();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
