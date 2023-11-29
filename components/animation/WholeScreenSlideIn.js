@@ -20,7 +20,7 @@ const WholeScreenSlideIn = ({ children, isOpen, from = "right" }) => {
       exit={"closed"}
       variants={variants}
       transition={{ duration: 1, ease: "easeInOut" }}
-      className="fixed inset-0 w-full min-h-full bg-primary z-[9999]"
+      className="fixed inset-0 w-full min-h-full bg-background z-[9999]"
     >
       {children}
     </motion.aside>

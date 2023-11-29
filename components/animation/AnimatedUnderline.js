@@ -26,7 +26,7 @@ const AnimatedUnderline = ({
     >
       {children}
       <motion.div
-        className="absolute bottom-0 left-0 w-full h-0.5 bg-primary-foreground"
+        className="absolute bottom-0 left-0 w-full h-0.5 bg-foreground"
         // Animated from left to right or right to left based on the direction prop
         initial={direction === "left" ? { width: 0 } : { width: "100%" }}
         animate={{ width: isHovered ? (direction === "left" ? "100%" : 0) : 0 }}

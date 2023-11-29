@@ -1,17 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import AdminNavigationMobile from "./AdminNavigationMobile";
 import AnimatedUnderline from "../animation/AnimatedUnderline";
+import CustomerNavigationMobile from "./CustomerNavigationMobile";
 
-function AdminNavigation() {
+function CustomerNavigation() {
   return (
     <>
       <nav className="hidden lg:flex items-center gap-5 mx-10">
-        <AnimatedUnderline>
-          <Link className="text-lg" href={"#"}>
-            Dashboard
-          </Link>
-        </AnimatedUnderline>
         <AnimatedUnderline>
           <Link className="text-lg" href={"#"}>
             Products
@@ -19,21 +14,26 @@ function AdminNavigation() {
         </AnimatedUnderline>
         <AnimatedUnderline>
           <Link className="text-lg" href={"#"}>
-            Customers
+            Inspiration
           </Link>
         </AnimatedUnderline>
         <AnimatedUnderline>
           <Link className="text-lg" href={"#"}>
-            Orders
+            News
+          </Link>
+        </AnimatedUnderline>
+        <AnimatedUnderline>
+          <Link className="text-lg" href={"#"}>
+            Contact
           </Link>
         </AnimatedUnderline>
       </nav>
       {/* Only show when screen size < 1280px*/}
       <div className="flex lg:hidden">
-        <AdminNavigationMobile />
+        <CustomerNavigationMobile />
       </div>
     </>
   );
 }
 
-export default AdminNavigation;
+export default CustomerNavigation;

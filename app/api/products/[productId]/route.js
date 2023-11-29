@@ -100,8 +100,6 @@ export async function DELETE(request, context) {
       .list(`${productId}`);
     const filesToRemove = list.map((x) => `${productId}/${x.name}`);
 
-    console.log(filesToRemove);
-
     const storageAction = await supabase.storage
       .from("product_image")
       .remove(filesToRemove);

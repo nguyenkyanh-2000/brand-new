@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 import React from "react";
 import { useState, useEffect } from "react";
 
-function ThemeToggle() {
+function ThemeToggle({ size }) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -17,9 +17,9 @@ function ThemeToggle() {
     mounted && (
       <>
         {theme === "light" ? (
-          <Moon onClick={() => setTheme("dark")} />
+          <Moon size={size} onClick={() => setTheme("dark")} />
         ) : (
-          <Sun onClick={() => setTheme("light")} />
+          <Sun size={size} onClick={() => setTheme("light")} />
         )}
       </>
     )
