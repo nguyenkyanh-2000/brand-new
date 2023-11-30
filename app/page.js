@@ -51,6 +51,7 @@ export default function Home() {
             className="object-cover object-center"
             fill
             priority
+            sizes="(min-width: 1200px) 800px, (min-width: 768px) 50vw, 100vw"
             alt="hero-image-1"
           />
         </SlideIn>
@@ -65,6 +66,7 @@ export default function Home() {
           <Image
             src={HeroImage2}
             className="object-cover object-center"
+            sizes="(min-width: 1200px) 800px, (min-width: 768px) 50vw, 100vw"
             fill
             priority
             alt="hero-image-2"
@@ -91,7 +93,7 @@ export default function Home() {
       {/** Shop by categories */}
 
       <section className="grid w-screen grid-cols-4 px-10 mt-20 sm:mt-[200px] gap-5">
-        <OnViewSlideIn x1={-1000} x2={0} delay={2} className={"col-span-4"}>
+        <OnViewSlideIn x1={-1000} x2={0} delay={1} className={"col-span-4"}>
           <h2 className="font-serif font-bold text-base md:text-2xl lg:text-4xl">
             Shop by categories
           </h2>
@@ -111,7 +113,8 @@ export default function Home() {
                 className="object-cover object-center rounded-md"
                 fill
                 priority
-                alt="hero-image-1"
+                sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
+                alt="category-image-1"
               />
             </div>
             <p className="text-lg">Clothes</p>
@@ -132,7 +135,8 @@ export default function Home() {
                 className="object-cover object-center rounded-md"
                 fill
                 priority
-                alt="hero-image-1"
+                sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
+                alt="category-image-2"
               />
             </div>
             <p className="text-lg">Cosmetics</p>
@@ -153,7 +157,8 @@ export default function Home() {
                 className="object-cover object-center rounded-md"
                 fill
                 priority
-                alt="hero-image-1"
+                sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
+                alt="category-image-3"
               />
             </div>
             <p className="text-lg">Furniture</p>
@@ -174,7 +179,8 @@ export default function Home() {
                 className="object-cover object-center rounded-md"
                 fill
                 priority
-                alt="hero-image-1"
+                sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
+                alt="category-image-4"
               />
             </div>
             <p className="text-lg">Stationery</p>
@@ -191,6 +197,7 @@ export default function Home() {
               src={BannerImageEnvironment}
               alt="banner-image-material"
               fill
+              sizes="(min-width: 1200px) 100vw, 50vw"
               className="object-cover object-center"
             ></Image>
             <h3 className="absolute font-sans font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
@@ -205,6 +212,7 @@ export default function Home() {
               src={BannerImageMaterial}
               alt="banner-image-material"
               fill
+              sizes="(min-width: 1200px) 100vw, 50vw"
               className="object-cover object-center"
             ></Image>
             <h3 className="absolute font-serif font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
@@ -219,6 +227,7 @@ export default function Home() {
               src={BannerImageSource}
               alt="banner-image-material"
               fill
+              sizes="(min-width: 1200px) 100vw, 50vw"
               className="object-cover object-[60%_40%]"
             ></Image>
             <h3 className="absolute font-sans font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
@@ -267,11 +276,12 @@ export default function Home() {
             src={PosterImage}
             alt="poster-image"
             fill
+            sizes="(min-width: 1200px) 50vw, 100vw"
             className="object-center object-cover rounded-md"
           ></Image>
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex flex-col justify-center items-center gap-5">
             <p className=" text-white font-sans font-bold text-3xl md:text-6xl italic">
-              DuraTex <sup className="text-3xl text-white">®</sup>
+              DuraTex <sup className="text-xl md:text-3xl text-white">®</sup>
             </p>
             <p className="  text-white font-sans font-bold text-3xl md:text-6xl  italic">
               DuraMat <sup className="text-xl md:text-3xl text-white">®</sup>
