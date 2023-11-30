@@ -17,9 +17,17 @@ function ThemeToggle({ size }) {
     mounted && (
       <>
         {theme === "light" ? (
-          <Moon size={size} onClick={() => setTheme("dark")} />
+          <Moon
+            size={size}
+            className="hover:cursor-pointer"
+            onClick={() => setTheme("dark")}
+          />
         ) : (
-          <Sun size={size} onClick={() => setTheme("light")} />
+          <Sun
+            size={size}
+            className="hover:cursor-pointer"
+            onClick={() => setTheme("light")}
+          />
         )}
       </>
     )
