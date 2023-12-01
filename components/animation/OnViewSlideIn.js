@@ -10,8 +10,8 @@ export const OnViewSlideIn = ({
   x2 = 0,
   y1 = 0,
   y2 = 0,
-  duration = 2,
-  delay = 0.5,
+  duration = 1.5,
+  delay = 0.25,
   className,
 }) => {
   const ref = useRef(null);

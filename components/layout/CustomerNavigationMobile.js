@@ -6,6 +6,7 @@ import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Menu, Search, ShoppingCart, User2, X } from "lucide-react";
+import UserProfile from "../header/UserProfile";
 
 function CustomerNavigationMobile() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -15,7 +16,7 @@ function CustomerNavigationMobile() {
       {!isMenuOpened ? (
         <div className="flex items-center gap-5 xl:hidden">
           <Search size={16} />
-          <User2 size={16} />
+          <UserProfile size={16} />
           <ShoppingCart size={16} />
           <Menu size={16} onClick={() => setIsMenuOpened(true)} />
         </div>

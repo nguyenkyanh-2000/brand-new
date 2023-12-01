@@ -1,3 +1,4 @@
+import UserProfile from "@/components/header/UserProfile";
 import AdminNavigation from "@/components/layout/AdminNavigation";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
@@ -25,7 +26,7 @@ export default async function Layout({ children }) {
         <AdminNavigation />
         <div className="hidden lg:flex gap-5">
           <ThemeToggle />
-          <User2 />
+          <UserProfile />
         </div>
       </Header>
       {children}

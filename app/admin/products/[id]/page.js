@@ -5,7 +5,7 @@ import notFoundImage from "@/public/Image_not_available.png";
 import { AddProductVariantDialog } from "@/components/forms/productVariant/AddProductVariantForm";
 import ProductVariantCard from "@/components/forms/productVariant/ProductVariantCard";
 import { ScrollArea } from "@/components/ui/ScrollArea";
-import useGetProduct from "@/hooks/useGetProductById";
+import useGetProduct from "@/hooks/useGetProduct";
 import AdminProductImageGallery from "@/components/gallery/AdminProductImageGallery";
 import { AddProductImageDialog } from "@/components/forms/productImage/AddProductImageDialog.js";
 

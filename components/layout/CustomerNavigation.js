@@ -8,7 +8,7 @@ function CustomerNavigation() {
     <>
       <nav className="hidden lg:flex items-center gap-5 mx-10">
         <AnimatedUnderline>
-          <Link className="text-lg" href={"#"}>
+          <Link className="text-lg" href={"/products"}>
             Products
           </Link>
         </AnimatedUnderline>

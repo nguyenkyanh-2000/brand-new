@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/utils/tailwind-utils";
 
 const AnimatedUnderline = ({
+  className,
   children,
   direction = "left",
   duration = 0.25,
@@ -20,7 +22,7 @@ const AnimatedUnderline = ({
 
   return (
     <div
-      className="relative"
+      className={cn("relative", className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

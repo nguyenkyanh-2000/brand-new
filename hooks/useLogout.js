@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./useToast";
 import { useRouter } from "next/navigation";
 
-async function loginWithEmail(data) {
+async function logoutHandler() {
   const url = new URL(
-    "/api/auth/login",
+    "/api/auth/logout",
     process.env.NEXT_PUBLIC_LOCATION_ORIGIN
   );
   const options = {
@@ -12,7 +12,6 @@ async function loginWithEmail(data) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
   };
   const res = await fetch(url, options);
   const result = await res.json();
@@ -20,19 +19,19 @@ async function loginWithEmail(data) {
   return result.data;
 }
 
-export default function useLogin() {
+export default function useLogout() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { toast } = useToast();
-  const { mutate: login, isPending: isLoading } = useMutation({
+  const { mutate: logout, isPending: isLoading } = useMutation({
     mutationKey: ["user"],
-    mutationFn: ({ email, password }) => loginWithEmail({ email, password }),
+    mutationFn: () => logoutHandler(),
     onSuccess: (data) => {
       toast({
-        title: `Welcome back!`,
-        description: "Login successfully!",
+        title: `See you soon!`,
+        description: "Logout successfully!",
       });
-      queryClient.setQueryData(["user"], data);
+      queryClient.invalidateQueries({ queryKey: ["user"] });
       router.push("/");
     },
     onError: (error) => {
@@ -44,5 +43,5 @@ export default function useLogin() {
     },
   });
 
-  return { login, isLoading };
+  return { logout, isLoading };
 }

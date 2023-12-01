@@ -1,4 +1,6 @@
+import UserProfile from "@/components/header/UserProfile";
 import CustomerNavigation from "@/components/layout/CustomerNavigation";
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
@@ -19,10 +21,11 @@ export default async function Layout({ children }) {
           <ThemeToggle />
           <Search />
           <ShoppingCart />
-          <User2 />
+          <UserProfile />
         </div>
       </Header>
       {children}
+      <Footer />
     </section>
   );
 }

@@ -2,7 +2,7 @@ import CustomerNavigation from "@/components/layout/CustomerNavigation";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { Search, ShoppingCart, User2 } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import HeroImage1 from "@/public/hero-image-1.jpg";
 import HeroImage2 from "@/public/hero-image-2.jpg";
@@ -12,13 +12,11 @@ import CategoryImageClothes from "@/public/category-image-clothes.jpg";
 import CategoryImageFurniture from "@/public/category-image-furniture.jpg";
 import CategoryImageCosmetics from "@/public/category-image-cosmetics.jpg";
 import CategoryImageStationery from "@/public/category-image-stationery.jpg";
-import BannerImageMaterial from "@/public/banner-image-material.jpg";
-import BannerImageEnvironment from "@/public/banner-image-environment.jpg";
-import BannerImageSource from "@/public/banner-image-source.jpg";
 import PosterImage from "@/public/poster-image.jpg";
 import Link from "next/link";
 import { OnViewSlideIn } from "@/components/animation/OnViewSlideIn";
 import Footer from "@/components/layout/Footer";
+import UserProfile from "@/components/header/UserProfile";
 
 export default function Home() {
   return (
@@ -31,7 +29,7 @@ export default function Home() {
             <ThemeToggle />
             <Search />
             <ShoppingCart />
-            <User2 />
+            <UserProfile />
           </div>
         </Header>
       </SlideIn>
@@ -93,7 +91,7 @@ export default function Home() {
       {/** Shop by categories */}
 
       <section className="grid w-screen grid-cols-4 px-10 mt-20 sm:mt-[200px] gap-5">
-        <OnViewSlideIn x1={-1000} x2={0} delay={1} className={"col-span-4"}>
+        <OnViewSlideIn x1={-1000} x2={0} delay={0} className={"col-span-4"}>
           <h2 className="font-serif font-bold text-base md:text-2xl lg:text-4xl">
             Shop by categories
           </h2>
@@ -188,68 +186,15 @@ export default function Home() {
         </OnViewSlideIn>
       </section>
 
-      {/** Banner section */}
-
-      <section className="flex flex-col gap-5 mt-20">
-        <OnViewSlideIn x1={1000} x2={0}>
-          <div className="relative w-screen h-[250px]">
-            <Image
-              src={BannerImageEnvironment}
-              alt="banner-image-material"
-              fill
-              sizes="(min-width: 1200px) 100vw, 50vw"
-              className="object-cover object-center"
-            ></Image>
-            <h3 className="absolute font-sans font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
-              Environment-friendly certified.
-            </h3>
-          </div>
-        </OnViewSlideIn>
-
-        <OnViewSlideIn x1={-1000} x2={0}>
-          <div className="relative w-screen h-[250px]">
-            <Image
-              src={BannerImageMaterial}
-              alt="banner-image-material"
-              fill
-              sizes="(min-width: 1200px) 100vw, 50vw"
-              className="object-cover object-center"
-            ></Image>
-            <h3 className="absolute font-serif font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
-              Luxurious, durable material.
-            </h3>
-          </div>
-        </OnViewSlideIn>
-
-        <OnViewSlideIn x1={1000} x2={0}>
-          <div className="relative w-screen h-[250px]">
-            <Image
-              src={BannerImageSource}
-              alt="banner-image-material"
-              fill
-              sizes="(min-width: 1200px) 100vw, 50vw"
-              className="object-cover object-[60%_40%]"
-            ></Image>
-            <h3 className="absolute font-sans font-bold text-white w-full text-center top-1/2 -translate-y-1/2 text-4xl md:text-6xl lg:text-8xl">
-              Sustainable, ethically sourced.
-            </h3>
-          </div>
-        </OnViewSlideIn>
-      </section>
-
       {/** Short description section */}
 
-      <section className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 gap-10 w-screen mt-20 px-10">
+      <section className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 gap-10 w-screen mt-20 sm:mt-[200px] px-10">
         <div className="flex flex-col justify-center gap-5 col-span-1 row-span-2">
           <h3 className="break-words font-serif font-bold text-2xl sm:text-4xl">
-            {`Discover the Essence of Brand's Visionary Approach to
-            Lifestyle`}
+            {`A Visionary Approach to Lifestyle`}
           </h3>
-          <p className="break-words text-base sm:text-lg">
-            {`At Brand, our vision extends far beyond products; it's a
-            testament to an evolved way of life. Each creation embodies our
-            ethos—blending opulence with sustainability, fostering a journey
-            that transcends mere possessions. Our dedication to detail and
+          <p className="break-words font-light text-base sm:text-lg">
+            {`Detail and
             craftsmanship isn't just about fashion; it's a testament to the
             harmony between luxury and consciousness. Step into our world and
             explore the narrative where sophistication meets responsibility,
@@ -298,23 +243,16 @@ export default function Home() {
           <h3 className="break-words font-serif font-bold text-2xl sm:text-4xl">
             {`Brand's Innovative Material Collection`}
           </h3>
-          <p className="break-words text-base sm:text-lg">
+          <p className="break-words text-base font-light sm:text-lg">
             {`Embark on a transformative journey with Brand, merging innovation
-              and sophistication through four pioneering materials. DuraTex®
-              revolutionizes fashion, blending durability with style in our
-              clothing line, embodying a fusion of resilience and elegance.
-              Explore DuraMat® in our furniture, a marriage of durability and
-              refined textures, epitomizing sophistication and practicality.
-              Immerse yourself in DuraFlex® for stationery, offering durability and smoothness, redefining the
-              essence of writing experiences. Indulge in DuraBlend® within our cosmetics, celebrating enduring
-              beauty and vibrant aesthetics. These materials underscore our
+              and sophistication through four pioneering materials. These materials underscore our
               commitment to crafting products that embody durability, elegance,
               and conscious refinement.`}
           </p>
         </div>
       </section>
 
-      <Footer className={"w-screen mt-20"} />
+      <Footer className={"w-screen mt-20 sm:mt-[200px]"} />
     </div>
   );
 }

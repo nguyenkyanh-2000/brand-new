@@ -6,6 +6,7 @@ import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Menu, User2, X } from "lucide-react";
+import UserProfile from "../header/UserProfile";
 
 function AdminNavigationMobile() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -15,7 +16,7 @@ function AdminNavigationMobile() {
       {!isMenuOpened ? (
         <div className="flex items-center gap-5 xl:hidden">
           <ThemeToggle />
-          <User2 />
+          <UserProfile />
           <Menu onClick={() => setIsMenuOpened(true)} />
         </div>
       ) : (
