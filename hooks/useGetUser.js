@@ -18,9 +18,7 @@ const useGetUser = (userId) => {
 
   return useQuery({
     queryKey: queryKey,
-    queryFn: async () => await getUser(userId),
-    enabled: false,
-    retry: false,
+    queryFn: getUser(userId),
   });
 };
 

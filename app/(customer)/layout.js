@@ -4,7 +4,7 @@ import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { User2, Search, ShoppingCart } from "lucide-react";
+import { Search, ShoppingCart } from "lucide-react";
 
 export const metadata = {
   title: "Products",

@@ -1,37 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/HoverCard";
 import { User2 } from "lucide-react";
 import Link from "next/link";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import useGetUser from "@/hooks/useGetUser";
 import { Button } from "../ui/Button";
 import useLogout from "@/hooks/useLogout";
+import useGetUser from "@/hooks/useGetUser";
 
-function UserProfile({ size = 24 }) {
+function UserProfile({ size = 24, userId }) {
+  const { data, isPending } = useGetUser(userId);
   const { logout } = useLogout();
-  const [currentUser, setCurrentUser] = useState();
-  const { data, refetch } = useGetUser(currentUser?.id);
 
   const handleLogout = () => {
     logout();
-    setCurrentUser(null);
-    refetch();
   };
 
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      const supabase = createClientComponentClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setCurrentUser(user);
-    };
-
-    getCurrentUser();
-  }, []);
-
-  if (data.user) {
+  if (data) {
     return (
       <HoverCard>
         <HoverCardTrigger asChild>
@@ -61,11 +45,13 @@ function UserProfile({ size = 24 }) {
       </HoverCard>
     );
   }
-  return (
-    <Link href={"/auth/login"}>
-      <User2 size={size} className="hover:cursor-pointer"></User2>
-    </Link>
-  );
+
+  if (!data || isPending)
+    return (
+      <Link href={"/auth/login"}>
+        <User2 size={size} className="hover:cursor-pointer"></User2>
+      </Link>
+    );
 }
 
 export default UserProfile;

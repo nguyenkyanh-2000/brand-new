@@ -31,7 +31,7 @@ export default function useLogout() {
         title: `See you soon!`,
         description: "Logout successfully!",
       });
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.setQueryData(["user"], null);
       router.push("/");
     },
     onError: (error) => {
