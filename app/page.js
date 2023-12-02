@@ -4,15 +4,16 @@ import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Search, ShoppingCart } from "lucide-react";
 import Image from "next/image";
-import HeroImage1 from "@/public/hero-image-1.jpg";
-import HeroImage2 from "@/public/hero-image-2.jpg";
+import HeroImage1 from "@/public/hero-image-1.webp";
+import HeroImage2 from "@/public/hero-image-2.webp";
 import SlideIn from "@/components/animation/SlideIn";
 import { Button } from "@/components/ui/Button";
-import CategoryImageClothes from "@/public/category-image-clothes.jpg";
-import CategoryImageFurniture from "@/public/category-image-furniture.jpg";
-import CategoryImageCosmetics from "@/public/category-image-cosmetics.jpg";
-import CategoryImageStationery from "@/public/category-image-stationery.jpg";
-import PosterImage from "@/public/poster-image.jpg";
+import CategoryImageClothes from "@/public/category-image-clothes.webp";
+import CategoryImageFurniture from "@/public/category-image-furniture.webp";
+import CategoryImageCosmetics from "@/public/category-image-cosmetics.webp";
+import CategoryImageStationery from "@/public/category-image-stationery.webp";
+import PosterImage from "@/public/poster-image.webp";
+import Video from "@/public/video.webm";
 import Link from "next/link";
 import { OnViewSlideIn } from "@/components/animation/OnViewSlideIn";
 import Footer from "@/components/layout/Footer";
@@ -56,10 +57,9 @@ export default async function Home() {
           >
             <Image
               src={HeroImage1}
-              className="object-cover object-center"
-              fill
+              className="w-full h-full object-cover object-center"
               priority
-              sizes="(min-width: 1200px) 800px, (min-width: 768px) 50vw, 100vw"
+              sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
               alt="hero-image-1"
             />
           </SlideIn>
@@ -73,10 +73,8 @@ export default async function Home() {
           >
             <Image
               src={HeroImage2}
-              className="object-cover object-center"
-              sizes="(min-width: 1200px) 800px, (min-width: 768px) 50vw, 100vw"
-              fill
-              priority
+              className="w-full h-full object-cover object-center"
+              sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
               alt="hero-image-2"
             />
           </SlideIn>
@@ -120,7 +118,6 @@ export default async function Home() {
                   src={CategoryImageClothes}
                   className="object-cover object-center rounded-md"
                   fill
-                  priority
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-1"
                 />
@@ -142,7 +139,6 @@ export default async function Home() {
                   src={CategoryImageCosmetics}
                   className="object-cover object-center rounded-md"
                   fill
-                  priority
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-2"
                 />
@@ -164,7 +160,6 @@ export default async function Home() {
                   src={CategoryImageFurniture}
                   className="object-cover object-center rounded-md"
                   fill
-                  priority
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-3"
                 />
@@ -186,7 +181,6 @@ export default async function Home() {
                   src={CategoryImageStationery}
                   className="object-cover object-center rounded-md"
                   fill
-                  priority
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-4"
                 />
@@ -217,12 +211,8 @@ export default async function Home() {
               loop
               muted
               className="w-full h-full object-cover rounded-md"
-            >
-              <source
-                type="video/mp4"
-                src="https://robpoznemaimlcpzzojf.supabase.co/storage/v1/object/public/video/202311300858.mp4"
-              />
-            </video>
+              src={Video}
+            ></video>
           </div>
 
           {/** Promotional poster */}

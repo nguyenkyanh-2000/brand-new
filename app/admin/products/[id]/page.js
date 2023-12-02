@@ -1,7 +1,7 @@
 import ProductForm from "@/components/forms/product/ProductForm";
 import Image from "next/image";
 import React from "react";
-import notFoundImage from "@/public/Image_not_available.png";
+import notFoundImage from "@/public/not-found-image";
 import { AddProductVariantDialog } from "@/components/forms/productVariant/AddProductVariantForm";
 import ProductVariantCard from "@/components/forms/productVariant/ProductVariantCard";
 import { ScrollArea } from "@/components/ui/ScrollArea";

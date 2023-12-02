@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const withVideo = require("next-videos");
+
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -13,4 +15,4 @@ const nextConfig = {
     ],
   },
 };
-module.exports = nextConfig;
+module.exports = withVideo(nextConfig);
