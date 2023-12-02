@@ -13,7 +13,6 @@ import CategoryImageFurniture from "@/public/category-image-furniture.webp";
 import CategoryImageCosmetics from "@/public/category-image-cosmetics.webp";
 import CategoryImageStationery from "@/public/category-image-stationery.webp";
 import PosterImage from "@/public/poster-image.webp";
-import Video from "@/public/video.mp4";
 import Link from "next/link";
 import { OnViewSlideIn } from "@/components/animation/OnViewSlideIn";
 import Footer from "@/components/layout/Footer";
@@ -211,7 +210,9 @@ export default async function Home() {
               autoPlay
               loop
               muted
-              src={Video}
+              src={
+                "https://robpoznemaimlcpzzojf.supabase.co/storage/v1/object/public/video/202311300858.webm"
+              }
               className="w-full h-full object-cover rounded-md"
             ></video>
           </div>
