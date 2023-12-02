@@ -9,19 +9,18 @@ const getUser = async (userId) => {
 
   const res = await fetch(`${API_URL}/users/${userId}`, options);
   const result = await res.json();
+
   if (result.error) throw new Error(result.error.message);
-  return result;
+  return result.data;
 };
 
 const useFetchUser = async (userId) => {
   const queryClient = getQueryClient();
   const queryKey = ["user"];
 
-  if (!userId) return;
-
   return await queryClient.prefetchQuery({
     queryKey: queryKey,
-    queryFn: getUser(userId),
+    queryFn: async () => await getUser(userId),
   });
 };
 

@@ -25,6 +25,7 @@ import getQueryClient from "@/utils/getQueryClient";
 export default async function Home() {
   const currentUser = await getCurrentUser();
   await useFetchUser(currentUser?.id);
+
   const dehydratedState = dehydrate(getQueryClient());
 
   return (
@@ -251,7 +252,7 @@ export default async function Home() {
           </div>
           <div className="flex flex-col justify-center gap-5 col-span-1 row-span-2">
             <h3 className="break-words font-serif font-bold text-2xl sm:text-4xl">
-              {`Brand's Innovative Material Collection`}
+              {`An Innovative Material Collection`}
             </h3>
             <p className="break-words text-base font-light sm:text-lg">
               {`Embark on a transformative journey with Brand, merging innovation

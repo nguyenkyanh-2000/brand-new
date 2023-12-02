@@ -2,8 +2,9 @@ import React from "react";
 import Link from "next/link";
 import AnimatedUnderline from "../animation/AnimatedUnderline";
 import CustomerNavigationMobile from "./CustomerNavigationMobile";
+import { getCurrentUser } from "@/utils/supabase-auth-utils";
 
-function CustomerNavigation() {
+async function CustomerNavigation() {
   return (
     <>
       <nav className="hidden lg:flex items-center gap-5 mx-10">

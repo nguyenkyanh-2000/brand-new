@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/HoverCard";
 import { User2 } from "lucide-react";
 import Link from "next/link";
@@ -8,7 +8,7 @@ import useLogout from "@/hooks/useLogout";
 import useGetUser from "@/hooks/useGetUser";
 
 function UserProfile({ size = 24, userId }) {
-  const { data, isPending } = useGetUser(userId);
+  const { data, error, isPending } = useGetUser(userId);
   const { logout } = useLogout();
 
   const handleLogout = () => {

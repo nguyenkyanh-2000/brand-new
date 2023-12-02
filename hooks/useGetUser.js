@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
@@ -10,7 +11,7 @@ const getUser = async (userId) => {
   const result = await res.json();
 
   if (result.error) throw new Error(result.error.message);
-  return result;
+  return result.data;
 };
 
 const useGetUser = (userId) => {
@@ -18,7 +19,8 @@ const useGetUser = (userId) => {
 
   return useQuery({
     queryKey: queryKey,
-    queryFn: getUser(userId),
+    queryFn: async () => await getUser(userId),
+    enabled: !!userId,
   });
 };
 

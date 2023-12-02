@@ -4,13 +4,11 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
-import ThemeToggle from "@/components/ui/ThemeToggle";
-import { Menu, Search, ShoppingCart, User2, X } from "lucide-react";
+import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import UserProfile from "../header/UserProfile";
 
 function CustomerNavigationMobile() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
-
   return (
     <>
       {!isMenuOpened ? (
