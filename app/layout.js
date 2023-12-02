@@ -3,8 +3,7 @@ import "./globals.css";
 import { Jost } from "next/font/google";
 import { Bodoni_Moda } from "next/font/google";
 import AuthProvider from "@/components/providers/AuthProvider";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import supabaseServer from "@/utils/supabaseServer";
 import { Toaster } from "@/components/ui/Toaster";
 import TanstackProvider from "@/components/providers/TanstackProvider";
 
@@ -23,11 +22,9 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const supabase = createServerComponentClient({ cookies });
-
   const {
     data: { session },
-  } = await supabase.auth.getSession();
+  } = await supabaseServer().auth.getSession();
 
   return (
     <html lang="en" className={`${jost.variable} ${bodoni_moda.variable}`}>

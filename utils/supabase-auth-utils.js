@@ -1,24 +1,21 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { headers, cookies } from "next/headers";
+import supabaseServer from "./supabaseServer";
 
 export const getCurrentUser = async () => {
-  const supabase = createServerComponentClient({ headers, cookies });
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabaseServer().auth.getUser();
 
   return user;
 };
 
 export const isAdmin = async () => {
-  const supabase = createServerComponentClient({ headers, cookies });
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabaseServer().auth.getUser();
 
   if (!user?.id) return false;
 
-  const { data } = await supabase
+  const { data } = await supabaseServer()
     .from("profile")
     .select("*")
     .eq("user_id", user.id)
