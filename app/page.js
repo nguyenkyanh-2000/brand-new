@@ -47,7 +47,7 @@ export default async function Home() {
         {/* Hero section */}
         <section className="w-full h-[80vh] grid grid-rows-4 grid-cols-12 gap-2 px-10 mt-10 lg:gap-5">
           <SlideIn
-            y1={1000}
+            y1={500}
             y2={0}
             duration={2}
             className={
@@ -63,7 +63,7 @@ export default async function Home() {
             />
           </SlideIn>
           <SlideIn
-            y1={-1000}
+            y1={-500}
             y2={0}
             duration={2}
             className={
