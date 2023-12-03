@@ -25,15 +25,20 @@ function UserProfile({ size = 24, userId }) {
         </HoverCardTrigger>
         <HoverCardContent className="w-30 my-1" align="end">
           <div className="flex flex-col gap-3">
-            <h4 className="px-4 font-semibold">
-              {`Welcome, ${data.user.first_name} ${data.user.last_name}!`}
-            </h4>
-
-            <Link href="/me" className="px-4 rounded-md hover:bg-muted">
+            {!data.user.firstname || !data.user.last_name ? (
+              <h4 className="px-4 font-semibold">
+                Please update your profile.
+              </h4>
+            ) : (
+              <h4 className="px-4 font-semibold">
+                {`Welcome, ${data.user.first_name} ${data.user.last_name}!`}
+              </h4>
+            )}
+            <Link href="/me" className="rounded-md px-4 hover:bg-muted">
               My profile
             </Link>
 
-            <Link href="#" className="px-4 rounded-md hover:bg-muted">
+            <Link href="#" className="rounded-md px-4 hover:bg-muted">
               Settings
             </Link>
 

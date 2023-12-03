@@ -11,15 +11,30 @@ export async function GET(request) {
     const searchParams = new URL(url).searchParams;
     let page = searchParams.get("page");
     let limit = searchParams.get("limit");
+    let search = searchParams.get("search");
+    let categories = searchParams.getAll("category");
+
     // Ensure page and limit are numbers. Default: Page 0, limit 10
     page = Number(page) || 0;
     limit = Number(limit) || 10;
     const offset = page * limit;
+
     const supabase = createRouteHandlerClient({ cookies });
-    // Supabase uses 0-based index and equal on both side for "range".
-    const { data, count, error } = await supabase
+    let query = supabase
       .from("product")
-      .select(`*, product_image(*)`, { count: "exact" })
+      .select(`*, product_image(*)`, { count: "estimated" });
+
+    // Apply keyword and category filters if they exist
+    if (search) {
+      query = query.ilike("name", `%${search}%`);
+    }
+    if (categories.length > 0) {
+      // Apply filter for multiple categories using 'in'
+      query = query.in("category", categories);
+    }
+
+    // Continue with the existing query
+    const { data, count, error } = await query
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 

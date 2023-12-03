@@ -17,7 +17,7 @@ export default async function Layout({ children }) {
       <Header>
         <Logo />
         <CustomerNavigation />
-        <div className="hidden lg:flex gap-5">
+        <div className="hidden gap-5 lg:flex">
           <ThemeToggle />
           <Search />
           <ShoppingCart />
@@ -25,7 +25,7 @@ export default async function Layout({ children }) {
         </div>
       </Header>
       {children}
-      <Footer />
+      <Footer className={"mt-20 md:mt-[200px]"} />
     </section>
   );
 }

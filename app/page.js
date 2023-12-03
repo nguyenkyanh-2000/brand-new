@@ -35,7 +35,7 @@ export default async function Home() {
           <Header>
             <Logo />
             <CustomerNavigation />
-            <div className="hidden lg:flex gap-5">
+            <div className="hidden gap-5 lg:flex">
               <ThemeToggle />
               <Search />
               <ShoppingCart />
@@ -45,18 +45,18 @@ export default async function Home() {
         </SlideIn>
 
         {/* Hero section */}
-        <section className="w-full h-[80vh] grid grid-rows-4 grid-cols-12 gap-2 px-10 mt-10 lg:gap-5">
+        <section className="mt-10 grid h-[80vh] w-full grid-cols-12 grid-rows-4 gap-2 px-10 lg:gap-5">
           <SlideIn
             y1={500}
             y2={0}
             duration={2}
             className={
-              "relative col-span-12 row-span-2 rounded-md md:row-span-4 md:col-span-6 lg:col-span-4"
+              "relative col-span-12 row-span-2 rounded-md md:col-span-6 md:row-span-4 lg:col-span-4"
             }
           >
             <Image
               src={HeroImage1}
-              className="w-full h-full object-cover object-center"
+              className="h-full w-full object-cover object-center"
               priority
               sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
               alt="hero-image-1"
@@ -67,40 +67,40 @@ export default async function Home() {
             y2={0}
             duration={2}
             className={
-              "relative col-span-12 row-span-2 rounded-md md:row-span-4 md:col-span-6 lg:col-span-4"
+              "relative col-span-12 row-span-2 rounded-md md:col-span-6 md:row-span-4 lg:col-span-4"
             }
           >
             <Image
               src={HeroImage2}
-              className="w-full h-full object-cover object-center"
+              className="h-full w-full object-cover object-center"
               sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
               priority
               alt="hero-image-2"
             />
           </SlideIn>
-          <div className="flex flex-col gap-1 col-span-12 mt-10 md:place-self-end md:col-span-4 md:row-span-4 md:pl-5">
+          <div className="col-span-12 mt-10 flex flex-col gap-1 md:col-span-4 md:row-span-4 md:place-self-end md:pl-5">
             <SlideIn y1={75} y2={0} duration={2}>
-              <h2 className="font-serif font-black text-base lg:text-4xl">
+              <h2 className="font-serif text-base font-black lg:text-4xl">
                 BRAND NEW WAY OF LIVING.
               </h2>
             </SlideIn>
             <SlideIn y1={75} y2={0} duration={2}>
-              <h3 className="text-base font-light md:text-base px-1">
+              <h3 className="px-1 text-base font-light md:text-base">
                 Embrace the art of refined living with our collection of
                 stationery, clothing, furniture, and cosmetics.
               </h3>
             </SlideIn>
             <SlideIn y1={75} y2={0} duration={2}>
-              <Button className="w-full mt-5">Discover now</Button>
+              <Button className="mt-5 w-full">Discover now</Button>
             </SlideIn>
           </div>
         </section>
 
         {/** Shop by categories */}
 
-        <section className="grid w-screen grid-cols-4 px-10 mt-20 sm:mt-[200px] gap-5">
+        <section className="mt-20 grid w-screen grid-cols-4 gap-5 px-10 sm:mt-[200px]">
           <OnViewSlideIn x1={-1000} x2={0} delay={0} className={"col-span-4"}>
-            <h2 className="font-serif font-bold text-base md:text-2xl lg:text-4xl">
+            <h2 className="font-serif text-base font-bold md:text-2xl lg:text-4xl">
               Shop by categories
             </h2>
           </OnViewSlideIn>
@@ -110,13 +110,13 @@ export default async function Home() {
             y2={0}
           >
             <Link
-              href="/products?categories=clothes"
+              href="/products?category=clothes"
               className="flex flex-col gap-2"
             >
               <div className={"relative h-[400px] md:h-[600px] "}>
                 <Image
                   src={CategoryImageClothes}
-                  className="object-cover object-center rounded-md"
+                  className="rounded-md object-cover object-center"
                   fill
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-1"
@@ -131,13 +131,13 @@ export default async function Home() {
             y2={0}
           >
             <Link
-              href="/products?categories=cosmetics"
+              href="/products?category=cosmetics"
               className="flex flex-col gap-2 "
             >
               <div className={"relative h-[400px] md:h-[600px] "}>
                 <Image
                   src={CategoryImageCosmetics}
-                  className="object-cover object-center rounded-md"
+                  className="rounded-md object-cover object-center"
                   fill
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-2"
@@ -152,13 +152,13 @@ export default async function Home() {
             y2={0}
           >
             <Link
-              href="/products?categories=furniture"
+              href="/products?category=furniture"
               className="flex flex-col gap-2"
             >
               <div className={"relative h-[400px] md:h-[600px] "}>
                 <Image
                   src={CategoryImageFurniture}
-                  className="object-cover object-center rounded-md"
+                  className="rounded-md object-cover object-center"
                   fill
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-3"
@@ -173,13 +173,13 @@ export default async function Home() {
             y2={0}
           >
             <Link
-              href="/products?categories=stationery"
+              href="/products?category=stationery"
               className="flex flex-col gap-2"
             >
               <div className={"relative h-[400px] md:h-[600px] "}>
                 <Image
                   src={CategoryImageStationery}
-                  className="object-cover object-center rounded-md"
+                  className="rounded-md object-cover object-center"
                   fill
                   sizes="(min-width: 1200px) calc(25vw - 15px), (min-width: 768px) calc(50vw - 10px), 100vw"
                   alt="category-image-4"
@@ -192,12 +192,12 @@ export default async function Home() {
 
         {/** Short description section */}
 
-        <section className="grid grid-cols-1 grid-rows-4 sm:grid-cols-2 gap-10 w-screen mt-20 sm:mt-[200px] px-10">
-          <div className="flex flex-col justify-center gap-5 col-span-1 row-span-2">
-            <h3 className="break-words font-serif font-bold text-2xl sm:text-4xl">
+        <section className="mt-20 grid w-screen grid-cols-1 grid-rows-4 gap-10 px-10 sm:mt-[200px] sm:grid-cols-2">
+          <div className="col-span-1 row-span-2 flex flex-col justify-center gap-5">
+            <h3 className="break-words font-serif text-2xl font-bold sm:text-4xl">
               {`A Visionary Approach to Lifestyle`}
             </h3>
-            <p className="break-words font-light text-base sm:text-lg">
+            <p className="break-words text-base font-light sm:text-lg">
               {`Detail and
             craftsmanship isn't just about fashion; it's a testament to the
             harmony between luxury and consciousness. Step into our world and
@@ -213,37 +213,38 @@ export default async function Home() {
               src={
                 "https://robpoznemaimlcpzzojf.supabase.co/storage/v1/object/public/video/202311300858.webm"
               }
-              className="w-full h-full object-cover rounded-md"
+              className="h-full w-full rounded-md object-cover"
             ></video>
           </div>
 
           {/** Promotional poster */}
-          <div className="col-span-1 min-h-[400px] row-span-2 relative">
+          <div className="relative col-span-1 row-span-2 min-h-[400px]">
             <Image
               src={PosterImage}
               alt="poster-image"
               fill
               sizes="(min-width: 1200px) 50vw, 100vw"
-              className="object-center object-cover rounded-md"
+              className="rounded-md object-cover object-center"
             ></Image>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full flex flex-col justify-center items-center gap-5">
-              <p className=" text-white font-sans font-bold text-3xl md:text-6xl italic">
-                DuraTex <sup className="text-xl md:text-3xl text-white">®</sup>
+            <div className="absolute left-1/2 top-1/2 flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-5">
+              <p className=" font-sans text-3xl font-bold italic text-white md:text-6xl">
+                DuraTex <sup className="text-xl text-white md:text-3xl">®</sup>
               </p>
-              <p className="  text-white font-sans font-bold text-3xl md:text-6xl  italic">
-                DuraMat <sup className="text-xl md:text-3xl text-white">®</sup>
+              <p className="  font-sans text-3xl font-bold italic text-white  md:text-6xl">
+                DuraMat <sup className="text-xl text-white md:text-3xl">®</sup>
               </p>
-              <p className=" text-white font-sans font-bold text-3xl md:text-6xl  italic">
-                DuraFlex <sup className="text-xl md:text-3xl text-white">®</sup>
+              <p className=" font-sans text-3xl font-bold italic text-white  md:text-6xl">
+                DuraFlex{" "}
+                <sup className="text-xl text-white md:text-3xl">®</sup>
               </p>
-              <p className=" text-white font-sans font-bold text-3xl md:text-6xl  italic">
+              <p className=" font-sans text-3xl font-bold italic text-white  md:text-6xl">
                 DuraBlend{" "}
-                <sup className="text-xl md:text-3xl text-white">®</sup>
+                <sup className="text-xl text-white md:text-3xl">®</sup>
               </p>
             </div>
           </div>
-          <div className="flex flex-col justify-center gap-5 col-span-1 row-span-2">
-            <h3 className="break-words font-serif font-bold text-2xl sm:text-4xl">
+          <div className="col-span-1 row-span-2 flex flex-col justify-center gap-5">
+            <h3 className="break-words font-serif text-2xl font-bold sm:text-4xl">
               {`An Innovative Material Collection`}
             </h3>
             <p className="break-words text-base font-light sm:text-lg">
@@ -255,7 +256,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <Footer className={"w-screen mt-20 sm:mt-[200px]"} />
+        <Footer className={"mt-20 w-screen sm:mt-[200px]"} />
       </div>
     </HydrationBoundary>
   );

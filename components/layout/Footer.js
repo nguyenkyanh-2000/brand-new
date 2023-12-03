@@ -7,19 +7,19 @@ import { ChevronUp } from "lucide-react";
 function Footer({ className }) {
   return (
     <footer className={cn("bg-background", className)}>
-      <hr className="h-1 mb-10" />
-      <div className="flex justify-between w-full px-10">
+      <hr className="mb-10 h-1" />
+      <div className="flex w-full justify-between px-10">
         <Logo />
         <Link href={"#top"} className="flex gap-2">
           <span>To the top</span> <ChevronUp />
         </Link>
       </div>
-      <div className="mt-10 grid grid-cols-2 px-10 py-6 lg:py-8 md:grid-cols-4 place-items-center">
-        <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+      <div className="mt-10 grid grid-cols-2 place-items-stretch gap-5 px-10 py-6 md:grid-cols-4 lg:py-8">
+        <div className="text-center">
+          <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
             Company
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="font-medium text-gray-500 dark:text-gray-400">
             <li className="mb-4">
               <a href="#" className=" hover:underline">
                 About
@@ -42,11 +42,11 @@ function Footer({ className }) {
             </li>
           </ul>
         </div>
-        <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+        <div className="text-center">
+          <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
             Help center
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="font-medium text-gray-500 dark:text-gray-400">
             <li className="mb-4">
               <a href="#" className="hover:underline">
                 Discord Server
@@ -69,11 +69,11 @@ function Footer({ className }) {
             </li>
           </ul>
         </div>
-        <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+        <div className="text-center">
+          <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
             Legal
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="font-medium text-gray-500 dark:text-gray-400">
             <li className="mb-4">
               <a href="#" className="hover:underline">
                 Privacy Policy
@@ -96,11 +96,11 @@ function Footer({ className }) {
             </li>
           </ul>
         </div>
-        <div>
-          <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+        <div className="text-center">
+          <h2 className="mb-6 text-sm font-semibold uppercase text-gray-900 dark:text-white">
             Download
           </h2>
-          <ul className="text-gray-500 dark:text-gray-400 font-medium">
+          <ul className="font-medium text-gray-500 dark:text-gray-400">
             <li className="mb-4">
               <a href="#" className="hover:underline">
                 iOS
@@ -124,14 +124,14 @@ function Footer({ className }) {
           </ul>
         </div>
       </div>
-      <div className="py-6 px-10 bg-background md:flex flex-col gap-2 md:items-center">
-        <div className="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
+      <div className="flex flex-col gap-2 bg-background px-10 py-6 text-center md:items-center">
+        <div className="mt-4 flex justify-center space-x-5 rtl:space-x-reverse md:mt-0">
           <a
             href="#"
             className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -150,7 +150,7 @@ function Footer({ className }) {
             className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -165,7 +165,7 @@ function Footer({ className }) {
             className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -184,7 +184,7 @@ function Footer({ className }) {
             className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -203,7 +203,7 @@ function Footer({ className }) {
             className="text-gray-400 hover:text-gray-900 dark:hover:text-white"
           >
             <svg
-              className="w-4 h-4"
+              className="h-4 w-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
