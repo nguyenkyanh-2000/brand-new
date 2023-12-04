@@ -5,6 +5,8 @@ import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { Search, ShoppingCart } from "lucide-react";
+import { getCurrentUser } from "@/utils/supabase-auth-utils";
+import useFetchUser from "@/hooks/useFetchUser";
 
 export const metadata = {
   title: "Products",
@@ -12,6 +14,9 @@ export const metadata = {
 };
 
 export default async function Layout({ children }) {
+  const currentUser = await getCurrentUser();
+  await useFetchUser(currentUser?.id);
+
   return (
     <section>
       <Header>
@@ -21,7 +26,7 @@ export default async function Layout({ children }) {
           <ThemeToggle />
           <Search />
           <ShoppingCart />
-          <UserProfile />
+          <UserProfile userId={currentUser?.id} />
         </div>
       </Header>
       {children}

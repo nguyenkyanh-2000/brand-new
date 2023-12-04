@@ -11,7 +11,7 @@ export default function GalleryImageContainer({ image }) {
       key={image.id}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative h-64 rounded overflow-hidden hover:scale-110 hover:transition-all"
+      className="relative h-64 overflow-hidden rounded hover:scale-110 hover:transition-all"
     >
       <Image
         src={image.url}
@@ -23,7 +23,7 @@ export default function GalleryImageContainer({ image }) {
         <DeleteProductImageDialog
           productId={image.product_id}
           imageId={image.id}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
         />
       )}
     </div>

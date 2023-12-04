@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 const validCategories = ["furniture", "clothing", "cosmetic", "stationery"];
+const validBadges = ["editor's choice", "best sellers", "new price", "popular"];
 
 const productSchema = z
   .object({
@@ -26,6 +27,12 @@ const productSchema = z
       invalid_enum_error: "Invalid category for the product.",
       required_error: "Missing category for the product.",
     }),
+    badge: z
+      .enum(validBadges, {
+        invalid_enum_error: "Invalid badge for the product.",
+      })
+      .nullable(),
+    keywords: z.array(z.string()).nullable().optional(),
   })
   .strict();
 

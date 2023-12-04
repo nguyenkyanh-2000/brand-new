@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const editProductVariant = async ({ productId, variantId, data }) => {
   const url = new URL(
     `/api/products/${productId}/variants/${variantId}`,
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
 
   const options = {
@@ -24,17 +24,17 @@ const editProductVariant = async ({ productId, variantId, data }) => {
   return result;
 };
 
-const useEditProductVariant = () => {
+const useEditProductVariant = (productId) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const router = useRouter();
 
   return useMutation({
-    mutationKey: ["products"],
-    mutationFn: ({ productId, variantId, data }) =>
+    mutationKey: ["product", { id: productId }],
+    mutationFn: ({ variantId, data }) =>
       editProductVariant({ productId, variantId, data }),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["product"]);
+      queryClient.invalidateQueries(["product", { id: productId }]);
       router.refresh();
       toast({
         title: `Product variant is updated.`,

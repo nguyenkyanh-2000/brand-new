@@ -19,9 +19,10 @@ export async function GET(request, context) {
     const offset = (page - 1) * limit;
     const { data, count, error } = await supabase
       .from("product_variant")
-      .select("*", { count: "exact" })
+      .select("*", { count: "estimated" })
       .eq("product_id", productId)
-      .range(offset, offset + limit - 1);
+      .range(offset, offset + limit - 1)
+      .order("created_at", { ascending: false });
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
@@ -39,7 +40,7 @@ export async function GET(request, context) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -74,7 +75,7 @@ export async function POST(request, context) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }

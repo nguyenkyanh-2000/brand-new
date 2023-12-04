@@ -26,19 +26,17 @@ function ResetPasswordPage() {
     defaultValues: { password: "", confirmPassword: "" },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const onSubmit = (data) => {};
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-6 py-12 lg:px-8">
-      <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-sm mb-5">
+      <div className="mb-5 flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <Logo />
       </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-[500px] max-sm:w-4/5 space-y-6 flex flex-col"
+          className="flex w-[500px] flex-col space-y-6 max-sm:w-4/5"
         >
           <FormField
             control={form.control}
@@ -91,7 +89,7 @@ function ResetPasswordPage() {
             Back to the{" "}
             <Link
               href="/auth/login"
-              className="font-semibold text-sm text-foreground
+              className="text-sm font-semibold text-foreground
               hover:text-foreground/50"
             >
               {" "}

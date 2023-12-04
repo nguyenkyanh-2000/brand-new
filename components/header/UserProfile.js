@@ -19,7 +19,7 @@ function UserProfile({ size = 24, userId }) {
     return (
       <HoverCard>
         <HoverCardTrigger asChild>
-          <Link href={"/me"}>
+          <Link href={"/me/profile"}>
             <User2 size={size} className="hover:cursor-pointer"></User2>
           </Link>
         </HoverCardTrigger>
@@ -34,12 +34,12 @@ function UserProfile({ size = 24, userId }) {
                 {`Welcome, ${data.user.first_name} ${data.user.last_name}!`}
               </h4>
             )}
-            <Link href="/me" className="rounded-md px-4 hover:bg-muted">
+            <Link href="/me/profile" className="rounded-md px-4 hover:bg-muted">
               My profile
             </Link>
 
             <Link href="#" className="rounded-md px-4 hover:bg-muted">
-              Settings
+              My orders
             </Link>
 
             <Button onClick={handleLogout} variant="default">

@@ -26,8 +26,12 @@ import useEditProductVariant from "@/hooks/useEditProductVariant";
 import useDeleteProductVariant from "@/hooks/useDeleteProductVariant";
 
 function ProductVariantCard({ productVariant }) {
-  const { mutate: editVariant } = useEditProductVariant();
-  const { mutate: deleteVariant } = useDeleteProductVariant();
+  const { mutate: editVariant } = useEditProductVariant(
+    productVariant.product_id,
+  );
+  const { mutate: deleteVariant } = useDeleteProductVariant(
+    productVariant.product_id,
+  );
   const [open, setOpen] = useState(false);
   const form = useForm({
     resolver: zodResolver(productVariantSchema),
@@ -35,6 +39,7 @@ function ProductVariantCard({ productVariant }) {
       name: productVariant.name,
       price: productVariant.price,
       amount_left: productVariant.amount_left,
+      color: productVariant.color,
     },
   });
 
@@ -48,19 +53,27 @@ function ProductVariantCard({ productVariant }) {
 
   const onSubmit = (data) => {
     editVariant({
-      productId: productVariant.product_id,
       variantId: productVariant.id,
       data: data,
     });
     setOpen(false);
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div className="flex flex-col gap-1 bg-muted hover:bg-muted/50 p-5">
-          <h3>Variant name: {productVariant.name}</h3>
-          <div>Stock: {productVariant.amount_left}</div>
-          <div>Price: {productVariant.price}</div>
+        <div className="flex h-[150px] items-center justify-between bg-muted p-5 hover:bg-muted/50">
+          <div className="flex flex-col gap-1">
+            <h3>Variant name: {productVariant.name}</h3>
+            <div>Stock: {productVariant.amount_left}</div>
+            <div>Price: {productVariant.price}</div>
+          </div>
+          <div
+            className="h-8 w-8 rounded-full"
+            style={{
+              backgroundColor: productVariant.color,
+            }}
+          ></div>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
@@ -72,7 +85,7 @@ function ProductVariantCard({ productVariant }) {
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
-              className="w-full space-y-6 flex flex-col"
+              className="flex w-full flex-col space-y-6"
             >
               <FormField
                 control={form.control}
@@ -120,7 +133,21 @@ function ProductVariantCard({ productVariant }) {
                 )}
               />
 
-              <div className="w-full flex justify-between">
+              <FormField
+                control={form.control}
+                name="color"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="color">{"Color"}</FormLabel>
+                    <FormControl>
+                      <Input id="color" type="color" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex w-full justify-between">
                 <Button
                   className="w-[100px]"
                   variant="destructive"

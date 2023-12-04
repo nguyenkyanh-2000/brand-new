@@ -13,16 +13,12 @@ import { Check, RotateCw } from "lucide-react";
 
 const refinements = [
   {
+    name: "badge",
+    values: ["editor's choice", "best sellers", "new price", "popular"],
+  },
+  {
     name: "category",
     values: ["clothing", "furniture", "stationery", "cosmetic"],
-  },
-  {
-    name: "collection",
-    values: ["spring", "summer", "autumn", "winter"],
-  },
-  {
-    name: "designer",
-    values: ["A", "B", "C"],
   },
 ];
 

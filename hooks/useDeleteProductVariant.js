@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 const deleteProductVariant = async ({ productId, variantId }) => {
   const url = new URL(
     `/api/products/${productId}/variants/${variantId}`,
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
 
   const options = {
@@ -23,17 +23,17 @@ const deleteProductVariant = async ({ productId, variantId }) => {
   return result;
 };
 
-const useDeleteProductVariant = () => {
+const useDeleteProductVariant = (productId) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const router = useRouter();
 
   return useMutation({
-    mutationKey: ["products"],
-    mutationFn: ({ productId, variantId }) =>
+    mutationKey: ["product", { id: productId }],
+    mutationFn: ({ variantId }) =>
       deleteProductVariant({ productId, variantId }),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["product"]);
+      queryClient.invalidateQueries(["product", { id: productId }]);
       router.refresh();
       toast({
         title: `Product variant is delete.`,

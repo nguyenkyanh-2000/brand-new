@@ -26,12 +26,12 @@ export async function GET(request, context) {
       error: null,
       data: { product: data },
       status: 200,
-      message: "Get all products successfully",
+      message: "Get the product successfully",
     });
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -65,12 +65,12 @@ export async function PUT(request, context) {
       error: null,
       data: { product: data },
       status: 200,
-      message: "OK",
+      message: "Update the product successfully!",
     });
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -108,7 +108,7 @@ export async function DELETE(request, context) {
       if (!storageAction.error.status) storageAction.error = 400;
       throw new ApiError(
         storageAction.error.status,
-        storageAction.error.message
+        storageAction.error.message,
       );
     }
 
@@ -116,12 +116,12 @@ export async function DELETE(request, context) {
       error: null,
       data: { product: data },
       status: 200,
-      message: "OK",
+      message: "Delete the product successfully",
     });
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }

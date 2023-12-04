@@ -9,18 +9,17 @@ const getProduct = async (productId) => {
 
   const res = await fetch(`${API_URL}/products/${productId}`, options);
   const result = await res.json();
-  return result;
+  if (result.error) throw new Error(result.error.message);
+  return result.data;
 };
 
-const useGetProduct = async (productId) => {
+const useFetchProduct = async (productId) => {
   const queryClient = getQueryClient();
-
-  const queryKey = ["product"];
-
+  const queryKey = ["product", { id: productId }];
   return await queryClient.fetchQuery({
     queryKey: queryKey,
-    queryFn: () => getProduct(productId),
+    queryFn: async () => await getProduct(productId),
   });
 };
 
-export default useGetProduct;
+export default useFetchProduct;

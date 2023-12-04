@@ -24,6 +24,16 @@ const productVariantSchema = z
         required_error: "Missing price for the product.",
       })
       .positive("The price for the product is incorrect."),
+
+    color: z
+      .string({
+        invalid_type_error: "The color is not a string!",
+        required_error: "Missing color.",
+      })
+      .regex(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, {
+        message:
+          "Invalid color format. Expected a valid hexadecimal color code (e.g., #FFA500).",
+      }),
   })
   .strict();
 

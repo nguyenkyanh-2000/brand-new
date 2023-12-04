@@ -23,9 +23,16 @@ import {
   SelectValue,
 } from "@/components/ui/Select";
 import useEditProduct from "@/hooks/useEditProduct";
+import useQueryProduct from "@/hooks/useQueryProduct";
+import { InputTags } from "@/components/ui/InputTags";
 
-function ProductForm({ defaultProduct }) {
-  const { mutate, isPending } = useEditProduct();
+function ProductForm({ productId }) {
+  const {
+    data: { product: defaultProduct },
+    error,
+  } = useQueryProduct(productId);
+
+  const { mutate, isPending } = useEditProduct(productId);
   const form = useForm({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -33,18 +40,20 @@ function ProductForm({ defaultProduct }) {
       description: defaultProduct.description,
       price: defaultProduct.price,
       category: defaultProduct.category,
+      keywords: defaultProduct.keywords,
+      badge: defaultProduct.badge,
     },
   });
 
   const onSubmit = (data) => {
-    mutate({ data: data, productId: defaultProduct.id });
+    mutate({ data });
   };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-6 flex flex-col"
+        className="flex w-full flex-col space-y-6"
       >
         <FormField
           control={form.control}
@@ -111,7 +120,47 @@ function ProductForm({ defaultProduct }) {
           )}
         />
 
-        <div className="w-full flex justify-end gap-4">
+        <FormField
+          control={form.control}
+          name="badge"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Product badge</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder={field.value} />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="editor's choice">
+                    {"Editor's choice"}
+                  </SelectItem>
+                  <SelectItem value="best sellers">Best sellers</SelectItem>
+                  <SelectItem value="new price">New price</SelectItem>
+                  <SelectItem value="popular">Popular</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="keywords"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Add keywords</FormLabel>
+              <FormControl>
+                <InputTags {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex w-full justify-end gap-4">
           <Button
             className="w-[100px]"
             type="reset"

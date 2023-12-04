@@ -26,7 +26,7 @@ import { useForm } from "react-hook-form";
 import useAddProductVariant from "@/hooks/useAddProductVariant";
 
 export function AddProductVariantDialog({ productId }) {
-  const { mutate } = useAddProductVariant();
+  const { mutate } = useAddProductVariant(productId);
   const [open, setOpen] = useState(false);
   const form = useForm({
     resolver: zodResolver(productVariantSchema),
@@ -34,11 +34,12 @@ export function AddProductVariantDialog({ productId }) {
       name: "",
       price: 0,
       amount_left: 0,
+      color: "#000000",
     },
   });
 
   const onSubmit = (data) => {
-    mutate({ productId, data });
+    mutate({ data });
     setOpen(false);
   };
   return (
@@ -54,7 +55,7 @@ export function AddProductVariantDialog({ productId }) {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 flex flex-col"
+            className="flex w-full flex-col space-y-6"
           >
             <FormField
               control={form.control}
@@ -102,7 +103,21 @@ export function AddProductVariantDialog({ productId }) {
               )}
             />
 
-            <div className="w-full flex justify-end gap-4">
+            <FormField
+              control={form.control}
+              name="color"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="color">{"Color"}</FormLabel>
+                  <FormControl>
+                    <Input id="color" type="color" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <div className="flex w-full justify-end gap-4">
               <Button
                 className="w-[100px]"
                 type="reset"

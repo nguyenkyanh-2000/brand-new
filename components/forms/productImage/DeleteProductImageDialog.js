@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/Button";
 import useDeleteProductImage from "@/hooks/useDeleteProductImage";
 
 function DeleteProductImageDialog({ imageId, productId, className }) {
-  const { mutate } = useDeleteProductImage();
+  const { mutate } = useDeleteProductImage(productId);
 
   return (
     <AlertDialog>
@@ -36,7 +36,7 @@ function DeleteProductImageDialog({ imageId, productId, className }) {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              mutate({ productId, imageId });
+              mutate({ imageId });
             }}
             className="bg-destructive text-destructive-foreground"
           >

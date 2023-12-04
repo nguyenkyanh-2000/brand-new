@@ -22,7 +22,9 @@ export async function GET(request) {
     const supabase = createRouteHandlerClient({ cookies });
     let query = supabase
       .from("product")
-      .select(`*, product_image(*)`, { count: "estimated" });
+      .select(`*, product_image(*), product_variant(*)`, {
+        count: "estimated",
+      });
 
     // Apply keyword and category filters if they exist
     if (search) {
@@ -58,7 +60,7 @@ export async function GET(request) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -93,7 +95,7 @@ export async function POST(request) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }

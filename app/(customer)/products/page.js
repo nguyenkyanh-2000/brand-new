@@ -8,6 +8,7 @@ async function ProductPage({ searchParams }) {
     searchParams.limit,
   );
 
+  console.log(data);
   return (
     <div className="mt-10 grid w-full grid-cols-12 gap-5 px-10">
       <h2 className="col-span-12 mb-10 text-center font-serif text-3xl sm:text-5xl">

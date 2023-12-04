@@ -5,7 +5,7 @@ import { useToast } from "./useToast";
 const addProductVariant = async ({ productId, data }) => {
   const url = new URL(
     `/api/products/${productId}/variants`,
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
   const res = await fetch(url, {
     method: "POST",
@@ -21,16 +21,16 @@ const addProductVariant = async ({ productId, data }) => {
   return result;
 };
 
-const useAddProductVariant = () => {
+const useAddProductVariant = (productId) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { toast } = useToast();
 
   return useMutation({
-    mutationKey: ["products"],
-    mutationFn: ({ productId, data }) => addProductVariant({ productId, data }),
+    mutationKey: ["product", { id: productId }],
+    mutationFn: ({ data }) => addProductVariant({ productId, data }),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries(["product"]);
       router.refresh();
       toast({
         title: `New product variant added.`,

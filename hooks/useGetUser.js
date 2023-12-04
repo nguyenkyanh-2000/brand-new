@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 

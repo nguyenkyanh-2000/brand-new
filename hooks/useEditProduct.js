@@ -1,14 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./useToast";
 
-const useEditProduct = () => {
+const useEditProduct = (productId) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const queryKey = ["product", { id: productId }];
 
   const editProductHandler = async (productId, data) => {
     const url = new URL(
       `/api/products/${productId}`,
-      process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+      process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
     );
     const options = {
       method: "PUT",
@@ -27,10 +28,10 @@ const useEditProduct = () => {
   };
 
   return useMutation({
-    mutationKey: ["products"],
-    mutationFn: ({ productId, data }) => editProductHandler(productId, data),
+    mutationKey: ["product", { id: productId }],
+    mutationFn: ({ data }) => editProductHandler(productId, data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["products"]);
+      queryClient.invalidateQueries(["product", { id: productId }]);
       toast({
         title: `Product is updated.`,
         description: "Update successfully!",
