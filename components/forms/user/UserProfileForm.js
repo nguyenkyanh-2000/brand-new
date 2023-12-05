@@ -40,36 +40,16 @@ import {
 import profileSchema from "@/schema/profileSchema";
 import countries from "@/data/countries.json";
 import { ScrollArea } from "@/components/ui/ScrollArea";
-import useGetUser from "@/hooks/useGetUser";
-import useEditUserProfile from "@/hooks/UseEditUserProfile";
 
-function UserProfileForm({ userId }) {
-  const { data, isLoading } = useGetUser(userId);
-  const { mutate, error } = useEditUserProfile(userId);
+function UserProfileForm({ user, mutate }) {
   const form = useForm({
     resolver: zodResolver(profileSchema),
-    defaultValues: {
-      first_name: "",
-      last_name: "",
-      gender: "",
-      date_of_birth: "",
-      home_address: "",
-      delivery_note: "",
-      country: "",
-      province: "",
-      city: "",
-      house_number: "",
-      street: "",
-      phone_number: "",
-    },
-    values: data?.user,
+    defaultValues: { ...user },
   });
 
   const onSubmit = (data) => {
     mutate({ data });
   };
-
-  if (isLoading) return <p> Loading...</p>;
 
   return (
     <Form {...form}>
