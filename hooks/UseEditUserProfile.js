@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./useToast";
 
-const editProductHandler = async (productId, data) => {
+const editUserProfileHandler = async (userId, data) => {
   const url = new URL(
-    `/api/products/${productId}`,
+    `/api/users/${userId}`,
     process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
   const options = {
@@ -22,18 +22,18 @@ const editProductHandler = async (productId, data) => {
   return result;
 };
 
-const useEditProduct = (productId) => {
+const useEditUserProfile = (userId) => {
   const queryClient = useQueryClient();
   const { toast } = useToast();
-  const queryKey = ["product", { id: productId }];
+  const queryKey = ["user"];
 
   return useMutation({
     mutationKey: queryKey,
-    mutationFn: ({ data }) => editProductHandler(productId, data),
+    mutationFn: ({ data }) => editUserProfileHandler(userId, data),
     onSuccess: (data) => {
-      queryClient.invalidateQueries(["product", { id: productId }]);
+      queryClient.setQueryData(["user"], data);
       toast({
-        title: `Product is updated.`,
+        title: `Your profile is updated.`,
         description: "Update successfully!",
       });
     },
@@ -47,4 +47,4 @@ const useEditProduct = (productId) => {
   });
 };
 
-export default useEditProduct;
+export default useEditUserProfile;

@@ -31,13 +31,19 @@ function UserProfileNavigation({ className, ...props }) {
   return (
     <div className="relative">
       <ScrollArea className="max-w-[600px] lg:max-w-none">
-        <div className={cn("flex flex-col gap-10", className)} {...props}>
+        <div
+          className={cn(
+            "flex flex-row justify-between gap-10 lg:flex-col",
+            className,
+          )}
+          {...props}
+        >
           {examples.map((example) => (
             <Link
               href={example.href}
               key={example.href}
               className={cn(
-                "flex items-center px-4",
+                "flex items-center text-sm sm:text-xl",
                 pathname?.startsWith(example.href)
                   ? "font-bold text-primary"
                   : "font-medium text-muted-foreground",

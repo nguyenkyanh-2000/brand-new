@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
 const getUser = async (userId) => {
-  const options = {};
+  const options = { next: { revalidate: 0 } };
   const res = await fetch(`${API_URL}/users/${userId}`, options);
   const result = await res.json();
 
@@ -16,7 +16,7 @@ const useGetUser = (userId) => {
 
   return useQuery({
     queryKey: queryKey,
-    queryFn: async () => await getUser(userId),
+    queryFn: () => getUser(userId),
     enabled: !!userId,
   });
 };

@@ -1,7 +1,9 @@
 "use client";
 
+import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { persistQueryClient } from "@tanstack/react-query-persist-client";
 import { useState } from "react";
 
 const TanstackProvider = ({ children }) => {
@@ -10,7 +12,7 @@ const TanstackProvider = ({ children }) => {
       new QueryClient({
         defaultOptions: {
           queries: {
-            staleTime: 60 * 1000,
+            gcTime: 1000 * 60 * 60 * 24, // 24 hours,
           },
         },
       }),

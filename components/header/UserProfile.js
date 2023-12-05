@@ -8,7 +8,7 @@ import useLogout from "@/hooks/useLogout";
 import useGetUser from "@/hooks/useGetUser";
 
 function UserProfile({ size = 24, userId }) {
-  const { data, error, isPending } = useGetUser(userId);
+  const { data, isPending } = useGetUser(userId);
   const { logout } = useLogout();
 
   const handleLogout = () => {
@@ -25,7 +25,7 @@ function UserProfile({ size = 24, userId }) {
         </HoverCardTrigger>
         <HoverCardContent className="w-30 my-1" align="end">
           <div className="flex flex-col gap-3">
-            {!data.user.firstname || !data.user.last_name ? (
+            {!data.user.first_name || !data.user.last_name ? (
               <h4 className="px-4 font-semibold">
                 Please update your profile.
               </h4>
