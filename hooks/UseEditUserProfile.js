@@ -29,9 +29,9 @@ const useEditUserProfile = (userId) => {
 
   return useMutation({
     mutationKey: queryKey,
-    mutationFn: ({ data }) => editUserProfileHandler(userId, data),
+    mutationFn: (data) => editUserProfileHandler(userId, data),
     onSuccess: (data) => {
-      queryClient.setQueryData(["user"], data);
+      queryClient.invalidateQueries(queryKey);
       toast({
         title: `Your profile is updated.`,
         description: "Update successfully!",

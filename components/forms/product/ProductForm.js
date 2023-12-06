@@ -170,6 +170,7 @@ function ProductForm({ productId }) {
             Reset
           </Button>
           <Button
+            variant="default"
             isLoading={isPending}
             disabled={isPending}
             className="w-[100px]"

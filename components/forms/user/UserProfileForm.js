@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -41,15 +42,24 @@ import profileSchema from "@/schema/profileSchema";
 import countries from "@/data/countries.json";
 import { ScrollArea } from "@/components/ui/ScrollArea";
 
-function UserProfileForm({ user, mutate }) {
+function UserProfileForm({ user, onSubmit, isPending }) {
   const form = useForm({
     resolver: zodResolver(profileSchema),
-    defaultValues: { ...user },
+    defaultValues: {
+      first_name: user?.first_name || "",
+      last_name: user?.last_name || "",
+      gender: user?.gender || "",
+      date_of_birth: user?.date_of_birth || null,
+      home_address: user?.home_address || "",
+      delivery_note: user?.delivery_note || "",
+      country: user?.country || "",
+      province: user?.province || "",
+      city: user?.city || "",
+      house_number: user?.house_number || "",
+      street: user?.street || "",
+      phone_number: user?.phone_number || "",
+    },
   });
-
-  const onSubmit = (data) => {
-    mutate({ data });
-  };
 
   return (
     <Form {...form}>
@@ -130,7 +140,7 @@ function UserProfileForm({ user, mutate }) {
                         )}
                       >
                         {field.value
-                          ? format(parseISO(field.value), "PPP")
+                          ? format(new Date(field.value), "PPP")
                           : "Please select a date"}
                         <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                       </Button>
@@ -325,7 +335,12 @@ function UserProfileForm({ user, mutate }) {
           >
             Reset
           </Button>
-          <Button className="w-[100px]" type="submit">
+          <Button
+            className="w-[100px]"
+            isLoading={isPending}
+            disabled={isPending}
+            type="submit"
+          >
             Save
           </Button>
         </div>
