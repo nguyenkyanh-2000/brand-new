@@ -42,6 +42,8 @@ export function AddProductDialog() {
       price: 0,
       description: "",
       category: "",
+      badge: "",
+      keywords: [],
     },
   });
   const { mutate } = useAddProduct();
@@ -53,7 +55,7 @@ export function AddProductDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default" className="flex max-sm:w-full h-8">
+        <Button variant="default" className="flex h-8 max-sm:w-full">
           <Plus className={cn("mr-2 h-4 w-4")} />
           Add product
         </Button>
@@ -69,7 +71,7 @@ export function AddProductDialog() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-full space-y-6 flex flex-col"
+            className="flex w-full flex-col space-y-6"
           >
             <FormField
               control={form.control}
@@ -139,7 +141,7 @@ export function AddProductDialog() {
               )}
             />
 
-            <div className="w-full flex justify-end gap-4">
+            <div className="flex w-full justify-end gap-4">
               <Button
                 className="w-[100px]"
                 type="reset"
@@ -148,7 +150,11 @@ export function AddProductDialog() {
               >
                 Reset
               </Button>
-              <Button className="w-[100px]" type="submit">
+              <Button
+                className="w-[100px]"
+                type="submit"
+                onClick={() => console.log(form.formState.errors)}
+              >
                 Save
               </Button>
             </div>

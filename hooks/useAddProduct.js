@@ -10,7 +10,7 @@ const useAddProduct = () => {
   const addProductHandler = async (data) => {
     const url = new URL(
       `/api/products`,
-      process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+      process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
     );
     const res = await fetch(url, {
       method: "POST",
@@ -21,6 +21,7 @@ const useAddProduct = () => {
     });
     const result = await res.json();
 
+    console.log(result);
     if (result.error) throw new Error(result.error.message);
 
     return result;

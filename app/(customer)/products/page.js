@@ -1,4 +1,5 @@
 import FilterProductForm from "@/components/forms/product/FilterProductForm";
+import CustomerProductImageGallery from "@/components/gallery/CustomerProductImageGallery";
 import useGetProducts from "@/hooks/useGetProducts";
 import React from "react";
 
@@ -8,6 +9,8 @@ async function ProductPage({ searchParams }) {
     searchParams.limit,
   );
 
+  console.log(data);
+
   return (
     <div className="mt-10 grid w-full grid-cols-12 gap-5 px-10">
       <h2 className="col-span-12 mb-10 text-center font-serif text-3xl sm:text-5xl">
@@ -16,7 +19,9 @@ async function ProductPage({ searchParams }) {
       <div className="col-span-12 lg:col-span-2">
         <FilterProductForm />
       </div>
-      <div className="col-span-12 h-screen lg:col-span-10"></div>
+      <div className="col-span-12 h-screen lg:col-span-10">
+        <CustomerProductImageGallery />
+      </div>
     </div>
   );
 }

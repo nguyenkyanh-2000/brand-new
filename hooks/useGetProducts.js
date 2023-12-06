@@ -8,7 +8,7 @@ const getProducts = async (page = 0, limit = 10) => {
   };
   const res = await fetch(
     `${API_URL}/products?page=${page}&limit=${limit}`,
-    options
+    options,
   );
   const result = await res.json();
   return result;
@@ -17,7 +17,7 @@ const getProducts = async (page = 0, limit = 10) => {
 const useGetProducts = async (page = 0, limit = 10) => {
   const queryClient = getQueryClient();
 
-  const queryKey = ["products", page];
+  const queryKey = ["products", { page: page }];
 
   return await queryClient.fetchQuery({
     queryKey: queryKey,

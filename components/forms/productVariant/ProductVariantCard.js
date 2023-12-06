@@ -24,6 +24,7 @@ import {
 import { Input } from "@/components/ui/Input";
 import useEditProductVariant from "@/hooks/useEditProductVariant";
 import useDeleteProductVariant from "@/hooks/useDeleteProductVariant";
+import clsx from "clsx";
 
 function ProductVariantCard({ productVariant }) {
   const { mutate: editVariant } = useEditProductVariant(
@@ -64,12 +65,28 @@ function ProductVariantCard({ productVariant }) {
       <DialogTrigger asChild>
         <div className="flex h-[150px] items-center justify-between bg-muted p-5 hover:bg-muted/50">
           <div className="flex flex-col gap-1">
-            <h3>Variant name: {productVariant.name}</h3>
-            <div>Stock: {productVariant.amount_left}</div>
-            <div>Price: {productVariant.price}</div>
+            <h3 className="text-lg">
+              <span className="text-muted-foreground">Name: </span>
+              <span className={`font-bold`}>{productVariant.name}</span>
+            </h3>
+            <div>
+              <span className="text-muted-foreground">Stock:</span>
+              <span
+                className={clsx("font-semibold", {
+                  "text-destructive": productVariant.amount_left === 0,
+                })}
+              >
+                {" "}
+                {productVariant.amount_left}
+              </span>
+            </div>
+            <div>
+              <span className="text-muted-foreground">Price:</span>
+              <span className="font-semibold"> {productVariant.price}</span>
+            </div>
           </div>
           <div
-            className="h-8 w-8 rounded-full"
+            className="h-8 w-8 rounded-full border-2 border-muted-foreground"
             style={{
               backgroundColor: productVariant.color,
             }}

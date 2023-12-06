@@ -1,7 +1,15 @@
 import { z } from "zod";
 
 const validCategories = ["furniture", "clothing", "cosmetic", "stationery"];
-const validBadges = ["editor's choice", "best sellers", "new price", "popular"];
+const validBadges = [
+  "editor's choice",
+  "best sellers",
+  "new price",
+  "popular",
+  null,
+  undefined,
+  "",
+];
 
 const productSchema = z
   .object({
@@ -29,7 +37,7 @@ const productSchema = z
     }),
     badge: z
       .enum(validBadges, {
-        invalid_enum_error: "Invalid badge for the product.",
+        errorMap: (issue, ctx) => ({ message: "Invalid badge." }),
       })
       .nullable(),
     keywords: z.array(z.string()).nullable().optional(),

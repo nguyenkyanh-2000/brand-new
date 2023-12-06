@@ -32,7 +32,7 @@ const columns = [
       return React.createElement(
         "div",
         { className: "font-secondary font-medium" },
-        amount
+        amount,
       );
     },
   },
@@ -51,7 +51,7 @@ const columns = [
       return React.createElement(
         "div",
         { className: "font-secondary font-medium" },
-        formatted
+        formatted,
       );
     },
   },
