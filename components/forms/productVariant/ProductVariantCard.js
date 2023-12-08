@@ -67,7 +67,7 @@ function ProductVariantCard({ productVariant }) {
           <div className="flex flex-col gap-1">
             <h3 className="text-lg">
               <span className="text-muted-foreground">Name: </span>
-              <span className={`font-bold`}>{productVariant.name}</span>
+              <span className={`font-semibold`}>{productVariant.name}</span>
             </h3>
             <div>
               <span className="text-muted-foreground">Stock:</span>
@@ -82,7 +82,7 @@ function ProductVariantCard({ productVariant }) {
             </div>
             <div>
               <span className="text-muted-foreground">Price:</span>
-              <span className="font-semibold"> {productVariant.price}</span>
+              <span className="font-semibold"> {productVariant.price}$</span>
             </div>
           </div>
           <div

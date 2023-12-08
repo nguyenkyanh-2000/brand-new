@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import { cn } from "@/utils/tailwind-utils";
 
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {

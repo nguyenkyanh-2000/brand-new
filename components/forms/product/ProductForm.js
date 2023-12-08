@@ -139,6 +139,7 @@ function ProductForm({ productId }) {
                   <SelectItem value="best sellers">Best sellers</SelectItem>
                   <SelectItem value="new price">New price</SelectItem>
                   <SelectItem value="popular">Popular</SelectItem>
+                  <SelectItem value={null}>None</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

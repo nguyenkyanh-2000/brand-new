@@ -6,10 +6,7 @@ import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/utils/getQueryClient";
 
 const Page = async ({ searchParams }) => {
-  const { data, error } = await useGetProducts(
-    searchParams.page,
-    searchParams.limit
-  );
+  const { data, error } = await useGetProducts(searchParams);
 
   if (error) throw new Error(error.message);
 
@@ -17,8 +14,8 @@ const Page = async ({ searchParams }) => {
   const dehydratedState = dehydrate(getQueryClient());
 
   return (
-    <div className="w-full mt-10 px-10">
-      <h2 className="font-serif text-3xl sm:text-5xl text-center mb-10">
+    <div className="mt-10 w-full px-10">
+      <h2 className="mb-10 text-center font-serif text-3xl sm:text-5xl">
         Products
       </h2>
       <HydrationBoundary state={dehydratedState}>
