@@ -2,12 +2,12 @@
 
 import React from "react";
 import UserProfileForm from "./UserProfileForm";
-import useGetUser from "@/hooks/useGetUser";
+import useQueryUser from "@/hooks/useQueryUser";
 import useEditUserProfile from "@/hooks/UseEditUserProfile";
 import { Loader2 } from "lucide-react";
 
 function UserProfileDetail({ userId }) {
-  const { data, isLoading } = useGetUser(userId);
+  const { data, isLoading } = useQueryUser(userId);
   const { mutate, isPending } = useEditUserProfile(userId);
 
   if (data)

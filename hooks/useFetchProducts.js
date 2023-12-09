@@ -8,7 +8,6 @@ const getProducts = async (searchParams) => {
   const params = new URLSearchParams({ page, limit, ...otherParams });
   const searchParamsString = params.toString();
 
-  console.log(searchParamsString);
   const options = {
     next: { revalidate: 0 },
   };
@@ -18,7 +17,7 @@ const getProducts = async (searchParams) => {
   return result;
 };
 
-const useGetProducts = async (searchParams) => {
+const useFetchProducts = async (searchParams) => {
   const queryClient = getQueryClient();
 
   const queryKey = ["products", searchParams];
@@ -29,4 +28,4 @@ const useGetProducts = async (searchParams) => {
   });
 };
 
-export default useGetProducts;
+export default useFetchProducts;

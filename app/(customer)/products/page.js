@@ -2,13 +2,17 @@ import CustomerProductPagination from "@/components/forms/product/CustomerProduc
 import FilterProductForm from "@/components/forms/product/FilterProductForm";
 import SortByFilter from "@/components/forms/product/SortByFilter";
 import CustomerProductImageGallery from "@/components/gallery/CustomerProductImageGallery";
-import useGetProducts from "@/hooks/useGetProducts";
+import useFetchProducts from "@/hooks/useFetchProducts";
 import React from "react";
 
-async function ProductPage({ searchParams }) {
-  const { data, error } = await useGetProducts(searchParams);
+export const metadata = {
+  title: "Products | Brand",
+  description: "Products filter page for Brand",
+};
 
-  console.log(data);
+async function ProductPage({ searchParams }) {
+  const { data, error } = await useFetchProducts(searchParams);
+
   if (error) throw new Error(error.message);
 
   return (

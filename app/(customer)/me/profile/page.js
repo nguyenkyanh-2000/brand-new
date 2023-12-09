@@ -3,6 +3,11 @@ import { getCurrentUser } from "@/utils/supabase-auth-utils";
 
 import React from "react";
 
+export const metadata = {
+  title: "My profile | Brand",
+  description: "User profile for Brand website",
+};
+
 async function ProfilePage() {
   const currentUser = await getCurrentUser();
 

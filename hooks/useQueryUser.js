@@ -11,7 +11,7 @@ const getUser = async (userId) => {
   return result.data;
 };
 
-const useGetUser = (userId) => {
+const useQueryUser = (userId) => {
   const queryKey = ["user"];
 
   return useQuery({
@@ -21,4 +21,4 @@ const useGetUser = (userId) => {
   });
 };
 
-export default useGetUser;
+export default useQueryUser;

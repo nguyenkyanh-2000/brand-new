@@ -1,12 +1,12 @@
 import React from "react";
-import useGetProducts from "@/hooks/useGetProducts";
+import useFetchProducts from "@/hooks/useFetchProducts";
 import ProductTable from "@/components/tables/products/ProductTable";
 import { columns } from "@/components/tables/products/columns";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import getQueryClient from "@/utils/getQueryClient";
 
 const Page = async ({ searchParams }) => {
-  const { data, error } = await useGetProducts(searchParams);
+  const { data, error } = await useFetchProducts(searchParams);
 
   if (error) throw new Error(error.message);
 

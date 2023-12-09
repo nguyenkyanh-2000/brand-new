@@ -150,11 +150,7 @@ export function AddProductDialog() {
               >
                 Reset
               </Button>
-              <Button
-                className="w-[100px]"
-                type="submit"
-                onClick={() => console.log(form.formState.errors)}
-              >
+              <Button className="w-[100px]" type="submit">
                 Save
               </Button>
             </div>

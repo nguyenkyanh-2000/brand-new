@@ -107,7 +107,9 @@ function CustomerProductPagination({ currentPage, totalPages }) {
             !canGetNextPage ? "cursor-not-allowed" : ""
           }`}
           onClick={() => {
-            router.push(pathName + "?" + createQueryString("page", totalPages));
+            router.push(
+              pathName + "?" + createQueryString("page", totalPages - 1),
+            );
           }}
           disabled={!canGetNextPage}
         >

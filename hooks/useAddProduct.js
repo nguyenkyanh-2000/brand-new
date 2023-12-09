@@ -21,7 +21,6 @@ const useAddProduct = () => {
     });
     const result = await res.json();
 
-    console.log(result);
     if (result.error) throw new Error(result.error.message);
 
     return result;

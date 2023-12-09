@@ -19,6 +19,11 @@ import Footer from "@/components/layout/Footer";
 import UserProfile from "@/components/header/UserProfile";
 import { getCurrentUser } from "@/utils/supabase-auth-utils";
 
+export const metadata = {
+  title: "Homepage | Brand",
+  description: "Homepage for Brand",
+};
+
 export default async function Home() {
   const currentUser = await getCurrentUser();
   return (

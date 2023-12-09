@@ -5,10 +5,10 @@ import { User2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/Button";
 import useLogout from "@/hooks/useLogout";
-import useGetUser from "@/hooks/useGetUser";
+import useQueryUser from "@/hooks/useQueryUser";
 
 function UserProfile({ size = 24, userId }) {
-  const { data, isPending } = useGetUser(userId);
+  const { data, isPending } = useQueryUser(userId);
   const { logout } = useLogout();
 
   const handleLogout = () => {

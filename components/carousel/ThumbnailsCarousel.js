@@ -21,7 +21,7 @@ const ThumbnailsCarousel = ({ images }) => {
       if (!emblaMainApi || !emblaThumbsApi) return;
       emblaMainApi.scrollTo(index);
     },
-    [emblaMainApi, emblaThumbsApi]
+    [emblaMainApi, emblaThumbsApi],
   );
 
   const onSelect = useCallback(() => {
@@ -38,15 +38,15 @@ const ThumbnailsCarousel = ({ images }) => {
   }, [emblaMainApi, onSelect]);
 
   return (
-    <div className="p-7 h-full">
+    <div className="h-full w-full p-7">
       <div className="overflow-hidden" ref={emblaMainRef}>
-        <div className="flex touch-pan-y ml-[calc(var(--slide-spacing) * -1)">
+        <div className="ml-[calc(var(--slide-spacing) * -1) flex touch-pan-y">
           {slides.map((index) => (
             <div
-              className="relative min-w-0 pl-[var(--slide-spacing)] flex-[0_0_var(--slide-size)]"
+              className="relative min-w-0 flex-[0_0_var(--slide-size)] pl-[var(--slide-spacing)]"
               key={index}
             >
-              <div className="block w-full h-[var(--slide-height)]">
+              <div className="block h-[var(--slide-height)] w-full">
                 <Image
                   src={imageByIndex(index).url}
                   alt={imageByIndex(index).description}
@@ -61,7 +61,7 @@ const ThumbnailsCarousel = ({ images }) => {
 
       <div className="mt-[var(--thumbs-slide-spacing)]">
         <div className="overflow-hidden" ref={emblaThumbsRef}>
-          <div className="flex flex-row ml-[calc(var(--thumbs-slide-spacing) * -1)]">
+          <div className="ml-[calc(var(--thumbs-slide-spacing) * -1)] flex flex-row">
             {slides.map((index) => (
               <ThumbnailsCarouselThumb
                 onClick={() => onThumbClick(index)}
