@@ -46,12 +46,14 @@ const ThumbnailsCarousel = ({ images }) => {
               className="relative min-w-0 flex-[0_0_var(--slide-size)] pl-[var(--slide-spacing)]"
               key={index}
             >
-              <div className="block h-[var(--slide-height)] w-full">
+              <div className="relative block h-[var(--slide-height)] w-full">
                 <Image
                   src={imageByIndex(index).url}
                   alt={imageByIndex(index).description}
                   fill
-                  className="object-contain"
+                  priority
+                  className="absolute object-contain"
+                  sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
                 />
               </div>
             </div>

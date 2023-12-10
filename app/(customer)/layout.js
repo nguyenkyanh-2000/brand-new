@@ -9,6 +9,7 @@ import { getCurrentUser } from "@/utils/supabase-auth-utils";
 import useFetchUser from "@/hooks/useFetchUser";
 import getQueryClient from "@/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import { CartSheet } from "@/components/forms/cart/CartSheet";
 
 export default async function Layout({ children }) {
   const currentUser = await getCurrentUser();
@@ -23,7 +24,7 @@ export default async function Layout({ children }) {
           <div className="hidden gap-5 lg:flex">
             <ThemeToggle />
             <Search />
-            <ShoppingCart />
+            <CartSheet />
             <UserProfile userId={currentUser?.id} />
           </div>
         </Header>

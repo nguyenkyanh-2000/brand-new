@@ -10,22 +10,21 @@ export const ThumbnailsCarouselThumb = (props) => {
     {
       "opacity-20": !selected,
       "opacity-100": selected,
-    }
+    },
   );
   return (
-    <div className="relative flex-[0_0_28%] min-w-0 pl-[var(--thumbs-slide-spacing)]">
+    <div className="relative min-w-0 flex-[0_0_28%] pl-[var(--thumbs-slide-spacing)]">
       <button onClick={onClick} className={buttonClasses} type="button">
-        <div className="block w-full h-[var(--thumbs-slide-height)]">
+        <div className="relative block h-[var(--thumbs-slide-height)] w-full border-2">
           <Image
             src={imgSrc}
             alt={imgAlt}
             fill
-            className="object-cover"
+            className="absolute object-cover"
+            sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
           ></Image>
         </div>
       </button>
     </div>
   );
 };
-
-/* */

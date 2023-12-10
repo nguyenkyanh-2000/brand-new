@@ -2,6 +2,7 @@ import ThumbnailsCarousel from "@/components/carousel/ThumbnailsCarousel";
 import VariantInformation from "@/components/forms/productVariant/VariantInformation";
 import { Badge } from "@/components/ui/Badge";
 import useFetchProduct from "@/hooks/useFetchProduct";
+import getQueryClient from "@/utils/getQueryClient";
 import { Check } from "lucide-react";
 import React from "react";
 
@@ -24,9 +25,8 @@ async function ProductPage({ params }) {
   if (result.error) throw new Error(result.error.message);
 
   const { product } = result;
-  console.log(product);
   return (
-    <div className="grid w-full grid-cols-12 px-10 md:mt-[200px]">
+    <div className="grid w-full grid-cols-12 gap-5 px-10 md:mt-[200px]">
       <div className="col-span-12 md:col-span-8">
         <ThumbnailsCarousel images={product.product_image}></ThumbnailsCarousel>
       </div>

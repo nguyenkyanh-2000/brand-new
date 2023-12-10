@@ -1,12 +1,6 @@
-import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/HoverCard";
 import notFoundImage from "@/public/not-found-image.webp";
 
 function CustomerProductImageGallery({ products }) {
@@ -24,25 +18,14 @@ function CustomerProductImageGallery({ products }) {
             key={product.id}
             className="relative col-span-6 flex h-[500px] flex-col justify-between rounded-md p-10 hover:border-2 lg:col-span-2"
           >
-            <HoverCard>
-              <HoverCardTrigger>
-                <ShoppingCart className="absolute right-10 top-10 z-10 stroke-1 text-muted-foreground" />
-              </HoverCardTrigger>
-              <HoverCardContent
-                align={"end"}
-                side={"top"}
-                className="w-fit bg-foreground px-2 py-1 text-background"
-              >
-                Add to cart
-              </HoverCardContent>
-            </HoverCard>
-
             <div className="relative h-[300px]">
               {product.product_image[0]?.url ? (
                 <Image
                   src={product.product_image[0]?.url}
                   alt={product.product_image[0]?.description}
                   fill
+                  priority
+                  sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
                   className="object-contain p-5"
                 ></Image>
               ) : (
@@ -50,6 +33,8 @@ function CustomerProductImageGallery({ products }) {
                   src={notFoundImage}
                   alt="Not found"
                   fill
+                  priority
+                  sizes="(min-width: 1200px) 500px, (min-width: 768px) 50vw, 100vw"
                   className="object-contain p-5"
                 ></Image>
               )}

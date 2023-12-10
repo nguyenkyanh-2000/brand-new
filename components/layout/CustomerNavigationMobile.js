@@ -6,6 +6,7 @@ import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
 import { Menu, Search, ShoppingCart, X } from "lucide-react";
 import UserProfile from "../header/UserProfile";
+import { CartSheet } from "../forms/cart/CartSheet";
 
 function CustomerNavigationMobile() {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -15,17 +16,17 @@ function CustomerNavigationMobile() {
         <div className="flex items-center gap-5 xl:hidden">
           <Search size={16} />
           <UserProfile size={16} />
-          <ShoppingCart size={16} />
+          <CartSheet />
           <Menu size={16} onClick={() => setIsMenuOpened(true)} />
         </div>
       ) : (
         <AnimatePresence>
           <WholeScreenSlideIn isOpen={isMenuOpened}>
-            <div className="flex flex-col h-full">
-              <div className="flex max-w-screen justify-end mx-10 mt-6">
+            <div className="flex h-full flex-col">
+              <div className="max-w-screen mx-10 mt-6 flex justify-end">
                 <X onClick={() => setIsMenuOpened(false)} />
               </div>
-              <nav className="flex flex-col flex-1 items-center justify-evenly mx-10">
+              <nav className="mx-10 flex flex-1 flex-col items-center justify-evenly">
                 <Link className="text-3xl" href={"#"}>
                   Products
                 </Link>

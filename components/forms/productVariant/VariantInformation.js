@@ -3,9 +3,14 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 import { Button } from "@/components/ui/Button";
+import { useCart } from "@/hooks/useCart";
+import useQueryProduct from "@/hooks/useQueryProduct";
+import { toast } from "@/hooks/useToast";
 
 function VariantInformation({ productVariants }) {
+  const {} = useQueryProduct(productVariants[0].product_id);
   const [selectedVariant, setSelectedVariant] = useState(productVariants[0]);
+  const { addItem } = useCart();
 
   return (
     <div className="mt-10 flex w-full flex-col gap-5">
@@ -19,7 +24,7 @@ function VariantInformation({ productVariants }) {
           <div className="font-bold">{selectedVariant.price} USD</div>
         </div>
       </div>
-      <div className="flex gap-2">
+      <div className="flex items-center gap-2">
         {productVariants.map((variant) => (
           <div
             key={variant.id}
@@ -38,7 +43,17 @@ function VariantInformation({ productVariants }) {
           </div>
         ))}
       </div>
-      <Button variant="default" className="hover:bg-foreground/50">
+      <Button
+        variant="default"
+        className="hover:bg-foreground/50"
+        onClick={() => {
+          addItem(selectedVariant);
+          toast({
+            title: `Add successfully.`,
+            description: "Add product to cart successfully!",
+          });
+        }}
+      >
         Add to the shopping cart
       </Button>
     </div>

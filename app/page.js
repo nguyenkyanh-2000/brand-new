@@ -18,6 +18,7 @@ import { OnViewSlideIn } from "@/components/animation/OnViewSlideIn";
 import Footer from "@/components/layout/Footer";
 import UserProfile from "@/components/header/UserProfile";
 import { getCurrentUser } from "@/utils/supabase-auth-utils";
+import { CartSheet } from "@/components/forms/cart/CartSheet";
 
 export const metadata = {
   title: "Homepage | Brand",
@@ -35,7 +36,7 @@ export default async function Home() {
           <div className="hidden gap-5 lg:flex">
             <ThemeToggle />
             <Search />
-            <ShoppingCart />
+            <CartSheet />
             <UserProfile userId={currentUser?.id} />
           </div>
         </Header>
