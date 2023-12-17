@@ -3,7 +3,7 @@ import AdminNavigation from "@/components/layout/AdminNavigation";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { isAdmin } from "@/utils/supabase-auth-utils";
+import { getCurrentUser, isAdmin } from "@/utils/supabase-auth-utils";
 
 export const metadata = {
   title: "Admin homepage",
@@ -11,11 +11,12 @@ export const metadata = {
 };
 
 export default async function Layout({ children }) {
+  const currentUser = await getCurrentUser();
   const isAnAdmin = await isAdmin();
 
   if (!isAnAdmin)
     throw new Error(
-      "Not enough privilege. Please sign in with an admin account."
+      "Not enough privilege. Please sign in with an admin account.",
     );
 
   return (
@@ -23,9 +24,9 @@ export default async function Layout({ children }) {
       <Header>
         <Logo />
         <AdminNavigation />
-        <div className="hidden lg:flex gap-5">
+        <div className="hidden gap-5 lg:flex">
           <ThemeToggle />
-          <UserProfile />
+          <UserProfile userId={currentUser.id} />
         </div>
       </Header>
       {children}

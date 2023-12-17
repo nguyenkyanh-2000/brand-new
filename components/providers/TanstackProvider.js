@@ -1,10 +1,10 @@
 "use client";
 
 import { createSyncStoragePersister } from "@tanstack/query-sync-storage-persister";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { persistQueryClient } from "@tanstack/react-query-persist-client";
-import { useState } from "react";
+import { PersistQueryClientProvider } from "@tanstack/react-query-persist-client";
+import { useState, useEffect } from "react";
 
 const TanstackProvider = ({ children }) => {
   const [queryClient] = useState(
@@ -18,11 +18,18 @@ const TanstackProvider = ({ children }) => {
       }),
   );
 
+  const persister = createSyncStoragePersister({
+    storage: typeof window !== "undefined" ? window.localStorage : undefined,
+  });
+
   return (
-    <QueryClientProvider client={queryClient}>
+    <PersistQueryClientProvider
+      client={queryClient}
+      persistOptions={{ persister }}
+    >
       {children}
       <ReactQueryDevtools></ReactQueryDevtools>
-    </QueryClientProvider>
+    </PersistQueryClientProvider>
   );
 };
 

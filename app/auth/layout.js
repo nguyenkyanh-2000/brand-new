@@ -2,7 +2,7 @@ import { getCurrentUser } from "@/utils/supabase-auth-utils";
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Auth",
+  title: "Auth | Brand",
   description: "Authetication sites for Brand website",
 };
 

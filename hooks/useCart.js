@@ -23,9 +23,22 @@ export const useCart = create(
           return { items: [...state.items, { ...variant, quantity: 1 }] };
         }),
       removeItem: (id) =>
-        set((state) => ({
-          items: state.items.filter((item) => item.product.id !== id),
-        })),
+        set((state) => {
+          const updatedItems = state.items
+            .map((item) => {
+              if (item.id === id) {
+                const updatedQuantity = item.quantity - 1;
+                // If quantity becomes zero or negative, remove the item
+                if (updatedQuantity <= 0) {
+                  return null; // Return null to filter it out
+                }
+                return { ...item, quantity: updatedQuantity };
+              }
+              return item;
+            })
+            .filter(Boolean); // Remove null entries
+          return { items: updatedItems };
+        }),
       clearCart: () => set({ items: [] }),
     }),
     {

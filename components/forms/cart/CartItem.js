@@ -1,23 +1,29 @@
 import useQueryProduct from "@/hooks/useQueryProduct";
+import { cn } from "@/utils/tailwind-utils";
 import Image from "next/image";
 import React from "react";
 
-function CartItem({ productId, variant }) {
-  const {
-    data: { product },
-  } = useQueryProduct(productId);
+function CartItem({ productId, variant, className }) {
+  const { isPending, data } = useQueryProduct(productId);
 
+  if (isPending) return <p>...Loading</p>;
+
+  const { product } = data;
   return (
-    <div className="flex items-center gap-5">
+    <div
+      className={cn(
+        "flex h-[150px] flex-col items-center gap-5 md:flex-row",
+        className,
+      )}
+    >
       <Image
-        src={product.product_image[0].url}
+        src={product?.product_image[0].url}
         alt={product.product_image[0].description}
-        className="h-auto w-auto"
         width={80}
         height={80}
       ></Image>
-      <div className="flex grow flex-col justify-between py-5">
-        <h4 className="text-xl font-bold">{product.name}</h4>
+      <div className="flex w-full grow flex-col justify-between py-5">
+        <h4 className="text-xl font-bold">{product?.name}</h4>
         <div className="flex w-full justify-between">
           <div className="flex flex-col ">
             <div className="flex gap-1">
@@ -25,7 +31,7 @@ function CartItem({ productId, variant }) {
                 Category:
               </p>
               <p className="text-sm font-semibold capitalize">
-                {product.category}
+                {product?.category}
               </p>
             </div>
             <div className="flex gap-1">
@@ -40,7 +46,7 @@ function CartItem({ productId, variant }) {
               <p className="text-sm capitalize text-muted-foreground">
                 Price:{" "}
               </p>
-              {product.price !== variant.price && (
+              {product?.price !== variant.price && (
                 <span className="text-sm font-semibold text-destructive line-through ">
                   {product.price}$
                 </span>

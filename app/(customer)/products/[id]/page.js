@@ -2,8 +2,6 @@ import ThumbnailsCarousel from "@/components/carousel/ThumbnailsCarousel";
 import VariantInformation from "@/components/forms/productVariant/VariantInformation";
 import { Badge } from "@/components/ui/Badge";
 import useFetchProduct from "@/hooks/useFetchProduct";
-import getQueryClient from "@/utils/getQueryClient";
-import { Check } from "lucide-react";
 import React from "react";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
@@ -49,7 +47,10 @@ async function ProductPage({ params }) {
         </div>
         {/**Variant information */}
         <div className="flex grow items-end">
-          <VariantInformation productVariants={product.product_variant} />
+          <VariantInformation
+            product={product}
+            productVariants={product.product_variant}
+          />
         </div>
 
         <div className="flex flex-col">

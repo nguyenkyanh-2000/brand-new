@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
-import useQueryProduct from "@/hooks/useQueryProduct";
 import { toast } from "@/hooks/useToast";
+import useQueryProduct from "@/hooks/useQueryProduct";
 
-function VariantInformation({ productVariants }) {
-  const {} = useQueryProduct(productVariants[0].product_id);
+function VariantInformation({ product, productVariants }) {
+  const {} = useQueryProduct(product.id);
   const [selectedVariant, setSelectedVariant] = useState(productVariants[0]);
   const { addItem } = useCart();
 
@@ -47,7 +47,7 @@ function VariantInformation({ productVariants }) {
         variant="default"
         className="hover:bg-foreground/50"
         onClick={() => {
-          addItem(selectedVariant);
+          addItem({ ...selectedVariant, original_price: product.price });
           toast({
             title: `Add successfully.`,
             description: "Add product to cart successfully!",
