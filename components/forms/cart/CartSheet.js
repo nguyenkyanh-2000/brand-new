@@ -16,19 +16,35 @@ import { Separator } from "@/components/ui/Separator";
 import clsx from "clsx";
 import { useCart } from "@/hooks/useCart";
 import CartItem from "./CartItem";
+import { roundPrice } from "@/utils/formatPrice";
+import useQueryCart from "@/hooks/useQueryCart";
+import useDeleteCart from "@/hooks/useDeleteCart";
 
-export function CartSheet() {
+export function CartSheet({ userId }) {
+  const { data } = useQueryCart(userId);
+  const { mutate } = useDeleteCart();
   const [isMounted, setIsMounted] = useState(false);
-  const { items, clearCart } = useCart();
+  const { items, clearCart, setCart } = useCart();
   const itemCount = items.length;
-  const total = items.reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
+  const total = roundPrice(
+    items.reduce((acc, item) => acc + item.price * item.quantity, 0),
   );
 
+  const onClearCart = () => {
+    clearCart();
+    mutate(userId);
+  };
+
   useEffect(() => {
+    if (data?.cart?.length > 0) {
+      const items = data.cart.map((item) => ({
+        ...item.product_variant,
+        quantity: item.quantity,
+      }));
+      setCart(items);
+    }
     setIsMounted(true);
-  }, []);
+  }, [data?.cart, setCart]);
 
   return (
     <Sheet>
@@ -81,7 +97,7 @@ export function CartSheet() {
                 <Button
                   className="w-full"
                   variant="destructive"
-                  onClick={() => clearCart()}
+                  onClick={onClearCart}
                 >
                   Clear cart
                 </Button>
@@ -94,7 +110,7 @@ export function CartSheet() {
                         className: "w-full",
                       })}
                     >
-                      Continue to Checkout
+                      Continue to Cart
                     </Link>
                   </SheetTrigger>
                 </SheetFooter>

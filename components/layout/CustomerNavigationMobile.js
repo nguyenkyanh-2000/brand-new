@@ -4,19 +4,19 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
-import { Menu, Search, ShoppingCart, X } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import UserProfile from "../header/UserProfile";
 import { CartSheet } from "../forms/cart/CartSheet";
 
-function CustomerNavigationMobile() {
+function CustomerNavigationMobile({ userId }) {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   return (
     <>
       {!isMenuOpened ? (
         <div className="flex items-center gap-5 xl:hidden">
           <Search size={16} />
-          <UserProfile size={16} />
-          <CartSheet />
+          <UserProfile userId={userId} size={16} />
+          <CartSheet userId={userId} />
           <Menu size={16} onClick={() => setIsMenuOpened(true)} />
         </div>
       ) : (
@@ -27,7 +27,7 @@ function CustomerNavigationMobile() {
                 <X onClick={() => setIsMenuOpened(false)} />
               </div>
               <nav className="mx-10 flex flex-1 flex-col items-center justify-evenly">
-                <Link className="text-3xl" href={"#"}>
+                <Link className="text-3xl" href={"/products"}>
                   Products
                 </Link>
                 <Link className="text-3xl" href={"#"}>

@@ -24,7 +24,7 @@ export default async function Layout({ children }) {
           <div className="hidden gap-5 lg:flex">
             <ThemeToggle />
             <Search />
-            <CartSheet />
+            <CartSheet userId={currentUser?.id} />
             <UserProfile userId={currentUser?.id} />
           </div>
         </Header>

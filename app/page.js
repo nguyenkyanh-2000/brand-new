@@ -36,7 +36,7 @@ export default async function Home() {
           <div className="hidden gap-5 lg:flex">
             <ThemeToggle />
             <Search />
-            <CartSheet />
+            <CartSheet userId={currentUser?.id} />
             <UserProfile userId={currentUser?.id} />
           </div>
         </Header>
@@ -108,7 +108,7 @@ export default async function Home() {
           y2={0}
         >
           <Link
-            href="/products?category=clothes"
+            href="/products?category=clothing"
             className="flex flex-col gap-2"
           >
             <div className={"relative h-[400px] md:h-[600px] "}>

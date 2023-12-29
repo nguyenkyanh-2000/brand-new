@@ -1,3 +1,5 @@
+"use client";
+
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -40,6 +42,7 @@ export const useCart = create(
           return { items: updatedItems };
         }),
       clearCart: () => set({ items: [] }),
+      setCart: (newItems) => set({ items: newItems }),
     }),
     {
       name: "cart-storage",

@@ -1,3 +1,6 @@
+"use client";
+
+import { Skeleton } from "@/components/ui/Skeleton";
 import useQueryProduct from "@/hooks/useQueryProduct";
 import { cn } from "@/utils/tailwind-utils";
 import Image from "next/image";
@@ -6,9 +9,17 @@ import React from "react";
 function CartItem({ productId, variant, className }) {
   const { isPending, data } = useQueryProduct(productId);
 
-  if (isPending) return <p>...Loading</p>;
+  if (isPending)
+    return (
+      <div className="mb-5 flex items-center space-x-4">
+        <Skeleton className="h-12 w-12" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px]" />
+          <Skeleton className="h-4 w-[200px]" />
+        </div>
+      </div>
+    );
 
-  const { product } = data;
   return (
     <div
       className={cn(
@@ -17,13 +28,13 @@ function CartItem({ productId, variant, className }) {
       )}
     >
       <Image
-        src={product?.product_image[0].url}
-        alt={product.product_image[0].description}
+        src={data.product?.product_image[0].url}
+        alt={data.product.product_image[0].description}
         width={80}
         height={80}
       ></Image>
       <div className="flex w-full grow flex-col justify-between py-5">
-        <h4 className="text-xl font-bold">{product?.name}</h4>
+        <h4 className="text-xl font-bold">{data.product?.name}</h4>
         <div className="flex w-full justify-between">
           <div className="flex flex-col ">
             <div className="flex gap-1">
@@ -31,7 +42,7 @@ function CartItem({ productId, variant, className }) {
                 Category:
               </p>
               <p className="text-sm font-semibold capitalize">
-                {product?.category}
+                {data.product?.category}
               </p>
             </div>
             <div className="flex gap-1">
@@ -46,9 +57,9 @@ function CartItem({ productId, variant, className }) {
               <p className="text-sm capitalize text-muted-foreground">
                 Price:{" "}
               </p>
-              {product?.price !== variant.price && (
+              {data.product?.price !== variant.price && (
                 <span className="text-sm font-semibold text-destructive line-through ">
-                  {product.price}$
+                  {data.product.price}$
                 </span>
               )}
               <p className="text-sm font-semibold"> {variant.price}$</p>

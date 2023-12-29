@@ -1,5 +1,7 @@
 import CartForm from "@/components/forms/cart/CartForm";
 import CartSummary from "@/components/forms/cart/CartSummary";
+import { Button } from "@/components/ui/Button";
+import Link from "next/link";
 import React from "react";
 
 async function CartPage() {
@@ -11,8 +13,13 @@ async function CartPage() {
       <div className="col-span-12 rounded-md  bg-muted p-5 md:col-span-8">
         <CartForm />
       </div>
-      <div className="col-span-12 h-fit rounded-md bg-muted p-5 md:col-span-4">
-        <CartSummary />
+      <div className="col-span-12 flex h-fit flex-col gap-5 md:col-span-4">
+        <div className="rounded-md bg-muted p-5 ">
+          <CartSummary />
+        </div>
+        <Link className="w-full" href={"/checkout"}>
+          <Button className="w-full">Checkout now</Button>
+        </Link>
       </div>
     </div>
   );

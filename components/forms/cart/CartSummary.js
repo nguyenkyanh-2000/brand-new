@@ -14,6 +14,7 @@ function CartSummary() {
 
   const discount =
     cart.reduce((acc, item) => {
+      if (!item.original_price) item.original_price = item.price;
       return acc + item.original_price * item.quantity;
     }, 0) - subtotal;
 
@@ -22,7 +23,7 @@ function CartSummary() {
   const total = subtotal - discount + shipping;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 ">
       <h3 className="col-span-3 mb-5 text-xl font-semibold">Order summary</h3>
       <div className="flex justify-between">
         <p>Subtotal:</p>
@@ -30,7 +31,7 @@ function CartSummary() {
       </div>
       <div className="flex justify-between">
         <p>Discount:</p>
-        <p>{discount}$</p>
+        <p>{roundPrice(discount)}$</p>
       </div>
       <div className="flex justify-between">
         <p>Shipping:</p>
@@ -38,8 +39,8 @@ function CartSummary() {
       </div>
       <Separator />
       <div className="flex justify-between">
-        <p>Total:</p>
-        <p>ro{roundPrice(total)}$</p>
+        <p className="font-semibold">Total:</p>
+        <p className="font-semibold">{roundPrice(total)}$</p>
       </div>
     </div>
   );
