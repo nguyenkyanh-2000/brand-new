@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 async function loginWithEmail(data) {
   const url = new URL(
     "/api/auth/login",
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
   const options = {
     method: "POST",
@@ -33,7 +33,7 @@ export default function useLogin() {
         description: "Login successfully!",
       });
       queryClient.setQueryData(["user"], data);
-      router.push("/");
+      router.back();
     },
     onError: (error) => {
       toast({

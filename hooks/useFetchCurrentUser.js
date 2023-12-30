@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { getCurrentUser as getExistingUser } from "@/utils/supabase-auth-utils";
 import getQueryClient from "@/utils/getQueryClient";
 

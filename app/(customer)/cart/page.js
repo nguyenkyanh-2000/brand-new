@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Cart | Brand",
+  description: "Cart for Brand's user",
+};
+
 async function CartPage() {
   return (
     <div className="mt-20 grid w-full grid-cols-12 gap-5 px-10">

@@ -5,7 +5,7 @@ import CustomerNavigationMobile from "./CustomerNavigationMobile";
 import { getCurrentUser } from "@/utils/supabase-auth-utils";
 
 async function CustomerNavigation() {
-  const user = await getCurrentUser();
+  const currentUser = await getCurrentUser();
   return (
     <>
       <nav className="mx-10 hidden items-center gap-5 lg:flex">
@@ -32,7 +32,7 @@ async function CustomerNavigation() {
       </nav>
       {/* Only show when screen size < 1280px*/}
       <div className="flex lg:hidden">
-        <CustomerNavigationMobile userId={user.id} />
+        <CustomerNavigationMobile userId={currentUser?.id} />
       </div>
     </>
   );

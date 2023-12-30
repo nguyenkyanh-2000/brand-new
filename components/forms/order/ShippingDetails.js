@@ -33,9 +33,9 @@ import useQueryUser from "@/hooks/useQueryUser";
 import Link from "next/link";
 
 function ShippingDetail({ userId }) {
-  const {
-    data: { user },
-  } = useQueryUser(userId);
+  const { data } = useQueryUser(userId);
+  const { user } = data;
+
   const form = useForm({
     defaultValues: {
       first_name: "",

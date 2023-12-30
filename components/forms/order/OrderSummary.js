@@ -10,57 +10,49 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/AlertDialog";
+import { Separator } from "@/components/ui/Separator";
 import { useCart } from "@/hooks/useCart";
+import useSaveCart from "@/hooks/useSaveCart";
 import React, { useEffect, useState } from "react";
-
-const saveCartHandler = async ({ userId, data }) => {
-  const url = new URL(
-    `api/cart/${userId}`,
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
-  );
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await res.json();
-
-  if (result.error) throw new Error(result.error.message);
-
-  return result.data;
-};
+import { roundPrice } from "@/utils/formatPrice";
 
 function OrderSummary({ userId }) {
   const { items } = useCart();
   const [open, setOpen] = useState(false);
-
-  // const onKeepingOldCart = () => {
-  //   const oldCart = data.cart.map((item) => item.product_variant);
-  //   const mergedCart = [...items, ...oldCart];
-  //   setCart(mergedCart);
-  // };
+  const { mutate } = useSaveCart();
 
   const onSavingCart = async () => {
-    console.log("saved!");
     let newItems = items.map((item) => ({
       quantity: item.quantity,
       variant_id: item.id,
+      product_id: item.product_id,
     }));
-    console.log(await saveCartHandler({ userId, data: newItems }));
+    mutate({ userId, data: newItems });
   };
 
   useEffect(() => {
     if (items.length > 0) setOpen(true);
   }, [items.length]);
 
+  const subtotal = items.reduce((acc, item) => {
+    return acc + item.original_price * item.quantity;
+  }, 0);
+
+  const discount =
+    items.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
+    }, 0) - subtotal;
+
+  const shipping = 0;
+
+  const total = subtotal + discount + shipping;
+
   return (
     <div>
       <AlertDialog open={open} onOpenChange={setOpen}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Old cart found!</AlertDialogTitle>
+            <AlertDialogTitle>New cart</AlertDialogTitle>
             <AlertDialogDescription>
               {"Do you want to save the content in the cart?"}
             </AlertDialogDescription>
@@ -71,7 +63,26 @@ function OrderSummary({ userId }) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-      <h3>Order summary</h3>
+      <div className="flex flex-col gap-3 ">
+        <h3 className="col-span-3 mb-5 text-xl font-semibold">Order summary</h3>
+        <div className="flex justify-between">
+          <p>Subtotal:</p>
+          <p>{roundPrice(subtotal)}$</p>
+        </div>
+        <div className="flex justify-between">
+          <p>Discount:</p>
+          <p>{roundPrice(discount)}$</p>
+        </div>
+        <div className="flex justify-between">
+          <p>Shipping:</p>
+          <p>{shipping === 0 ? "Free" : `${shipping}$`}</p>
+        </div>
+        <Separator />
+        <div className="flex justify-between">
+          <p className="font-semibold">Total:</p>
+          <p className="font-semibold">{roundPrice(total)}$</p>
+        </div>
+      </div>
     </div>
   );
 }

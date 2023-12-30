@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 async function logoutHandler() {
   const url = new URL(
     "/api/auth/logout",
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
   const options = {
     method: "POST",
@@ -31,8 +31,8 @@ export default function useLogout() {
         title: `See you soon!`,
         description: "Logout successfully!",
       });
-      queryClient.setQueryData(["user"], null);
       router.push("/");
+      queryClient.setQueryData(["user"], null);
     },
     onError: (error) => {
       toast({

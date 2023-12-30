@@ -23,6 +23,7 @@ const useQueryCart = (userId) => {
   return useQuery({
     queryKey: queryKey,
     queryFn: async () => await getCart(userId),
+    enabled: !!userId,
   });
 };
 

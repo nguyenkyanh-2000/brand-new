@@ -32,19 +32,20 @@ export function CartSheet({ userId }) {
 
   const onClearCart = () => {
     clearCart();
-    mutate(userId);
+    if (userId) mutate(userId);
   };
 
   useEffect(() => {
-    if (data?.cart?.length > 0) {
+    if (data?.cart?.length > 0 && userId) {
       const items = data.cart.map((item) => ({
         ...item.product_variant,
         quantity: item.quantity,
+        original_price: item.product.price,
       }));
       setCart(items);
     }
     setIsMounted(true);
-  }, [data?.cart, setCart]);
+  }, [data?.cart, setCart, userId]);
 
   return (
     <Sheet>

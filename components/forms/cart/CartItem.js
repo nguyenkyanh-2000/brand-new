@@ -30,6 +30,7 @@ function CartItem({ productId, variant, className }) {
       <Image
         src={data.product?.product_image[0].url}
         alt={data.product.product_image[0].description}
+        className="h-auto w-auto"
         width={80}
         height={80}
       ></Image>

@@ -6,21 +6,20 @@ import { useCart } from "@/hooks/useCart";
 import { roundPrice } from "@/utils/formatPrice";
 
 function CartSummary() {
-  const cart = useCart((state) => state.items);
+  const { items } = useCart();
 
-  const subtotal = cart.reduce((acc, item) => {
-    return acc + item.price * item.quantity;
+  const subtotal = items.reduce((acc, item) => {
+    return acc + item.original_price * item.quantity;
   }, 0);
 
   const discount =
-    cart.reduce((acc, item) => {
-      if (!item.original_price) item.original_price = item.price;
-      return acc + item.original_price * item.quantity;
+    items.reduce((acc, item) => {
+      return acc + item.price * item.quantity;
     }, 0) - subtotal;
 
   const shipping = 0;
 
-  const total = subtotal - discount + shipping;
+  const total = subtotal + discount + shipping;
 
   return (
     <div className="flex flex-col gap-3 ">

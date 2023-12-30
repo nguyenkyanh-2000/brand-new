@@ -1,21 +1,28 @@
-import supabaseServer from "./supabaseServer";
+import { supabase } from "./supabaseServer";
 
 export const getCurrentUser = async () => {
   const {
     data: { user },
-  } = await supabaseServer().auth.getUser();
+  } = await supabase().auth.getUser();
 
+  return user;
+};
+
+export const getCurrentSessionUser = async () => {
+  const { data, error } = await supabase().auth.getSession();
+  const { user } = data.session;
+  console.log(user);
   return user;
 };
 
 export const isAdmin = async () => {
   const {
     data: { user },
-  } = await supabaseServer().auth.getUser();
+  } = await supabase().auth.getUser();
 
   if (!user?.id) return false;
 
-  const { data } = await supabaseServer()
+  const { data } = await supabase()
     .from("profile")
     .select("*")
     .eq("user_id", user.id)
