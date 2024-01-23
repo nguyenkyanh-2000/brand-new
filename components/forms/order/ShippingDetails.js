@@ -30,13 +30,22 @@ import { useForm } from "react-hook-form";
 import { cn } from "@/utils/tailwind-utils";
 import countries from "@/data/countries.json";
 import useQueryUser from "@/hooks/useQueryUser";
-import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import shippingDetailSchema from "@/schema/shippingDetailSchema";
+import { useCart } from "@/hooks/useCart";
+import useAddOrder from "@/hooks/useAddOrder";
+import { useRouter } from "next/navigation";
+import { encryptId } from "@/utils/crypto";
 
 function ShippingDetail({ userId }) {
+  const { items } = useCart();
   const { data } = useQueryUser(userId);
   const { user } = data;
+  const { mutateAsync, data: orderDetail, isSuccess } = useAddOrder(userId);
+  const router = useRouter();
 
   const form = useForm({
+    resolver: zodResolver(shippingDetailSchema),
     defaultValues: {
       first_name: "",
       last_name: "",
@@ -51,8 +60,13 @@ function ShippingDetail({ userId }) {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const orderDetail = await mutateAsync({
+      data: { ...data, cart_items: items, user_id: userId },
+    });
+    const { order } = orderDetail;
+    const encryptedOrderId = encryptId(order.id);
+    router.push(`/payment/${encryptedOrderId}`);
   };
 
   const onUseMyInfoClick = () => {
@@ -258,7 +272,12 @@ function ShippingDetail({ userId }) {
                 <FormItem className="col-span-12 lg:col-span-2">
                   <FormLabel htmlFor="phone_number">Phone number</FormLabel>
                   <FormControl>
-                    <Input id="phone_number" type="tel" {...field} />
+                    <Input
+                      id="phone_number"
+                      type="tel"
+                      maxLength={11}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -275,11 +294,10 @@ function ShippingDetail({ userId }) {
             >
               Reset
             </Button>
-            <Link href={"/payment"}>
-              <Button className="w-[200px]" type="submit">
-                To payment
-              </Button>
-            </Link>
+
+            <Button className="w-[200px]" type="submit">
+              To payment
+            </Button>
           </div>
         </form>
       </Form>

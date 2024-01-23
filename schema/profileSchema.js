@@ -77,14 +77,10 @@ const StreetSchema = z
 const PhoneNumberSchema = z
   .string()
   .nullable()
-  .refine(
-    (value) =>
-      value === null || value === "" || /^\+\d{1,3}\d{10}$/.test(value),
-    {
-      message:
-        "Invalid phone number. Please add a 11-digit number with country code (e.g +00123456789) or leave it empty.",
-    },
-  );
+  .refine((value) => /^\d{11}$/.test(value), {
+    message:
+      "Invalid phone number. Please add an 11-digit number with country code (e.g 00123456789).",
+  });
 
 const profileSchema = z
   .object({

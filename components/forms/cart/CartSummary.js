@@ -4,6 +4,8 @@ import { Separator } from "@/components/ui/Separator";
 import React from "react";
 import { useCart } from "@/hooks/useCart";
 import { roundPrice } from "@/utils/formatPrice";
+import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 function CartSummary() {
   const { items } = useCart();
@@ -41,6 +43,13 @@ function CartSummary() {
         <p className="font-semibold">Total:</p>
         <p className="font-semibold">{roundPrice(total)}$</p>
       </div>
+
+      <Button
+        disabled={items.length > 0 ? false : true}
+        className="mt-5 w-full"
+      >
+        <Link href={"/checkout"}>Checkout now</Link>
+      </Button>
     </div>
   );
 }

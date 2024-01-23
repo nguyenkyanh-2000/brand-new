@@ -27,7 +27,11 @@ function CustomerNavigationMobile({ userId }) {
                 <X onClick={() => setIsMenuOpened(false)} />
               </div>
               <nav className="mx-10 flex flex-1 flex-col items-center justify-evenly">
-                <Link className="text-3xl" href={"/products"}>
+                <Link
+                  className="text-3xl"
+                  href={"/products"}
+                  onClick={() => setIsMenuOpened(false)}
+                >
                   Products
                 </Link>
                 <Link className="text-3xl" href={"#"}>

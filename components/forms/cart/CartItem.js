@@ -23,7 +23,7 @@ function CartItem({ productId, variant, className }) {
   return (
     <div
       className={cn(
-        "flex h-[150px] flex-col items-center gap-5 md:flex-row",
+        "flex min-h-[150px] flex-col items-center gap-5 md:flex-row",
         className,
       )}
     >
@@ -36,7 +36,7 @@ function CartItem({ productId, variant, className }) {
       ></Image>
       <div className="flex w-full grow flex-col justify-between py-5">
         <h4 className="text-xl font-bold">{data.product?.name}</h4>
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between gap-5">
           <div className="flex flex-col ">
             <div className="flex gap-1">
               <p className="text-sm capitalize text-muted-foreground">

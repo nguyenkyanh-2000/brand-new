@@ -70,7 +70,7 @@ export function CartSheet({ userId }) {
           <>
             <div className="flex w-full grow flex-col pr-6">
               <ScrollArea className="mt-10 max-h-[300px] sm:max-h-[500px] ">
-                <div className="flex flex-col divide-y">
+                <div className="flex flex-col gap-5">
                   {items.map((item) => (
                     <CartItem
                       key={item.id}

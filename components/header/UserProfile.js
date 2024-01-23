@@ -38,7 +38,7 @@ function UserProfile({ size = 24, userId }) {
               My profile
             </Link>
 
-            <Link href="#" className="rounded-md px-4 hover:bg-muted">
+            <Link href="/me/orders" className="rounded-md px-4 hover:bg-muted">
               My orders
             </Link>
 

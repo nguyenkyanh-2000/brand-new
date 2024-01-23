@@ -318,7 +318,12 @@ function UserProfileForm({ user, onSubmit, isPending }) {
               <FormItem className="col-span-12 lg:col-span-2">
                 <FormLabel htmlFor="phone_number">Phone number</FormLabel>
                 <FormControl>
-                  <Input id="phone_number" type="tel" {...field} />
+                  <Input
+                    id="phone_number"
+                    type="tel"
+                    maxLength={11}
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

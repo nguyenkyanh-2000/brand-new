@@ -18,13 +18,8 @@ async function CartPage() {
       <div className="col-span-12 rounded-md  bg-muted p-5 md:col-span-8">
         <CartForm />
       </div>
-      <div className="col-span-12 flex h-fit flex-col gap-5 md:col-span-4">
-        <div className="rounded-md bg-muted p-5 ">
-          <CartSummary />
-        </div>
-        <Link className="w-full" href={"/checkout"}>
-          <Button className="w-full">Checkout now</Button>
-        </Link>
+      <div className="col-span-12 flex h-fit flex-col gap-5 rounded-md bg-muted p-5 md:col-span-4 ">
+        <CartSummary />
       </div>
     </div>
   );

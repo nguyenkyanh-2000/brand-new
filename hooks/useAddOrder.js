@@ -1,13 +1,11 @@
 import getQueryClient from "@/utils/getQueryClient";
-const { useRouter } = require("next/navigation");
 const { useToast } = require("./useToast");
 import { useMutation } from "@tanstack/react-query";
+import { useCart } from "./useCart";
+import useDeleteCart from "./useDeleteCart";
 
-const saveCartHandler = async ({ userId, data }) => {
-  const url = new URL(
-    `api/cart/${userId}`,
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
-  );
+const addOrderHandler = async ({ data }) => {
+  const url = new URL(`api/orders`, process.env.NEXT_PUBLIC_LOCATION_ORIGIN);
   const res = await fetch(url, {
     method: "POST",
     headers: {
@@ -22,20 +20,22 @@ const saveCartHandler = async ({ userId, data }) => {
   return result.data;
 };
 
-const useSaveCart = () => {
+const useAddOrder = (userId) => {
   const queryClient = getQueryClient();
-  const router = useRouter();
   const { toast } = useToast();
+  const { clearCart } = useCart();
+  const { mutate } = useDeleteCart();
 
   return useMutation({
-    mutationKey: ["cart"],
-    mutationFn: ({ userId, data }) => saveCartHandler({ userId, data }),
+    mutationKey: ["order"],
+    mutationFn: ({ data }) => addOrderHandler({ userId, data }),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-      router.refresh();
+      queryClient.invalidateQueries(["order"]);
+      clearCart();
+      mutate(userId);
       toast({
-        title: `Your cart is saved.`,
-        description: "Items in your cart are saved successfully!",
+        title: `Your order is saved`,
+        description: "Your order is saved successfully!",
       });
     },
     onError: (error) => {
@@ -48,4 +48,4 @@ const useSaveCart = () => {
   });
 };
 
-export default useSaveCart;
+export default useAddOrder;

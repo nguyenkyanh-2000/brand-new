@@ -10,6 +10,7 @@ const getCart = async (userId) => {
     headers: {
       "Content-Type": "application/json",
     },
+    next: { revalidate: 0 },
   });
   const result = await res.json();
   if (result.error) throw new Error(result.error.message);
