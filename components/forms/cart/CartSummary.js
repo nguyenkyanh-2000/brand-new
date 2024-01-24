@@ -44,12 +44,14 @@ function CartSummary() {
         <p className="font-semibold">{roundPrice(total)}$</p>
       </div>
 
-      <Button
-        disabled={items.length > 0 ? false : true}
-        className="mt-5 w-full"
-      >
-        <Link href={"/checkout"}>Checkout now</Link>
-      </Button>
+      <Link href={"/checkout"}>
+        <Button
+          disabled={items.length > 0 ? false : true}
+          className="mt-5 w-full"
+        >
+          Checkout now
+        </Button>
+      </Link>
     </div>
   );
 }

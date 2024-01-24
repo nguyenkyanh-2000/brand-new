@@ -24,19 +24,19 @@ function VariantInformation({ product, productVariants }) {
           <div className="font-bold">{selectedVariant.price} USD</div>
         </div>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 ">
         {productVariants.map((variant) => (
           <div
             key={variant.id}
             className={clsx(
-              "flex h-fit w-fit items-center justify-center border-foreground bg-muted",
+              "flex h-fit w-fit items-center justify-center border-foreground",
               {
                 "border-2": variant.id === selectedVariant.id,
               },
             )}
           >
             <button
-              className="h-8 w-8 rounded-full"
+              className="h-8 w-8 rounded-full border-2"
               style={{ backgroundColor: variant.color }}
               onClick={() => setSelectedVariant(variant)}
             ></button>

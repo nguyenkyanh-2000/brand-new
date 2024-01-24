@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import orderSchema from "@/schema/orderDetailSchema";
 import transformedZodErrors from "@/utils/zod-utils";
+import { ApiError } from "next/dist/server/api-utils";
 
 export async function POST(request, context) {
   try {

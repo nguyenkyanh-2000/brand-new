@@ -35,7 +35,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 function PaymentForm({ orderEncryptedId }) {
-  const { mutateAsync, isSuccess } = usePayOrder();
+  const { mutate, isSuccess, isPending } = usePayOrder();
   const router = useRouter();
   const form = useForm({
     resolver: zodResolver(PaymentFormSchema),
@@ -48,12 +48,11 @@ function PaymentForm({ orderEncryptedId }) {
     },
   });
 
-  const onSubmit = async () => {
-    await mutateAsync({
+  const onSubmit = () => {
+    mutate({
       data: { order_status: "PAID", payment_method: "CARD" },
       encryptedOrderId: orderEncryptedId,
     });
-    if (isSuccess) router.push(`/thank-you/${orderEncryptedId}`);
   };
 
   return (
@@ -195,7 +194,12 @@ function PaymentForm({ orderEncryptedId }) {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
-            <Button className="w-full" type="submit">
+            <Button
+              isLoading={isPending}
+              disabled={isPending}
+              className="w-full"
+              type="submit"
+            >
               Continue
             </Button>
             <Button variant="outline" className="flex w-full gap-2">

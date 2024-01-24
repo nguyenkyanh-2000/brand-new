@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { decryptId } from "@/utils/crypto";
 import { toast } from "./useToast";
+import { useRouter } from "next/navigation";
 
 const editOrderHandler = async (encryptedOrderId, data) => {
   const orderId = decryptId(encryptedOrderId);
@@ -26,12 +27,13 @@ const editOrderHandler = async (encryptedOrderId, data) => {
 
 const usePayOrder = () => {
   const queryKey = ["order"];
-
+  const router = useRouter();
   return useMutation({
     mutationKey: queryKey,
     mutationFn: ({ data, encryptedOrderId }) =>
       editOrderHandler(encryptedOrderId, data),
     onSuccess: (data) => {
+      router.replace(`/thank-you`);
       toast({
         title: `Order is paid.`,
         description: "Thank you for your purchase!",

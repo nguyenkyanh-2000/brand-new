@@ -2,6 +2,11 @@ import { Button } from "@/components/ui/Button";
 import Link from "next/link";
 import React from "react";
 
+export const metadata = {
+  title: "Thank you!",
+  description: "Thank you page in Brand",
+};
+
 function ThankYouPage({ searchParams }) {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
