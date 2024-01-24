@@ -1,7 +1,5 @@
 import CartForm from "@/components/forms/cart/CartForm";
 import CartSummary from "@/components/forms/cart/CartSummary";
-import { Button } from "@/components/ui/Button";
-import Link from "next/link";
 import React from "react";
 
 export const metadata = {

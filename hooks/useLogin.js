@@ -33,7 +33,7 @@ export default function useLogin() {
         description: "Login successfully!",
       });
       queryClient.setQueryData(["user"], data);
-      router.back();
+      router.push("/");
     },
     onError: (error) => {
       toast({

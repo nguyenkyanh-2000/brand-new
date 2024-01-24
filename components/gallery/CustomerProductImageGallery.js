@@ -14,8 +14,9 @@ function CustomerProductImageGallery({ products }) {
                 ...product.product_variant.map((variant) => variant.price),
               );
         return (
-          <div
+          <Link
             key={product.id}
+            href={`products/${product.id}`}
             className="relative col-span-6 flex h-[500px] flex-col justify-between rounded-md p-10 hover:border-2 lg:col-span-2"
           >
             <div className="relative h-[300px]">
@@ -46,10 +47,7 @@ function CustomerProductImageGallery({ products }) {
                 </p>
               </div>
             )}
-            <Link
-              href={`products/${product.id}`}
-              className="flex flex-col items-center"
-            >
+            <div className="flex flex-col items-center">
               <h4 className="font-bold">{product.name}</h4>
               <div className="flex gap-2">
                 <p className="text-muted-foreground">Original price at</p>
@@ -59,8 +57,8 @@ function CustomerProductImageGallery({ products }) {
                 <p className="text-muted-foreground">Price starts from</p>
                 <p className="text-destructive">{`${smallestPrice}$`}</p>
               </div>
-            </Link>
-          </div>
+            </div>
+          </Link>
         );
       })}
     </div>
