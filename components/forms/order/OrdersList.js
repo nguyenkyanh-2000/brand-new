@@ -3,10 +3,12 @@ import { Badge } from "@/components/ui/Badge";
 import useQueryOrders from "@/hooks/useQueryOrders";
 
 import { format, parseISO } from "date-fns";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 function OrdersList({ page, limit, userId }) {
   const { data } = useQueryOrders(userId, { page: page, limit: limit });
+  const router = useRouter();
 
   if (!data || data.orders.length === 0) {
     return (
@@ -18,7 +20,6 @@ function OrdersList({ page, limit, userId }) {
       </div>
     );
   }
-
   const { orders } = data;
 
   return (
@@ -26,15 +27,17 @@ function OrdersList({ page, limit, userId }) {
       <h2 className="mb-4 text-2xl font-bold">Orders List</h2>
       {orders.map((order) => (
         <div
+          onClick={() => router.push(`orders/${order.id}`)}
           key={order.id}
-          className="mb-4 flex flex-col gap-1 rounded-md border-2 p-4"
+          className="mb-4 flex flex-col gap-1 rounded-md border-2 bg-background p-4 hover:bg-background/50"
         >
-          <div className="flex justify-between">
+          <div className="flex flex-col justify-between sm:flex-row">
             <h3 className="text-lg font-semibold">Order ID: {order.id}</h3>
             <Badge
               variant={
                 order.order_status === "PAID" ? "default" : "destructive"
               }
+              className="w-fit"
             >
               {order.order_status}
             </Badge>
