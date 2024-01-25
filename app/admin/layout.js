@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { getCurrentUser, isAdmin } from "@/utils/supabase-auth-utils";
+import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Admin homepage",
@@ -14,10 +15,7 @@ export default async function Layout({ children }) {
   const currentUser = await getCurrentUser();
   const isAnAdmin = await isAdmin();
 
-  if (!isAnAdmin)
-    throw new Error(
-      "Not enough privilege. Please sign in with an admin account.",
-    );
+  if (!isAnAdmin) redirect("/auth/login");
 
   return (
     <section>

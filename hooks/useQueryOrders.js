@@ -1,4 +1,5 @@
 import getQueryClient from "@/utils/getQueryClient";
+import { useQuery } from "@tanstack/react-query";
 
 const API_URL = process.env.NEXT_PUBLIC_LOCATION_API;
 
@@ -17,17 +18,18 @@ const getOrders = async (userId, searchParams) => {
     options,
   );
   const result = await res.json();
-  return result;
+  if (result.error) throw new Error(result.error.message);
+  return result.data;
 };
 
-const useFetchOrders = async (userId, searchParams) => {
-  const queryClient = getQueryClient();
+const useQueryOrders = (userId, searchParams) => {
   const queryKey = ["orders", { user_id: userId }, searchParams];
-
-  return await queryClient.fetchQuery({
+  const queryClient = getQueryClient();
+  return useQuery({
     queryKey: queryKey,
-    queryFn: () => getOrders(userId, searchParams),
+    queryFn: async () => await getOrders(userId, searchParams),
+    queryClient: queryClient,
   });
 };
 
-export default useFetchOrders;
+export default useQueryOrders;

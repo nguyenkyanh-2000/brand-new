@@ -27,12 +27,12 @@ export default function useLogout() {
     mutationKey: ["user"],
     mutationFn: () => logoutHandler(),
     onSuccess: (data) => {
+      queryClient.clear();
       toast({
         title: `See you soon!`,
         description: "Logout successfully!",
       });
       router.push("/");
-      queryClient.setQueryData(["user"], null);
     },
     onError: (error) => {
       toast({
