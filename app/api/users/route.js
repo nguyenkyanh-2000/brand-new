@@ -3,6 +3,8 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { ApiError } from "next/dist/server/api-utils";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request) {
   try {
     const url = request.nextUrl;
@@ -39,7 +41,7 @@ export async function GET(request) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
