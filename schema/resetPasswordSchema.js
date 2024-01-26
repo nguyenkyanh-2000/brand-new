@@ -5,7 +5,7 @@ const PasswordSchema = z
     invalid_type_error: "Wrong type of data for password.",
     required_error: "Missing password.",
   })
-  .refine((value) => value.length > 6, {
+  .refine((value) => value.length >= 6, {
     message: "Password must be longer than 6 characters.",
   });
 

@@ -31,7 +31,7 @@ export async function GET(request, context) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -41,7 +41,6 @@ export async function PUT(request, context) {
     const variantId = context.params.variantId;
     const productId = context.params.productId;
     const supabase = createRouteHandlerClient({ cookies });
-    // Check if the product variant exists
     // Validate data
     let productVariant = await request.json();
     const result = productVariantSchema.safeParse(productVariant);
@@ -70,7 +69,7 @@ export async function PUT(request, context) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
@@ -102,7 +101,7 @@ export async function DELETE(request, context) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }
