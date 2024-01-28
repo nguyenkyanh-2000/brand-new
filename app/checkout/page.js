@@ -1,7 +1,10 @@
 import OrderSummary from "@/components/forms/order/OrderSummary";
 import ShippingDetail from "@/components/forms/order/ShippingDetails";
-import { getCurrentUser } from "@/utils/supabase-auth-utils";
-import { redirect } from "next/navigation";
+import {
+  getCurrentSessionUser,
+  getCurrentUser,
+} from "@/utils/supabase-auth-utils";
+import { permanentRedirect, redirect } from "next/navigation";
 import React from "react";
 
 export const metadata = {
@@ -10,9 +13,10 @@ export const metadata = {
 };
 
 async function CheckoutPage() {
-  const user = await getCurrentUser();
+  const user = await getCurrentSessionUser();
+  console.log(user);
   if (!user) {
-    redirect("/auth/login");
+    permanentRedirect("/auth/login");
   }
 
   return (

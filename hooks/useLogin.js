@@ -33,9 +33,8 @@ export default function useLogin() {
         description: "Login successfully!",
       });
       queryClient.setQueryData(["user"], data);
-
-      if (data.user.is_admin) router.push("/admin");
-      else router.push("/");
+      router.refresh();
+      router.back();
     },
     onError: (error) => {
       toast({

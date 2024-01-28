@@ -19,7 +19,6 @@ import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/Button";
 import registrationSchema from "@/schema/registrationSchema";
 import useSignUp from "@/hooks/useSignUp";
-import { Loader2 } from "lucide-react";
 
 function RegisterPage() {
   const { signUp, isLoading } = useSignUp();
@@ -41,7 +40,7 @@ function RegisterPage() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="w-[500px] max-sm:w-4/5 space-y-6 flex flex-col"
+          className="flex w-[500px] flex-col space-y-6 max-sm:w-4/5"
         >
           <FormField
             control={form.control}
@@ -112,7 +111,7 @@ function RegisterPage() {
             Back to the{" "}
             <Link
               href="/auth/login"
-              className="font-semibold text-sm text-foreground
+              className="text-sm font-semibold text-foreground
               hover:text-foreground/50"
             >
               {" "}

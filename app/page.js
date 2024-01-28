@@ -129,7 +129,7 @@ export default async function Home() {
           y2={0}
         >
           <Link
-            href="/products?category=cosmetics"
+            href="/products?category=cosmetic"
             className="flex flex-col gap-2 "
           >
             <div className={"relative h-[400px] md:h-[600px] "}>

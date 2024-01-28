@@ -10,6 +10,7 @@ export const getCurrentUser = async () => {
 
 export const getCurrentSessionUser = async () => {
   const { data, error } = await supabase().auth.getSession();
+  if (!data.session) return null;
   const { user } = data.session;
   return user;
 };

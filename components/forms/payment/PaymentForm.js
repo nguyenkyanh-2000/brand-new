@@ -35,8 +35,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 
 function PaymentForm({ orderEncryptedId }) {
-  const { mutate, isSuccess, isPending } = usePayOrder();
-  const router = useRouter();
+  const { mutate, isPending } = usePayOrder();
   const form = useForm({
     resolver: zodResolver(PaymentFormSchema),
     defaultValues: {
