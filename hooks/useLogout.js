@@ -33,6 +33,7 @@ export default function useLogout() {
         description: "Logout successfully!",
       });
       router.push("/");
+      router.refresh();
     },
     onError: (error) => {
       toast({

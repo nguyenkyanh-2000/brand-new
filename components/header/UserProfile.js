@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/HoverCard";
 import { User2 } from "lucide-react";
 import Link from "next/link";
