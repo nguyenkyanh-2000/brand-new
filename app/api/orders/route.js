@@ -25,6 +25,7 @@ export async function POST(request, context) {
       .from("order")
       .insert({ total_amount: totalAmount, ...rest })
       .select("*")
+      .order("created_at", { ascending: false })
       .single();
 
     if (insertOrderError) {

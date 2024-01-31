@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 function page() {
-  return <div>returns</div>;
+  return <div className="p-4">Coming soon!</div>;
 }
 
 export default page;

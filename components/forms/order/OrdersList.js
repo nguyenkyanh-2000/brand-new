@@ -10,7 +10,7 @@ function OrdersList({ page, limit, userId }) {
   const { data } = useQueryOrders(userId, { page: page, limit: limit });
   const router = useRouter();
 
-  if (!data || data.orders.length === 0) {
+  if (!data || !data.orders?.length) {
     return (
       <div className="h-[500px] rounded-md bg-muted p-4">
         <h2 className="mb-4 text-2xl font-bold">Orders List</h2>

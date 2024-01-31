@@ -8,8 +8,7 @@ export const metadata = {
 
 export default async function Layout({ children }) {
   const user = await getCurrentUser();
-
   if (user) redirect("/");
 
-  return <section>{children}</section>;
+  return <div>{children}</div>;
 }

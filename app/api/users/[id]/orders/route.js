@@ -21,6 +21,7 @@ export async function GET(request, context) {
       .from("order")
       .select("*, order_item(*)", { count: "estimated" })
       .eq("user_id", userId)
+      .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
     if (error) {

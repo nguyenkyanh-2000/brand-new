@@ -1,30 +1,33 @@
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
 import { ApiError } from "next/dist/server/api-utils";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 import { validate } from "uuid";
 
 export async function GET(request, context) {
   try {
-    const orderId = context.params.id;
-    if (!validate(orderId)) throw new ApiError(400, "Wrong order ID");
+    const variantId = context.params.id;
+    if (!validate(variantId)) throw new ApiError(400, "Variant ID is invalid.");
     const supabase = createRouteHandlerClient({ cookies });
+    // Ensure page and limit are numbers. Default: Page 0, limit 10
     const { data, error } = await supabase
-      .from("order")
-      .select("*, order_item(*)")
-      .eq("id", orderId)
-      .maybeSingle();
+      .from("product_variant")
+      .select("*, product (name, price)")
+      .eq("id", variantId)
+      .single();
 
-    if (!data) throw new ApiError(400, "Order does not exist!");
     if (error) {
       if (!error.status) error.status = 400;
       throw new ApiError(error.status, error.message);
     }
+
     return NextResponse.json({
       error: null,
-      data: { order: data },
+      data: {
+        product_variant: data,
+      },
       status: 200,
-      message: "Get the order successfully",
+      message: "Get the product variant successfully.",
     });
   } catch (error) {
     return NextResponse.json(
