@@ -200,7 +200,7 @@ function PaymentForm({ orderEncryptedId }) {
             >
               Continue
             </Button>
-            <Button variant="outline" className="flex w-full gap-2">
+            <Button variant="outline" disabled className="flex w-full gap-2">
               <Icons.paypal className="h-6 w-6" />
               <Label htmlFor="paypal">Continue with Paypal</Label>
             </Button>

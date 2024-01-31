@@ -31,8 +31,8 @@ const useAddOrder = (userId) => {
     mutationFn: ({ data }) => addOrderHandler({ userId, data }),
     onSuccess: (data) => {
       queryClient.invalidateQueries(["order"]);
-      clearCart();
       mutate(userId);
+      clearCart();
       toast({
         title: `Your order is saved`,
         description: "Your order is saved successfully!",

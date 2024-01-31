@@ -19,6 +19,7 @@ import Footer from "@/components/layout/Footer";
 import UserProfile from "@/components/header/UserProfile";
 import { getCurrentUser } from "@/utils/supabase-auth-utils";
 import { CartSheet } from "@/components/forms/cart/CartSheet";
+import SearchProduct from "@/components/header/SearchProduct";
 
 export const metadata = {
   title: "Homepage | Brand",
@@ -35,7 +36,7 @@ export default async function Home() {
           <CustomerNavigation />
           <div className="hidden gap-5 lg:flex">
             <ThemeToggle />
-            <Search />
+            <SearchProduct />
             <CartSheet userId={currentUser?.id} />
             <UserProfile userId={currentUser?.id} />
           </div>

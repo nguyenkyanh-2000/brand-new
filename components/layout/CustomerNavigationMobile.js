@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import WholeScreenSlideIn from "../animation/WholeScreenSlideIn";
 import Link from "next/link";
-import { Menu, Search, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import UserProfile from "../header/UserProfile";
 import { CartSheet } from "../forms/cart/CartSheet";
+import SearchProduct from "../header/SearchProduct";
 
 function CustomerNavigationMobile({ userId }) {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
@@ -14,7 +15,7 @@ function CustomerNavigationMobile({ userId }) {
     <>
       {!isMenuOpened ? (
         <div className="flex items-center gap-5 xl:hidden">
-          <Search size={16} />
+          <SearchProduct size={16} />
           <UserProfile userId={userId} size={16} />
           <CartSheet userId={userId} />
           <Menu size={16} onClick={() => setIsMenuOpened(true)} />
