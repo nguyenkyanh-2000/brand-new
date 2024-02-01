@@ -53,7 +53,7 @@ function UserProfile({ size = 24, userId }) {
 
   if (!data || isPending)
     return (
-      <Link href={"/auth/login"}>
+      <Link href={"/login"}>
         <User2 size={size} className="hover:cursor-pointer"></User2>
       </Link>
     );

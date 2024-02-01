@@ -11,15 +11,15 @@ export async function POST(request) {
     const userCredentials = await supabase.auth.signInWithPassword({
       email,
       password,
-      options: {
+      /**options: {
         emailRedirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/api/auth/callback`,
-      },
+      },**/
     });
     if (userCredentials.error) {
       if (!userCredentials.error.status) userCredentials.error.status = 400;
       throw new ApiError(
         userCredentials.error.status,
-        userCredentials.error.message
+        userCredentials.error.message,
       );
     }
     // Get user profile from login credentials
@@ -41,7 +41,7 @@ export async function POST(request) {
   } catch (error) {
     return NextResponse.json(
       { error: { message: error.message } },
-      { status: error.statusCode }
+      { status: error.statusCode },
     );
   }
 }

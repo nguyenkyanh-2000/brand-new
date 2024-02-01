@@ -15,7 +15,7 @@ export default async function Layout({ children }) {
   const currentUser = await getCurrentUser();
   const isAnAdmin = await isAdmin();
 
-  if (!isAnAdmin) redirect("/auth/login");
+  if (!isAnAdmin) redirect("/login");
 
   return (
     <section>

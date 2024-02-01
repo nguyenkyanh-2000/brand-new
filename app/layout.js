@@ -16,11 +16,6 @@ const bodoni_moda = Bodoni_Moda({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Home",
-  description: "Homepage of Brand.",
-};
-
 export default async function RootLayout({ children }) {
   const {
     data: { session },

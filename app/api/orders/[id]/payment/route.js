@@ -34,7 +34,6 @@ export async function PUT(request, context) {
       message: "Update order payment successfully!",
     });
   } catch (error) {
-    console.log(error);
     return NextResponse.json(
       { error: { message: error.message } },
       { status: error.statusCode },

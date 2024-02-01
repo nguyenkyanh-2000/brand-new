@@ -17,20 +17,24 @@ import { Input } from "@/components/ui/Input";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import resetPasswordSchema from "@/schema/resetPasswordSchema";
+import registrationSchema from "@/schema/registrationSchema";
+import useSignUp from "@/hooks/useSignUp";
 
-function ResetPasswordPage() {
+function RegisterPage() {
+  const { signUp, isLoading } = useSignUp();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
-    resolver: zodResolver(resetPasswordSchema),
-    defaultValues: { password: "", confirmPassword: "" },
+    resolver: zodResolver(registrationSchema),
+    defaultValues: { email: "", password: "", confirmPassword: "" },
   });
 
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    signUp(data);
+  };
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-6 py-12 lg:px-8">
-      <div className="mb-5 flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <Logo />
       </div>
       <Form {...form}>
@@ -40,10 +44,23 @@ function ResetPasswordPage() {
         >
           <FormField
             control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormControl>
+                  <Input id="email" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="password">New password</FormLabel>
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <FormControl>
                   <Input
                     id="password"
@@ -61,7 +78,7 @@ function ResetPasswordPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel htmlFor="confirmPassword">
-                  Confirm your new password
+                  Confirm your password
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -82,13 +99,18 @@ function ResetPasswordPage() {
             />
             <Label htmlFor="c1">Show password?</Label>
           </div>
-          <Button variant="default" type="submit">
-            Reset password
+          <Button
+            isLoading={isLoading}
+            disabled={isLoading}
+            variant="default"
+            type="submit"
+          >
+            Register now
           </Button>
           <p className="mt-10 text-center text-sm text-foreground">
             Back to the{" "}
             <Link
-              href="/auth/login"
+              href="/login"
               className="text-sm font-semibold text-foreground
               hover:text-foreground/50"
             >
@@ -102,4 +124,4 @@ function ResetPasswordPage() {
   );
 }
 
-export default ResetPasswordPage;
+export default RegisterPage;

@@ -4,6 +4,9 @@ import { getCurrentSessionUser } from "@/utils/supabase-auth-utils";
 import { redirect } from "next/navigation";
 import React from "react";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata = {
   title: "Checkout | Brand",
   description: "Checkout for Brand's user",
@@ -12,7 +15,7 @@ export const metadata = {
 async function CheckoutPage() {
   const user = await getCurrentSessionUser();
   if (!user) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
   return (

@@ -20,9 +20,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useLogin from "@/hooks/useLogin";
 import React from "react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
-  const { login, isLoading } = useLogin();
+  const router = useRouter();
+  const { login, isLoading, isSuccess } = useLogin();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
     resolver: zodResolver(credentialSchema),
@@ -31,6 +33,7 @@ function LoginForm() {
 
   const onSubmit = (data) => {
     login(data);
+    if (isSuccess) router.back();
   };
   return (
     <Form {...form}>
@@ -79,7 +82,7 @@ function LoginForm() {
             <Label htmlFor="c1">Show password?</Label>
           </div>
           <Link
-            href={"#"}
+            href={"/forgot-password"}
             className="text-center text-sm font-semibold text-foreground hover:text-foreground/50"
           >
             Forgot your password?
@@ -97,10 +100,10 @@ function LoginForm() {
           </Button>
           <p className="text-xs text-foreground">Or sign in with</p>
           <div className="space-between flex w-full gap-5">
-            <Button type="button" className="w-full">
+            <Button disabled type="button" className="w-full">
               Google
             </Button>
-            <Button type="button" className="w-full">
+            <Button disabled type="button" className="w-full">
               <span>Facebook</span>
             </Button>
           </div>
@@ -109,7 +112,7 @@ function LoginForm() {
         <p className="mt-10 text-center text-sm text-foreground">
           Not a member?{" "}
           <Link
-            href="/auth/register"
+            href="/register"
             className="text-sm font-semibold text-foreground
     hover:text-foreground/50"
           >

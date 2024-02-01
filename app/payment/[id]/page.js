@@ -11,7 +11,7 @@ async function page({ params }) {
   const user = await getCurrentUser();
   const orderEncryptedId = params.id;
   if (!user) {
-    redirect("/auth/login");
+    redirect("/login");
   }
   return (
     <div className="flex h-screen items-center justify-center">

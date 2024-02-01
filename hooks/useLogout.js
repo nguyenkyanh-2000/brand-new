@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "./useToast";
 import { useRouter } from "next/navigation";
+import { useCart } from "./useCart";
 
 async function logoutHandler() {
   const url = new URL(
@@ -20,6 +21,7 @@ async function logoutHandler() {
 }
 
 export default function useLogout() {
+  const { clearCart } = useCart();
   const queryClient = useQueryClient();
   const router = useRouter();
   const { toast } = useToast();
@@ -28,6 +30,7 @@ export default function useLogout() {
     mutationFn: () => logoutHandler(),
     onSuccess: (data) => {
       queryClient.clear();
+      clearCart();
       toast({
         title: `See you soon!`,
         description: "Logout successfully!",

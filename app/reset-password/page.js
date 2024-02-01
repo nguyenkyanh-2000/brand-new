@@ -17,24 +17,43 @@ import { Input } from "@/components/ui/Input";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Label } from "@radix-ui/react-dropdown-menu";
 import { Button } from "@/components/ui/Button";
-import registrationSchema from "@/schema/registrationSchema";
-import useSignUp from "@/hooks/useSignUp";
+import resetPasswordSchema from "@/schema/resetPasswordSchema";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/useToast";
 
-function RegisterPage() {
-  const { signUp, isLoading } = useSignUp();
+function ResetPasswordPage() {
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
-    resolver: zodResolver(registrationSchema),
-    defaultValues: { email: "", password: "", confirmPassword: "" },
+    resolver: zodResolver(resetPasswordSchema),
+    defaultValues: { password: "", confirmPassword: "" },
   });
+  const supabase = createClientComponentClient();
+  const router = useRouter();
+  const { toast } = useToast();
+  const onSubmit = async (data) => {
+    const { data: resetData, error } = await supabase.auth.updateUser({
+      password: data.password,
+    });
 
-  const onSubmit = (data) => {
-    signUp(data);
+    if (error)
+      toast({
+        variant: "destructive",
+        title: "Error!",
+        description: `${error.message}`,
+      });
+    if (resetData) {
+      toast({
+        title: `Reset password successfully.`,
+        description: "Welcome back to Brand!",
+      });
+      router.replace("/");
+    }
   };
 
   return (
     <div className="flex h-screen flex-col items-center justify-center px-6 py-12 lg:px-8">
-      <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="mb-5 flex justify-center sm:mx-auto sm:w-full sm:max-w-sm">
         <Logo />
       </div>
       <Form {...form}>
@@ -44,23 +63,10 @@ function RegisterPage() {
         >
           <FormField
             control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel htmlFor="email">Email</FormLabel>
-                <FormControl>
-                  <Input id="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor="password">Password</FormLabel>
+                <FormLabel htmlFor="password">New password</FormLabel>
                 <FormControl>
                   <Input
                     id="password"
@@ -78,7 +84,7 @@ function RegisterPage() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel htmlFor="confirmPassword">
-                  Confirm your password
+                  Confirm your new password
                 </FormLabel>
                 <FormControl>
                   <Input
@@ -99,18 +105,13 @@ function RegisterPage() {
             />
             <Label htmlFor="c1">Show password?</Label>
           </div>
-          <Button
-            isLoading={isLoading}
-            disabled={isLoading}
-            variant="default"
-            type="submit"
-          >
-            Register now
+          <Button variant="default" type="submit">
+            Reset password
           </Button>
           <p className="mt-10 text-center text-sm text-foreground">
             Back to the{" "}
             <Link
-              href="/auth/login"
+              href="/login"
               className="text-sm font-semibold text-foreground
               hover:text-foreground/50"
             >
@@ -124,4 +125,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default ResetPasswordPage;

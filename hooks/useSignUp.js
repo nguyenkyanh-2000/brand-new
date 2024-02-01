@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 async function register(data) {
   const url = new URL(
     "/api/auth/register",
-    process.env.NEXT_PUBLIC_LOCATION_ORIGIN
+    process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
   );
   const options = {
     method: "POST",
@@ -30,7 +30,7 @@ export default function useSignUp() {
         title: `Welcome onboard!`,
         description: "Register successfully!",
       });
-      router.push("/auth/login");
+      router.push("/login");
     },
     onError: (error) => {
       toast({

@@ -24,7 +24,11 @@ export default function useLogin() {
   const queryClient = useQueryClient();
   const router = useRouter();
   const { toast } = useToast();
-  const { mutate: login, isPending: isLoading } = useMutation({
+  const {
+    mutate: login,
+    isPending: isLoading,
+    isSuccess,
+  } = useMutation({
     mutationKey: ["user"],
     mutationFn: ({ email, password }) => loginWithEmail({ email, password }),
     onSuccess: (data) => {
@@ -34,7 +38,6 @@ export default function useLogin() {
       });
       queryClient.setQueryData(["user"], data);
       router.refresh();
-      router.back();
     },
     onError: (error) => {
       toast({
