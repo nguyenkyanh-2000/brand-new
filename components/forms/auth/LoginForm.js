@@ -22,10 +22,12 @@ import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { toast, useToast } from "@/hooks/useToast";
 
 function LoginForm() {
   const router = useRouter();
   const supabase = createClientComponentClient();
+  const { toast } = useToast();
   const { login, isLoading, isSuccess } = useLogin();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
@@ -39,14 +41,14 @@ function LoginForm() {
   };
 
   const loginWithGoogle = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: "google",
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   };
 
   const loginWithFacebook = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: "facebook",
       options: { redirectTo: `${window.location.origin}/auth/callback` },
     });

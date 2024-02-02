@@ -13,7 +13,5 @@ export async function GET(request) {
     return NextResponse.redirect(`${requestUrl.origin}/reset-password`);
   }
 
-  console.error("ERROR: Invalid auth code or no auth code found");
-
   return NextResponse.redirect(`${requestUrl.origin}/login`);
 }
