@@ -9,13 +9,13 @@ export const metadata = {
 
 async function page({ params }) {
   const user = await getCurrentUser();
-  const orderEncryptedId = params.id;
+  const orderId = params.id;
   if (!user) {
     redirect("/login");
   }
   return (
     <div className="flex h-screen items-center justify-center">
-      <PaymentForm orderEncryptedId={orderEncryptedId} />
+      <PaymentForm orderId={orderId} />
     </div>
   );
 }

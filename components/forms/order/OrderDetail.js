@@ -8,7 +8,6 @@ import { ScrollArea } from "@/components/ui/ScrollArea";
 import { format, parseISO } from "date-fns";
 import { Button } from "@/components/ui/Button";
 import { useRouter } from "next/navigation";
-import { encryptId } from "@/utils/crypto";
 
 function OrderDetail({ orderId }) {
   const { data } = useQueryOrder(orderId);
@@ -26,7 +25,7 @@ function OrderDetail({ orderId }) {
   ).label;
 
   const onPayNow = () => {
-    router.push(`/payment/${encryptId(orderId)}`);
+    router.push(`/payment/${orderId}`);
   };
 
   return (

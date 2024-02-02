@@ -35,7 +35,6 @@ import shippingDetailSchema from "@/schema/shippingDetailSchema";
 import { useCart } from "@/hooks/useCart";
 import useAddOrder from "@/hooks/useAddOrder";
 import { useRouter } from "next/navigation";
-import { encryptId } from "@/utils/crypto";
 
 function ShippingDetail({ userId }) {
   const { items } = useCart();
@@ -65,8 +64,7 @@ function ShippingDetail({ userId }) {
       data: { ...data, cart_items: items, user_id: userId },
     });
     const { order } = orderDetail;
-    const encryptedOrderId = encryptId(order.id);
-    router.push(`/payment/${encryptedOrderId}`);
+    router.push(`/payment/${order.id}`);
   };
 
   const onUseMyInfoClick = () => {

@@ -1,10 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { decryptId } from "@/utils/crypto";
 import { toast } from "./useToast";
 import { useRouter } from "next/navigation";
 
-const editOrderHandler = async (encryptedOrderId, data) => {
-  const orderId = decryptId(encryptedOrderId);
+const editOrderHandler = async (orderId, data) => {
   const url = new URL(
     `/api/orders/${orderId}/payment`,
     process.env.NEXT_PUBLIC_LOCATION_ORIGIN,
@@ -30,8 +28,7 @@ const usePayOrder = () => {
   const router = useRouter();
   return useMutation({
     mutationKey: queryKey,
-    mutationFn: ({ data, encryptedOrderId }) =>
-      editOrderHandler(encryptedOrderId, data),
+    mutationFn: ({ data, orderId }) => editOrderHandler(orderId, data),
     onSuccess: (data) => {
       router.replace(`/thank-you`);
       toast({

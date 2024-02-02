@@ -33,7 +33,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function PaymentForm({ orderEncryptedId }) {
+function PaymentForm({ orderId }) {
   const { mutate, isPending } = usePayOrder();
   const form = useForm({
     resolver: zodResolver(PaymentFormSchema),
@@ -49,7 +49,7 @@ function PaymentForm({ orderEncryptedId }) {
   const onSubmit = () => {
     mutate({
       data: { order_status: "PAID", payment_method: "CARD" },
-      encryptedOrderId: orderEncryptedId,
+      orderId: orderId,
     });
   };
 
