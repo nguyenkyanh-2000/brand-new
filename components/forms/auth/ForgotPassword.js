@@ -28,7 +28,7 @@ function ForgotPassword() {
   const onSubmit = async (data) => {
     const { data: resetData, error } =
       await supabase.auth.resetPasswordForEmail(data.email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`,
+        redirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/auth/reset-password`,
       });
     if (error)
       toast({
