@@ -41,18 +41,14 @@ function LoginForm() {
   const loginWithGoogle = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/auth/callback`,
-      },
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   };
 
   const loginWithFacebook = async () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "facebook",
-      options: {
-        redirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/auth/callback`,
-      },
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   };
 
