@@ -1,7 +1,7 @@
 import Logo from "@/components/layout/Logo";
 
 import React from "react";
-import LoginForm from "@/components/forms/login/LoginForm";
+import LoginForm from "@/components/forms/auth/LoginForm";
 import { getCurrentSessionUser } from "@/utils/supabase-auth-utils";
 import { redirect } from "next/navigation";
 
