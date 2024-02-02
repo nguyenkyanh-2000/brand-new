@@ -11,9 +11,6 @@ export async function POST(request) {
     const userCredentials = await supabase.auth.signInWithPassword({
       email,
       password,
-      /**options: {
-        emailRedirectTo: `${process.env.NEXT_PUBLIC_LOCATION_ORIGIN}/api/auth/callback`,
-      },**/
     });
     if (userCredentials.error) {
       if (!userCredentials.error.status) userCredentials.error.status = 400;

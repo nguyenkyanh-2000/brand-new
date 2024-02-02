@@ -21,9 +21,11 @@ import useLogin from "@/hooks/useLogin";
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 function LoginForm() {
   const router = useRouter();
+  const supabase = createClientComponentClient();
   const { login, isLoading, isSuccess } = useLogin();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const form = useForm({
@@ -35,6 +37,21 @@ function LoginForm() {
     login(data);
     if (isSuccess) router.back();
   };
+
+  const loginWithGoogle = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${location.origin}/auth/callback` },
+    });
+  };
+
+  const loginWithFacebook = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "facebook",
+      options: { redirectTo: `${location.origin}/auth/callback` },
+    });
+  };
+
   return (
     <Form {...form}>
       <form
@@ -100,10 +117,14 @@ function LoginForm() {
           </Button>
           <p className="text-xs text-foreground">Or sign in with</p>
           <div className="space-between flex w-full gap-5">
-            <Button disabled type="button" className="w-full">
+            <Button onClick={loginWithGoogle} type="button" className="w-full">
               Google
             </Button>
-            <Button disabled type="button" className="w-full">
+            <Button
+              onClick={loginWithFacebook}
+              type="button"
+              className="w-full"
+            >
               <span>Facebook</span>
             </Button>
           </div>
