@@ -2,7 +2,6 @@ import CustomerNavigation from "@/components/layout/CustomerNavigation";
 import Header from "@/components/layout/Header";
 import Logo from "@/components/layout/Logo";
 import ThemeToggle from "@/components/ui/ThemeToggle";
-import { Search, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import HeroImage1 from "@/public/hero-image-1.webp";
 import HeroImage2 from "@/public/hero-image-2.webp";

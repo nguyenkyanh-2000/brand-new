@@ -15,7 +15,7 @@ async function CustomerNavigation() {
           </Link>
         </AnimatedUnderline>
         <AnimatedUnderline>
-          <Link className="text-lg" href={"#"}>
+          <Link className="text-lg" href={"/inspiration"}>
             Inspiration
           </Link>
         </AnimatedUnderline>

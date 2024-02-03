@@ -35,7 +35,11 @@ function CustomerNavigationMobile({ userId }) {
                 >
                   Products
                 </Link>
-                <Link className="text-3xl" href={"#"}>
+                <Link
+                  className="text-3xl"
+                  href={"/inspiration"}
+                  onClick={() => setIsMenuOpened(false)}
+                >
                   Inspiration
                 </Link>
                 <Link className="text-3xl" href={"#"}>

@@ -22,7 +22,10 @@ export default async function RootLayout({ children }) {
   } = await supabase().auth.getSession();
 
   return (
-    <html lang="en" className={`${jost.variable} ${bodoni_moda.variable}`}>
+    <html
+      lang="en"
+      className={`${jost.variable} ${bodoni_moda.variable} overflow-x-hidden`}
+    >
       <body>
         <AuthProvider accessToken={session?.access_token}>
           <TanstackProvider>

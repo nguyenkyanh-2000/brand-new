@@ -2,7 +2,7 @@ import React from "react";
 
 function Header({ children }) {
   return (
-    <header className="w-full h-[64px] bg-transparent text-foreground flex items-center justify-between px-10">
+    <header className="flex h-[64px] w-full items-center justify-between  !overflow-hidden bg-transparent px-10 text-foreground">
       {children}
     </header>
   );
