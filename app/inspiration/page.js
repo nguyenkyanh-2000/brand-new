@@ -12,8 +12,14 @@ import { getCurrentUser } from "@/utils/supabase-auth-utils";
 import React from "react";
 import InspirationHeader from "@/components/inspiration/InspirationHeader";
 import { HorizontalCarousel } from "@/components/carousel/HorizontalCarousel";
-import { InspirationCard1 } from "@/components/inspiration/InspirationCard1";
-import { InspirationCard2 } from "@/components/inspiration/InspirationCard2";
+import { InspirationCard } from "@/components/inspiration/InspirationCard";
+
+import Picture1 from "@/public/inspiration-card-1.webp";
+import Picture2 from "@/public/inspiration-card-2.webp";
+import Picture3 from "@/public/inspiration-card-3.webp";
+import Picture4 from "@/public/inspiration-card-4.webp";
+import Picture5 from "@/public/inspiration-card-5.webp";
+import Picture6 from "@/public/inspiration-card-6.webp";
 
 export const metadata = {
   title: "Inspiration | Brand",
@@ -21,6 +27,8 @@ export const metadata = {
 };
 
 const paragraph = "Feeling nostalgic? Mix and match with soft white tones.";
+
+const images = [Picture1, Picture2, Picture3, Picture4, Picture5, Picture6];
 
 async function InspirationPage() {
   const currentUser = await getCurrentUser();
@@ -41,17 +49,14 @@ async function InspirationPage() {
 
       <section className="my-20 px-10">
         <HorizontalCarousel>
-          <InspirationCard1 />
-          <InspirationCard1 />
-          <InspirationCard1 />
-          <InspirationCard1 />
-          <InspirationCard2 />
+          {images.map((image, index) => (
+            <InspirationCard key={index} image={image} />
+          ))}
         </HorizontalCarousel>
       </section>
 
       <section className="my-20 px-10">
         <InspirationParagraph paragraph={paragraph} />
-
         <InspirationGallery />
       </section>
 

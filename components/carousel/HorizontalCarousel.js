@@ -12,7 +12,7 @@ export const HorizontalCarousel = ({ children }) => {
 
   return (
     // normally: h-[300vh]
-    <section ref={targetRef} className="relative h-[200vh] bg-background">
+    <section ref={targetRef} className="relative h-[300vh] bg-background">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div style={{ x }} className="flex gap-4">
           {children}
