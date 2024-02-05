@@ -97,16 +97,12 @@ export default async function Home() {
       {/** Shop by categories */}
 
       <section className="mt-20 grid w-screen grid-cols-4 gap-5 px-10 sm:mt-[200px]">
-        <OnViewSlideIn x1={-1000} x2={0} delay={0} className={"col-span-4"}>
+        <div className={"col-span-4"}>
           <h2 className="font-serif text-base font-bold md:text-2xl lg:text-4xl">
             Shop by categories
           </h2>
-        </OnViewSlideIn>
-        <OnViewSlideIn
-          className={"col-span-4 sm:col-span-2 md:col-span-1"}
-          y1={1000}
-          y2={0}
-        >
+        </div>
+        <div className={"col-span-4 sm:col-span-2 md:col-span-1"}>
           <Link
             href="/products?category=clothing"
             className="flex flex-col gap-2"
@@ -122,12 +118,8 @@ export default async function Home() {
             </div>
             <p className="text-lg">Clothes</p>
           </Link>
-        </OnViewSlideIn>
-        <OnViewSlideIn
-          className={"col-span-4 sm:col-span-2 md:col-span-1"}
-          y1={-1000}
-          y2={0}
-        >
+        </div>
+        <div className={"col-span-4 sm:col-span-2 md:col-span-1"}>
           <Link
             href="/products?category=cosmetic"
             className="flex flex-col gap-2 "
@@ -143,8 +135,8 @@ export default async function Home() {
             </div>
             <p className="text-lg">Cosmetics</p>
           </Link>
-        </OnViewSlideIn>
-        <OnViewSlideIn
+        </div>
+        <div
           className={"col-span-4 sm:col-span-2 md:col-span-1"}
           y1={1000}
           y2={0}
@@ -164,12 +156,8 @@ export default async function Home() {
             </div>
             <p className="text-lg">Furniture</p>
           </Link>
-        </OnViewSlideIn>
-        <OnViewSlideIn
-          className={"col-span-4 sm:col-span-2 md:col-span-1"}
-          y1={-1000}
-          y2={0}
-        >
+        </div>
+        <div className={"col-span-4 sm:col-span-2 md:col-span-1"}>
           <Link
             href="/products?category=stationery"
             className="flex flex-col gap-2"
@@ -185,7 +173,7 @@ export default async function Home() {
             </div>
             <p className="text-lg">Stationery</p>
           </Link>
-        </OnViewSlideIn>
+        </div>
       </section>
 
       {/** Short description section */}

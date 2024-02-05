@@ -23,13 +23,13 @@ function InspirationDoubleImages({ image1, image2 }) {
     : "100%";
   const scaleLeftHeight = oneInTwoHovered
     ? isImage1Hovered
-      ? "110%"
-      : "70%"
+      ? "105%"
+      : "80%"
     : "100%";
   const scaleRightHeight = oneInTwoHovered
     ? isImage2Hovered
-      ? "110%"
-      : "70%"
+      ? "105%"
+      : "80%"
     : "100%";
 
   return (

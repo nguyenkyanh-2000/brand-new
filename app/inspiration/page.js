@@ -26,13 +26,16 @@ import Picture7 from "@/public/inspiration-double-1.webp";
 import Picture8 from "@/public/inspiration-double-2.webp";
 import Picture9 from "@/public/inspiration-double-3.webp";
 import Picture10 from "@/public/inspiration-double-4.webp";
+import VerticalCarousel from "@/components/carousel/VerticalCarousel";
+import { VerticalInspirationCard } from "@/components/inspiration/VerticalInspirationCard";
 
 export const metadata = {
   title: "Inspiration | Brand",
   description: "Inspiration page for Brand",
 };
 
-const paragraph = "Feeling nostalgic? Mix and match with soft white tones.";
+const paragraph = "First: choose your style.";
+const paragraph1 = "Feeling nostalgic? Mix and match with soft white tones.";
 const paragraph2 = "Discover other inspirations here.";
 
 const images = [Picture1, Picture2, Picture3, Picture4, Picture5, Picture6];
@@ -54,7 +57,7 @@ async function InspirationPage() {
 
       <InspirationHeader />
 
-      <section className="my-20 px-10">
+      <section className="my-[150px] px-10">
         <HorizontalCarousel>
           {images.map((image, index) => (
             <InspirationCard key={index} image={image} />
@@ -62,14 +65,21 @@ async function InspirationPage() {
         </HorizontalCarousel>
       </section>
 
-      <section className="my-20 px-10"></section>
-
-      <section className="my-20 flex h-screen flex-col gap-[150px] px-10">
+      <section className="my-[150px] flex h-fit flex-col px-10">
         <InspirationParagraph paragraph={paragraph} />
+        <VerticalCarousel>
+          {images.map((image, index) => (
+            <VerticalInspirationCard image={image} key={index} index={index} />
+          ))}
+        </VerticalCarousel>
+      </section>
+
+      <section className="my-[150px] flex h-screen flex-col gap-[100px] px-10">
+        <InspirationParagraph paragraph={paragraph1} />
         <InspirationGallery />
       </section>
 
-      <section className="my-20 flex min-h-screen flex-col gap-[150px] px-10">
+      <section className="my-[150px] flex min-h-screen flex-col gap-20 px-10">
         <InspirationParagraph paragraph={paragraph2} />
         <InspirationDoubleImages image1={Picture7} image2={Picture8} />
         <InspirationDoubleImages image1={Picture9} image2={Picture10} />
