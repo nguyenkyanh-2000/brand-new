@@ -33,7 +33,7 @@ function InspirationDoubleImages({ image1, image2 }) {
     : "100%";
 
   return (
-    <div className="flex h-[500px] w-full">
+    <div className="flex h-[300px] w-full sm:h-[500px]">
       <motion.div
         ref={image1Ref}
         animate={{ width: scaleLeftWidth, height: scaleLeftHeight }}
