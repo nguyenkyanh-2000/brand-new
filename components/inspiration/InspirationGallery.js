@@ -29,7 +29,7 @@ function InspirationGallery() {
   return (
     <div
       ref={container}
-      className="relative mt-20 flex h-[500px] w-full justify-center px-10"
+      className="relative flex h-[500px] w-full justify-center "
     >
       {images.map(({ src, y }, i) => (
         <motion.div
